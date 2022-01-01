@@ -15,13 +15,26 @@
         rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(to right, #021943 0%, #023f74 100%);
             font-family: 'Noto Sans HK', sans-serif;
             font-family: 'Noto Sans TC', sans-serif;
         }
 
+        .container-wrap {
+            background: linear-gradient(to right, #021943 0%, #023f74 100%);
+            height: 100vh;  /*為了讓背景色顯示，預設高度100vh。*/
+            width: 80%;
+            position: absolute;
+            right: 0;
+        }
+
         img {
             width: 100%;
+        }
+
+        #navbar {
+            position: fixed;
+            left: 0;
+            top: 0;
         }
 
         #navbar a {
@@ -56,3 +69,4 @@
 </head>
 
 <body>
+<div class="container-wrap">
