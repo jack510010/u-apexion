@@ -1,4 +1,4 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" id="navbar" style="width: 280px;height: 100vh">
+    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" id="navbar" style="width: 20%;height: 100vh">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto  text-decoration-none">
             <div class="logo"><img src="./img/logo.png" alt=""></div>
             <svg class="bi me-2" width="5" height="5">
