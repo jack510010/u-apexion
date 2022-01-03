@@ -57,6 +57,7 @@
         }
         /* navbar樣式結束 */
 
+        
         /* 訂票 Tina開始 */
         .ticket-form {
             color: white;
@@ -113,8 +114,9 @@
         }
 
         .myticket-wrap {
-            width: 70%;
+            width: 80%;
             margin: 0 auto;
+            border-radius: 10px;
         }
 
         .myticket-content {
@@ -127,6 +129,7 @@
             text-align: center;
             color: white;
         }
+
         /* 訂票 Tina結束 */
 
         /* Transportation */
