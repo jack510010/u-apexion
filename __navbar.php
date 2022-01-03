@@ -33,7 +33,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link ">
+                <a href="product.php" class="nav-link ">
                     <svg class="bi me-2" width="25" height="25">
                         <use xlink:href="#people-circle"></use>
                     </svg>
