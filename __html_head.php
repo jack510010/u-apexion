@@ -13,59 +13,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@100;300;400;500&family=Noto+Sans+TC:wght@500;700;900&display=swap"
         rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Noto Sans HK', sans-serif;
-            font-family: 'Noto Sans TC', sans-serif;
-        }
-
-        .container-wrap {
-            background: linear-gradient(to right, #021943 0%, #023f74 100%);
-            height: 100vh;  /*為了讓背景色顯示，預設高度100vh。*/
-            width: 80%;
-            position: absolute;
-            right: 0;
-        }
-
-        img {
-            width: 100%;
-        }
-
-        #navbar {
-            position: fixed;
-            left: 0;
-            top: 0;
-        }
-
-        #navbar a {
-            color: #00002D;
-        }
-
-        .nav-pills .nav-link.active {
-            background-color: #05f2f2;
-        }
-
-        #navbar hr {
-            background-color: #05f2f2;
-            height: 3px;
-            border: none;
-        }
-
-        .logo {
-            width: 40px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-
-        .userPic {
-            width: 32px;
-            height: 32px;
-        }
-
-        .dropdown-menu {
-            background-color: #05f2f2;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/style.css">
+    
 </head>
 
 <body>

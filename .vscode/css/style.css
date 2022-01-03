@@ -1,0 +1,132 @@
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans HK', sans-serif;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        .container-wrap {
+            background: linear-gradient(to right, #021943 0%, #023f74 100%);
+            min-height: 100vh;  /*為了讓背景色顯示，預設高度100vh。*/
+            width: 80%;
+            position: absolute;
+            right: 0;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        /* navbar樣式開始 */
+        #navbar {
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        #navbar a {
+            color: #00002D;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: #05f2f2;
+        }
+
+        #navbar hr {
+            background-color: #05f2f2;
+            height: 3px;
+            border: none;
+        }
+
+        .logo {
+            width: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .userPic {
+            width: 32px;
+            height: 32px;
+        }
+
+        .dropdown-menu {
+            background-color: #05f2f2;
+        }
+        /* navbar樣式結束 */
+
+        /* 訂票 Tina開始 */
+        .ticket-form {
+            color: white;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .ticket-wrap {
+            border-radius: 20px;
+            border: 1px solid #05f2f2;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ticket-form  label {
+            background-color: #05f2f2;
+            margin: 0;
+            width: 20%;
+        }
+
+        .ticket-form .form-control {
+            border-radius: 0;
+            background-color: rgb(255,255,255,.1);
+            color: #EAE8E8;
+            width: 70%;
+            border: 0;
+        }
+
+        .member-confirm {
+            width: 10%;
+            border: 0;
+        }
+
+        /* .fileUploadBtn {
+            position: absolute;
+            right: 0;
+        } */
+
+        .ticket-form-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='white' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+        }
+
+        .ticketBtn {
+            border-radius: 20px;
+            background-color: #fff;
+            color: #048ABF;
+            border: 1px solid #048ABF;
+            display: none;
+        }
+
+        .ticketBtn:hover {
+            background-color: #F7C242;
+            border: 1px solid #fff;
+        }
+
+        .myticket-wrap {
+            width: 70%;
+            margin: 0 auto;
+        }
+
+        .myticket-content {
+            width: 100%;
+            background-color: #fff;
+        }
+
+        .myticket-content h4 {
+            background-color: #048ABF;
+            text-align: center;
+            color: white;
+        }
+        /* 訂票 Tina結束 */
+    </style>
