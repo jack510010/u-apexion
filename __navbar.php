@@ -33,7 +33,7 @@
                 </a>
             </li>
             <li>
-                <a href="product.php" class="nav-link ">
+            <a href="product.php" class="nav-link <?= $pageName=='product' ? 'active disabled' : '' ?>">
                     <svg class="bi me-2" width="25" height="25">
                         <use xlink:href="#people-circle"></use>
                     </svg>
