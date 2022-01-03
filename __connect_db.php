@@ -1,6 +1,6 @@
 <?php
 $db_host= 'localhost';
-$db_name='b-team';
+$db_name='bteam';
 $db_user='bteam';
 $db_pass='12345678';
 
