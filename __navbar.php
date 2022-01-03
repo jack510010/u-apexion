@@ -17,7 +17,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link ">
+                <a href="ticket_insert.php" class="nav-link">
                     <svg class="bi me-2" width="25" height="25">
                         <use xlink:href="#table"></use>
                     </svg>
