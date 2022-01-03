@@ -128,3 +128,17 @@
             color: white;
         }
         /* 訂票 Tina結束 */
+
+        /* Transportation */
+        .transport{
+            width: 70%;
+            margin: 0 auto;
+        }
+        .transport h1{
+            text-align: center;
+            color: aliceblue;
+            
+        }
+
+
+         /* Transportation END*/
