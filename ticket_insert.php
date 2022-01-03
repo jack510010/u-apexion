@@ -68,13 +68,13 @@ $seatrows = $pdo->query($seatsql)->fetchAll();
     const memberInput = `<div class="mb-3">
     <div class="d-flex align-items-center ticket-wrap">
     <label for="exampleInputEmail1" class="memberName form-label  d-flex align-items-center justify-content-center align-self-stretch">成員姓名</label>
-    <input type="email" class="form-control flex-fill" id="exampleInputEmail1" aria-describedby="emailHelp" name="member" placeholder="請輸入護照英文名字">
+    <input type="email" class="form-control flex-fill" id="exampleInputEmail1" aria-describedby="emailHelp" name="member[]" placeholder="請輸入護照英文名字">
     </div>
     <div class="ticket-incorrect"></div>
   </div><div class="mb-3">
     <div class="d-flex align-items-center ticket-wrap">
     <label for="exampleInputEmail1" class="memberPassport form-label  d-flex align-items-center justify-content-center align-self-stretch">護照上傳</label>
-    <input type="file" class="form-control UploadPas flex-fill" name="memberPass">
+    <input type="file" class="form-control UploadPas flex-fill" name="memberPass[]">
     </div>
     <div class="ticket-incorrect"></div>
   </div>`;
@@ -83,6 +83,7 @@ $seatrows = $pdo->query($seatsql)->fetchAll();
         const membernum = members.value;
         console.log(membernum);
         for(let i=1;i<=membernum;i++){
+          if(i<=10){
             document.querySelector(".member-input").innerHTML += memberInput;
             const memberInputTitle = document.querySelectorAll("label");
             memberInputTitle.forEach(function(v) {
@@ -92,7 +93,13 @@ $seatrows = $pdo->query($seatsql)->fetchAll();
         }else if(v.classList.contains("memberPassport")){
             v.setAttribute('style' , `background-color: #023E73`);
         }
-        }) 
+        })
+        }
+        else {
+          alert("人數超過10人了喔");
+          document.querySelector(".member-input").innerHTML = "";
+          break;
+        } 
         }
         document.querySelector(".ticketBtn").style= "display: block";
 }
