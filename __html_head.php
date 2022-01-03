@@ -14,6 +14,7 @@
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@100;300;400;500&family=Noto+Sans+TC:wght@500;700;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./fontawesome/css/all.css">
     
 </head>
 
