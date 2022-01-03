@@ -5,17 +5,18 @@ header('Content-Type: application/json');
 
 $output = [
     "success" => "成功",
-    "error" => "沒有錯誤"
+    "error" => "沒有錯誤",
+    // "memberPass" => $memberPass
 ];
 
-// echo json_encode($output);
-
+$ticketsid = isset($_POST['sid']) ? intval($_POST['sid']) : 0;
 $flightTime = isset($_POST['flightTime'])? $_POST['flightTime'] : '';
-$trip = $_POST['trip'];
-$seatLevel = $_POST['seatLevel'];
-$memberNumber = intval($_POST['memberNumber']);
-$member = $_POST['member'];
-$memberPass = $_FILES['memberPass']['name'];
+$trip = isset($_POST['trip'])? $_POST['trip'] : '';
+$seatLevel = isset($_POST['seatLevel'])? $_POST['seatLevel'] : '';
+$memberNumber = isset($_POST['memberNumber'])? intval($_POST['memberNumber']) : '';
+$member = isset($_POST['member'])? implode(",",$_POST['member']) : '';
+$memberPass = isset($_FILES['memberPass'])? implode(",",$_FILES['memberPass']['name']) : '';
+
 
 if(empty($flightTime)){
     $output["success"]=false;
@@ -38,6 +39,7 @@ if(empty($seatLevel)){
     exit;
 }
 
+//TODO: 大於10防呆機制無效
 if(empty($memberNumber) or $memberNumber > 10){
     $output["success"]=false;
     $output["error"]="人數上限10人，請輸入正確人數";
@@ -45,7 +47,8 @@ if(empty($memberNumber) or $memberNumber > 10){
     exit;
 }
 
-if(empty($member) or strlen($member) < 2 or !preg_match("/^[a-zA-Z\s]+$/",$member)){
+//TODO: 英文和小於2個字防呆機制無效
+if(empty($member or strlen($member) < 2 or !preg_match("/^[a-zA-Z\s]+$/",$member))){
     $output["success"]=false;
     $output["error"]="請輸入成員護照姓名";
     echo json_encode($output);
@@ -59,16 +62,20 @@ if(empty($memberPass)){
     exit;
 }
 
-$ticketSql = sprintf("INSERT INTO `ticket` (`flight_time`, `trip_sid`, `seat_sid`, `member_count`,`created_at`) VALUES ('%s', '%s', '%s', '%s', NOW())",$flightTime,$trip,$seatLevel,$memberNumber);
+$ticketSql = sprintf("INSERT INTO `ticket` (`sid`,`flight_time`, `trip_sid`, `seat_sid`, `member_count`,`created_at`) VALUES ('%s','%s', '%s', '%s', '%s', NOW())",$ticketsid,$flightTime,$trip,$seatLevel,$memberNumber);
 
 $stmt = $pdo->query($ticketSql)->fetch();
+$ticketid = $pdo->lastInsertId();
 
-$memberSql = "INSERT INTO `member`(`name`, `passport`) VALUES ('$member','$memberPass')";
+// echo $ticketid;
+
+$memberSql = "INSERT INTO `member`(`ticket_sid`,`name`, `passport`) VALUES ('$ticketid','$member','$memberPass')";
 
 $pdo->query($memberSql);
 
 
 
-// echo json_encode($member);
+
+echo json_encode($output);
 
 ?>
