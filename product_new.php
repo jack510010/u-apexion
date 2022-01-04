@@ -1,4 +1,6 @@
-<?php require __DIR__ . "/__connect_db.php"; ?>
+<?php require __DIR__ . "/__connect_db.php";
+$title = '周邊商品';
+?>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <div class="d-flex">
   <?php require __DIR__ . "/__navbar.php"; ?>
@@ -53,62 +55,85 @@
       </div>
     </nav>
     <!-- 下方新增表單列表 -->
+    <!-- `category`, `product_name`, `img``size`, `quantity`, `price` -->
     <div class="d-flex">
-      <form class="container pt-4 mx-2">
+      <form class="container pt-5 mx-2" name="productForm" onsubmit="sendData(); return false;">
         <div class="form-row text-light">
-          <div class=" mb-3">
-            <label for="validationDefault01">商品名稱</label>
-            <input type="text" class="form-control" id="validationDefault01" placeholder="名稱" required>
+          <div class="mb-3">
+            <label for="product_name">商品名稱</label>
+            <input type="text" class="product-wrap form-control" id="product_name" name="product_name" placeholder="名稱" required>
           </div>
           <div class=" mb-3">
-            <label for="validationDefault02">產品分類</label>
-            <select class="custom-select d-block w-100" id="country" required="">
-              <option value=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">選擇...</font></font></option>
+            <label for="category">產品分類</label>
+            <select class="custom-select d-block w-100 form-control" id="category" name="category" required="">
+              <option value="">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">選擇...</font>
+                </font>
+              </option>
               <option>
-                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">女生</font></font>
-            </option>
-            <option>
-                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">男生</font></font>
-            </option>
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">女生</font>
+                </font>
+              </option>
+              <option>
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">男生</font>
+                </font>
+              </option>
             </select>
           </div>
           <div class=" mb-3">
-            <label for="validationDefaultUsername">產品照片</label>
+            <label for="img">產品照片</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="validationDefaultUsername" placeholder="照片" aria-describedby="inputGroupPrepend2" required>
+              <input type="text" class="form-control" id="img" name="img" placeholder="照片" aria-describedby="inputGroupPrepend2" required>
             </div>
           </div>
           <div class=" mb-3">
-            <label for="validationDefaultUsername">庫存數量</label>
+            <label for="quantity">庫存數量</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="validationDefaultUsername" placeholder="請填入數字" aria-describedby="inputGroupPrepend2" required>
+              <input type="text" class="form-control" id="quantity" name="quantity" placeholder="請填入數字" aria-describedby="inputGroupPrepend2" required>
             </div>
           </div>
           <div class=" mb-3">
-            <label for="validationDefaultUsername">價格</label>
+            <label for="price">價格</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="validationDefaultUsername" placeholder="請填入數字" aria-describedby="inputGroupPrepend2" required>
+              <input type="text" class="form-control" id="price" name="price" placeholder="請填入數字" aria-describedby="inputGroupPrepend2" required>
             </div>
           </div>
         </div>
         <div class="">
-        <label class="text-light">尺寸</label>
-          <select class="mb-3">
-            <option value="1">F</option>
-            <option value="2">S</option>
-            <option value="3">M</option>
-            <option value="4">L</option>
-            <option value="5">其他</option>
+          <label class="text-light">尺寸</label>
+          <select class="mb-3" id="size" name="size">
+            <option value="F">F</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="其他">其他</option>
           </select>
         </div>
-        <button class="btn btn-primary" type="submit">資料送出</button>
+        <button class="btn btn-outline-info" type="submit">資料送出</button>
 
       </form>
-      <div class="pt-4 mx-2">
-        <img class="img-fluid " src="./img/logo.png" width="50" height="50">
+      <div class="pt-5 mx-2">
+        <img class="img-fluid " src="./img/logo.png" width="75" height="75">
       </div>
     </div>
   </div>
 </div>
 <?php require __DIR__ . "/__scripts.php"; ?>
+<script>
+    function sendData(){
+        const fd = new FormData(document.productForm);
+
+       fetch('product_new_api.php',{
+           method: 'POST',
+            body: fd,
+        }).then(r=>r.json())
+        .then(obj=>{
+            console.log(obj);
+        });
+    }
+        </script>     
+
 <?php require __DIR__ . "/__html_foot.php"; ?>
