@@ -4,9 +4,8 @@ require __DIR__. "/__connect_db.php";
 header('Content-Type: application/json');
 
 $output = [
-    "success" => "成功",
-    "error" => "沒有錯誤",
-    // "memberPass" => $memberPass
+    "success" =>  true,
+    "error" => "",
 ];
 
 $ticketsid = isset($_POST['sid']) ? intval($_POST['sid']) : 0;
@@ -62,6 +61,29 @@ if(empty($memberPass)){
     exit;
 }
 
+
+//移動檔案位置
+$upload_folder = __DIR__."/img/uploaded";
+if(! empty($_FILES['memberPass'])) {
+    foreach($_FILES['memberPass']['name'] as $i=>$name){
+        $filename = $memberPass;
+
+        $target = $upload_folder. '/'. $filename;
+        if( move_uploaded_file($_FILES['memberPass']['tmp_name'][$i], $target)){
+            $output['success'] = true;
+            $output['filename'] = $filename;
+            $output['i'] = $i;
+        } else {
+            $output['error'] = '無法移動檔案';
+            $output['target'] = $target;
+        }
+        }
+    } 
+else {
+    $output['error'] = '沒有上傳檔案';
+}
+
+
 $ticketSql = sprintf("INSERT INTO `ticket` (`sid`,`flight_time`, `trip_sid`, `seat_sid`, `member_count`,`created_at`) VALUES ('%s','%s', '%s', '%s', '%s', NOW())",$ticketsid,$flightTime,$trip,$seatLevel,$memberNumber);
 
 $stmt = $pdo->query($ticketSql)->fetch();
@@ -74,8 +96,6 @@ $memberSql = "INSERT INTO `member`(`ticket_sid`,`name`, `passport`) VALUES ('$ti
 $pdo->query($memberSql);
 
 
-
-
-echo json_encode($output);
+echo json_encode($output,JSON_UNESCAPED_UNICODE);
 
 ?>
