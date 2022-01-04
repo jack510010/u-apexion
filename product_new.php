@@ -55,13 +55,13 @@ $title = '周邊商品';
       </div>
     </nav>
     <!-- 下方新增表單列表 -->
-    <!-- `category`, `product_name`, `img``size`, `quantity`, `price` -->
     <div class="d-flex">
       <form class="container pt-5 mx-2" name="productForm" onsubmit="sendData(); return false;">
         <div class="form-row text-light">
           <div class="mb-3">
             <label for="product_name">商品名稱</label>
             <input type="text" class="product-wrap form-control" id="product_name" name="product_name" placeholder="名稱" required>
+            <div class="text-warning"></div>
           </div>
           <div class=" mb-3">
             <label for="category">產品分類</label>
@@ -92,17 +92,18 @@ $title = '周邊商品';
           <div class=" mb-3">
             <label for="quantity">庫存數量</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="quantity" name="quantity" placeholder="請填入數字" aria-describedby="inputGroupPrepend2" required>
+              <input type="number" class="form-control" id="quantity" name="quantity" placeholder="請填入數字" aria-describedby="inputGroupPrepend2" required>
             </div>
           </div>
           <div class=" mb-3">
             <label for="price">價格</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="price" name="price" placeholder="請填入數字" aria-describedby="inputGroupPrepend2" required>
+              <input type="number" class="form-control" id="price" name="price" placeholder="請填入數字" aria-describedby="inputGroupPrepend2" required>
             </div>
           </div>
         </div>
-        <div class="">
+        <div class="d-flex">
+        <div class="m-1">
           <label class="text-light">尺寸</label>
           <select class="mb-3" id="size" name="size">
             <option value="F">F</option>
@@ -111,7 +112,17 @@ $title = '周邊商品';
             <option value="L">L</option>
             <option value="其他">其他</option>
           </select>
+          </div>
+          <div class="m-1">
+          <label class="text-light">顏色</label>
+          <select class="mb-3" id="size" name="style">
+            <option value="黑色">黑色</option>
+            <option value="白色">白色</option>
+            <option value="藍色">藍色</option>
+          </select>
         </div>
+        </div>
+      
         <button class="btn btn-outline-info" type="submit">資料送出</button>
 
       </form>
@@ -123,17 +134,29 @@ $title = '周邊商品';
 </div>
 <?php require __DIR__ . "/__scripts.php"; ?>
 <script>
-    function sendData(){
-        const fd = new FormData(document.productForm);
+  const product_name = document.querySelector('#product_name');
 
-       fetch('product_new_api.php',{
-           method: 'POST',
-            body: fd,
-        }).then(r=>r.json())
-        .then(obj=>{
-            console.log(obj);
-        });
+  function sendData() {
+    product_name.nextElementSibling.innerHTML = '';
+
+    let isPass = true;
+    //檢查表單資料
+    if (product_name.value.length < 2) {
+      isPass = false;
+      product_name.nextElementSibling.innerHTML = "請輸入正確商品名稱";
     }
-        </script>     
+
+    //拿取輸入的資料
+    const fd = new FormData(document.productForm);
+
+    fetch('product_new_api.php', {
+        method: 'POST',
+        body: fd,
+      }).then(r => r.json())
+      .then(obj => {
+        console.log(obj);
+      });
+  }
+</script>
 
 <?php require __DIR__ . "/__html_foot.php"; ?>
