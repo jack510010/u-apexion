@@ -179,3 +179,10 @@
 
 
          /* Transportation END*/
+         /* jhih-ting開始 */
+         .form-control {
+            border-radius: 20px;
+            border: 1px solid #05f2f2;
+        }
+
+       /* jhih-ting結束 */
