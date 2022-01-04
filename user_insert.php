@@ -21,6 +21,11 @@ $pageName = 'insert';
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
+                            <label for="gender" class="form-label">gender</label>
+                            <input type="gender" class="form-control" id="gender" name="gender">
+                            <div class="form-text"></div>
+                        </div>
+                        <div class="mb-3">
                             <label for="email" class="form-label">email</label>
                             <input type="text" class="form-control" id="email" name="email">
                             <div class="form-text"></div>
@@ -45,6 +50,16 @@ $pageName = 'insert';
                             <label for="address" class="form-label">address</label>
                             <textarea class="form-control" name="address" id="address" cols="30" rows="3"></textarea>
 
+                            <div class="form-text"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nick-name" class="form-label">nick-name</label>
+                            <input type="nick-name" class="form-control" id="nick-name" name="nick-name">
+                            <div class="form-text"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="country" class="form-label">country</label>
+                            <input type="country" class="form-control" id="country" name="country">
                             <div class="form-text"></div>
                         </div>
 
@@ -91,7 +106,7 @@ function sendData() {
     if (isPass) {
         const fd = new FormData(document.form1);
 
-        fetch('insert-api.php', {
+        fetch('user_insert_api.php', {
                 method: 'POST',
                 body: fd,
             }).then(r => r.json())
