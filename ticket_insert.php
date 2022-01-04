@@ -112,9 +112,13 @@ function sendTicketForm(){
     body: fd,
   }).then(r=>r.json())
   .then(txt => {
+  if(txt.success){
+    alert(txt.i);
+    location.href = "ticket_myticket.php";
+  }else {
     alert(txt.error);
-  });
-
+  }
+});
 }
 
 
