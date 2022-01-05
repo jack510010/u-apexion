@@ -57,6 +57,8 @@ $user = $pdo->query($sql)->fetchAll();
                 <th scope="col">國籍</th>
                 <th scope="col">新增時間</th>
                 <th scope="col">修改時間</th>
+                <th scope="col">修改</th>
+                <th scope="col">刪除</th>
             </tr>
         </thead>
         <tbody>
@@ -75,8 +77,16 @@ $user = $pdo->query($sql)->fetchAll();
                 <td><?= $u['country'] ?></td>
                 <td><?= $u['create-date'] ?></td>
                 <td><?= $u['update-date'] ?></td>
-                <td><i class="fas fa-pencil-alt"></i></td>
-                <td><i class="fas fa-trash-alt"></i></td>
+                <td>
+                    <a href="user_edit.php?sid=<?= $u['sid'] ?>">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="javascript: delete_it(<?= $u['sid'] ?>)">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
@@ -112,4 +122,11 @@ $user = $pdo->query($sql)->fetchAll();
 </div>
 
 <?php require __DIR__ . "/__scripts.php"; ?>
+<script>
+function delete_it(sid) {
+    if (confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)) {
+        location.href = `user_delete.php?sid=${sid}`;
+    }
+}
+</script>
 <?php require __DIR__ . "/__html_foot.php"; ?>
