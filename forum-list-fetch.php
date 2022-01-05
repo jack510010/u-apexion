@@ -3,12 +3,13 @@ require __DIR__. '/__connect_db.php';
 
 $output = '';
 
+// $response = $_POST['response'] ?? '';
+// $search = $_POST['query'] ?? '';
 
-
-if(isset($_POST['query']))
-{
-	// ???????這樣寫對嗎?????
-	$search = $_POST["query"];
+// if(isset($_POST['query']))
+// {
+// 	// ???????這樣寫對嗎?????
+	$search = $_POST["query"]?? '';
 	$query = "
     SELECT * FROM `forum_article` LEFT JOIN `forum_category` ON `forum_category`.cat_sid=`forum_article`.art_category_sid 
 	WHERE `art_title` Like ? 
@@ -20,18 +21,18 @@ if(isset($_POST['query']))
 	$stmt -> execute(['%'.$search.'%','%'.$search.'%','%'.$search.'%']);
 
 	$rows = $stmt->fetchAll();
-	// echo $rows["for_category"];
-}
-else
-{
-	$query = "
-	SELECT * FROM forum_article ORDER BY sid";
-	$stmt = $pdo -> prepare($query);
-	$stmt -> execute();
+// 	// echo $rows["for_category"];
+// }
+// else
+// {
+// 	$query = "
+// 	SELECT * FROM forum_article ORDER BY sid";
+// 	$stmt = $pdo -> prepare($query);
+// 	$stmt -> execute();
 
-	$rows = $stmt->fetchAll();
-	// echo 'fff';
-}
+// 	$rows = $stmt->fetchAll();
+// 	// echo 'fff';
+// }
 
 
 
@@ -54,7 +55,7 @@ if($stmt->rowCount()){
 		$output .='
 		<tr>
 			<td>'.$r["sid"]. '</td>
-			<td>'.$r["art_category_sid"].'</td>
+			<td>'.$r["for_category"].'</td>
 			<td>'.$r["art_title"]. '</td>
 			<td>'.$r["art_content"]. '</td>
 			<td>'.$r["art_create_time"]. '</td>
@@ -69,7 +70,10 @@ if($stmt->rowCount()){
                 </a>
             </td>
 		</tr>
-		';
+		'
+		
+		
+		;
 	}
 	echo $output;
 }

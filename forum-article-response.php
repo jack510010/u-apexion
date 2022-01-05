@@ -16,9 +16,19 @@ if($page>$totalPages){
     exit;
 } 
 
-$sql = sprintf("SELECT * FROM forum_response LEFT JOIN forum_user ON forum_response.user_sid=forum_user.sid ORDER BY forum_response.sid DESC LIMIT %s, %s", ($page-1)*$perPage, $perPage);
+
+$sql = sprintf("SELECT * FROM forum_response LEFT JOIN forum_user ON forum_response.user_sid=forum_user.sid WHERE res_art_sid=2 ORDER BY forum_response.sid DESC LIMIT %s, %s", ($page-1)*$perPage, $perPage);
 
 $rows = $pdo->query($sql)->fetchAll();
+
+$sql2 = sprintf("SELECT * FROM forum_article LEFT JOIN forum_category ON forum_category.cat_sid=forum_article.art_category_sid WHERE sid=2 ");
+// 變數目前先寫死
+
+$row2=$pdo->query($sql2)->fetch();
+
+
+
+
 
 date_default_timezone_set('Asia/Taipei');
 
@@ -28,17 +38,44 @@ date_default_timezone_set('Asia/Taipei');
 <?php include __DIR__. '/__navbar.php' ?>
 
 <style>
-
+    body{
+        color:#fff;
+    }
     .forum-card{
         margin-top:30px;
         border-radius:0;
+        background: linear-gradient(to right, #021943 0%, #023f74 100%);
+        border:2px solid #FFD700;
+        border-radius:10px 10px 0 0;
+    }
+    .forum-card .card-header{
+        border-bottom:1px solid #FFD700;
+        color:#05f2f2;
+    }
+    .forum-card .card-header p{
+        margin-left:12px;
     }
     .forum-list-group{
         border-radius:0;
         margin-bottom:30px;
+        /* background: linear-gradient(to right, #021943 0%, #023f74 100%); */
+    }
+    .forum-list-group li{
+        background: linear-gradient(to right, #021943 0%, #023f74 100%);
+        border-left:2px solid #FFD700;
+        border-right:2px solid #FFD700;
+        border-bottom:0.5px solid #021943;
     }
     .forum-card .card-title{
         margin-top:20px;
+    }
+    .forum-card-top a{
+        margin-top:15px;
+    }
+    .forum-card-top a i{
+        color:#fff;
+        font-size:25px;
+        margin-right:10px;
     }
     .forum-card .card-text{
         margin-top:20px;
@@ -48,11 +85,11 @@ date_default_timezone_set('Asia/Taipei');
         font-size:20px;
     }
     .article_emoji .article_emoji-left p {
-        color:grey;
+        color:#fff;
         font-size:13px;
     }
     .article_emoji .article_emoji-right i{
-        color:grey;
+        color:#fff;
         font-size:20px;
     }
     .article_emoji a{
@@ -67,27 +104,31 @@ date_default_timezone_set('Asia/Taipei');
     .forum-list-group-title{
         padding-top:30px;
     }
+    .list-group-item .fa-user{
+        color:#C0C0C0;
+    }
 
     .user-resopnse-space .user-title{
         font-size:12px;
         margin-bottom:10px;
+        color:#fff;
     }
     .response-space-left .fa-user{
         margin-right:20px;
         font-size:12px;
-        color:grey;
+        color:#C0C0C0;
     }
     .user-resopnse-space .response-time{
         font-size:12px;
         margin-top:15px;
-        color:grey;
+        color:#C0C0C0;
     }
     .user-resopnse-space .response-words{
-        color:grey;
+        color:#C0C0C0;
     }
 
     .response-space-right .fa-heart{
-        color:grey;
+        color:#C0C0C0;
     }
     .pagination{
         justify-content:center;
@@ -98,7 +139,6 @@ date_default_timezone_set('Asia/Taipei');
         bottom:0;
         width:64.8%;
         z-index:999;
-        /* aj4 */
     }
     .respose-fix{
         border-radius:0px;
@@ -108,6 +148,7 @@ date_default_timezone_set('Asia/Taipei');
         border:0;
         width:87%;
         margin-left:15px;
+        background: linear-gradient(to right, #021943 0%, #023f74 100%);
     }
     .respose-fix button{
        background-color: #FFD700;
@@ -122,6 +163,36 @@ date_default_timezone_set('Asia/Taipei');
        padding:8px 15px;
        border-radius:10px;
     }
+    .respose-fix{
+        border:0;
+    }
+
+    .pagination li{
+        border:0px;
+        border-radius:10px;
+        /* width:30px; */
+    }
+    .pagination .disabled .page-link{
+        background-color: #021943;
+        border:0;
+    }
+    .pagination .active .page-link{
+        background-color: #05f2f2;
+        border:0;
+        color:#021943;
+    }
+    .pagination .page-link{
+        background-color: #021943;
+        border:0;
+        color:grey;
+    }
+    .forum-title-dropdown button{
+        color:#fff;
+    }
+    .forum-title-dropdown{
+        margin-left:auto;
+    }
+    
 
 
 
@@ -133,13 +204,42 @@ date_default_timezone_set('Asia/Taipei');
     <div class="row">
         <div class="col-10 m-auto ">
             <div class="forum-card card">
-                <div class="card-header">
-                    $分類
+                <!-- 文章分類下拉選單 -->
+                <div class="card-header-flex">
+
+                    <div class="card-header">
+
+                    <div class="forum-title-dropdown">
+                        <div class="dropdown forum-choose-category">
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    文章分類
+                            </button>
+                            <ul class="category-list dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="forum-list copy.php">全部文章</a></li>
+                                <li><a class="dropdown-item" href="forum-list-cat1.php">事前準備</a></li>
+                                <li><a class="dropdown-item" href="forum-list-cat2.php">旅遊心得</a></li>
+                                <li><a class="dropdown-item" href="#">太空冷知識</a></li>
+                                <li><a class="dropdown-item" href="#">音樂推薦</a></li>
+                                <li><a class="dropdown-item" href="#">星座</a></li>
+                                <li><a class="dropdown-item" href="#">太空美食</a></li>
+                            </ul>
+                    </div>
                 </div>
+                    <!-- 文章分類下拉選單 -->
+                    <p>
+                        <?=$row2['for_category']?>
+                    </p>
+                </div>
+                    
                 <div class="card-body">
-                    <h5 class="card-title">＄標題</h5>
-                    <p class="card-text">$內文
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat fuga voluptatem at repudiandae incidunt? Nam voluptas odio perspiciatis veritatis non quia magni ipsa itaque aliquid dolorum omnis, eius at ipsam, rerum voluptatum repellat iure eos. Ab dolores natus, quasi maxime obcaecati ducimus inventore in, quas quae hic molestiae praesentium earum tenetur, quod velit neque a! Labore ratione delectus repellat ducimus totam. Fugit, sapiente in suscipit eligendi nam exercitationem doloribus modi voluptates ratione! Tempore obcaecati ea fugiat in aut. Totam deserunt quo, veritatis ratione, distinctio ut placeat consequatur, nisi esse atque tenetur minus voluptatibus vel quam aspernatur veniam minima quis mollitia.</p>
+                    <div class="forum-card-top d-flex justify-content-between">
+                       <h5 class="card-title"><?= $row2['art_title'] ?></h5>
+                        <a href="forum-list copy.php">
+                            <i class="fas fa-times"></i>
+                        </a> 
+                    </div>
+                    
+                    <p class="card-text"><?= $row2['art_content'] ?></p>
                     <div class="article_emoji d-flex justify-content-between">
                         <div class="article_emoji-left d-flex">
                             <a href="">
@@ -148,7 +248,10 @@ date_default_timezone_set('Asia/Taipei');
                             <a href="#">
                                 <i class="fab fa-gratipay" style="margin-right:10px;"></i>
                             </a>
-                            <p>回應$則</p>
+                            <a href="#list-group-item">
+                               <p>回應<?= $totalRows ?>則</p> 
+                            </a>
+                            
                         </div>
                         <div class="article_emoji-right">
                             <a href="#">
@@ -161,11 +264,13 @@ date_default_timezone_set('Asia/Taipei');
                     </div>
                 </div>
             </div>
-            <ul class="forum-list-group list-group">
-                <li class="forum-list-group-title list-group-item disabled" aria-disabled="true">共$則留言</li>
 
-                <?php foreach($rows as $r): ?>
-                <li class="list-group-item">
+            
+            <ul class="forum-list-group list-group">
+                <li class="forum-list-group-title list-group-item disabled" aria-disabled="true">共<?= $totalRows ?>則留言</li>
+
+            <?php foreach($rows as $r): ?>
+                <li class="list-group-item" id="list-group-item">
                     <div class="response-space d-flex justify-content-between">
                         <div class="response-space-left d-flex">
                             <div class="user-img">
@@ -174,7 +279,7 @@ date_default_timezone_set('Asia/Taipei');
                             <div class="user-resopnse-space">
                                 <div class="user-title">Amanda Chiu</div>
                                 <div class="response-words"><?= $r['res_content'] ?></div>
-                                <div class="response-time"><?=date('m-d-Y h:i:s a', time()); ?></div>
+                                <div class="response-time"><?= $r['res_time'] ?></div>
                             </div>
                         </div>
                         <div class="response-space-right d-flex">
@@ -186,34 +291,33 @@ date_default_timezone_set('Asia/Taipei');
                 </li>
                 <?php endforeach;  ?>
 
-
                 <li class="list-group-item disabled">
-                    <div class="row">
-                        <div class="col">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-                                    <li class="page-item <?= 1==$page ? 'disabled' : '' ?>">
-                                    <a class="page-link" href="?page=<?= $page-1 ?>">
-                                            <i class="fas fa-arrow-circle-left"></i>
-                                        </a></li>
-                                        <?php for($i=$page-2; $i<=$page+2; $i++)
-                                        if($i>=1 && $i<=$totalPages):
-                                            ?>
-                                        <li class="page-item <?= $i==$page? 'active': '' ?>">
-                                            <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                                        </li>
-                                        </li>
-                                        <?php endif; ?>
+                <div class="row">
+        <div class="col">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item <?= 1==$page ? 'disabled' : '' ?>">
+                    <a class="page-link" href="?page=<?= $page-1 ?>">
+                            <i class="fas fa-arrow-circle-left"></i>
+                        </a></li>
+                        <?php for($i=$page-2; $i<=$page+2; $i++)
+                        if($i>=1 && $i<=$totalPages):
+                            ?>
+                        <li class="page-item <?= $i==$page? 'active': '' ?>">
+                            <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                        </li>
+                        </li>
+                        <?php endif; ?>
 
 
-                                    <li class="page-item <?= $totalPages==$page ? 'disabled' : '' ?>">
-                                    <a class="page-link" href="?page=<?= $page+1 ?>">
-                                            <i class="fas fa-arrow-circle-right"></i>
-                                        </a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
+                    <li class="page-item <?= $totalPages==$page ? 'disabled' : '' ?>">
+                    <a class="page-link" href="?page=<?= $page+1 ?>">
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
                 </li>
 
                 <li class="forum-list-group-title list-group-item disabled" aria-disabled="true"></li>
