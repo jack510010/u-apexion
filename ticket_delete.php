@@ -12,6 +12,7 @@ if(isset($_GET['sid'])){
     $pdo->query("DELETE FROM `member` WHERE ticket_sid = $sid");
     $pdo->query("DELETE FROM `ticket` WHERE sid = $sid");
 }
+header("Location: ticket_myticket.php");
 
 // $come_from = $_SERVER['HTTP_REFERER'] ?? 'list.php';
 
