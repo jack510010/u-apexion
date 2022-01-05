@@ -22,6 +22,14 @@ $sql = sprintf("SELECT * FROM travel LIMIT %s, %s", ($page - 1) * $perPage, $per
 $rows = $pdo->query($sql)->fetchAll();
 
 ?>
+
+<style>
+    i{
+     font-size: 30px;
+     text-align: center;
+     padding: 20px 10px 10px 10px;
+    }
+</style>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
 <div class="container">
@@ -33,13 +41,13 @@ $rows = $pdo->query($sql)->fetchAll();
     <table class="table table-dark table-hover table-bordered">
         <thead>
             <tr>
-                <th scope="col">Delete</th>
+                <th scope="col"style="text-align: center;">刪除</th>
                 <th scope="col">行程編號</th>
                 <th scope="col">行程標題</th>
                 <th scope="col">行程介紹</th>
                 <th scope="col">注意事項</th>
                 <th scope="col">價格</th>
-                <th scope="col">Revise</th>
+                <th scope="col"style="text-align: center;">修改</th>
             </tr>
         </thead>
         <tbody>
@@ -48,13 +56,13 @@ $rows = $pdo->query($sql)->fetchAll();
 
                 <tr>
                     <td>
-                        <a href="travel_delete.php?sid=<?= $r["sid"] ?>"><i class="fas fa-times-circle"></i></a>
+                        <a href="travel_delete.php?sid=<?= $r["sid"] ?>" onclick="return confirm('確定要刪除嗎?')"><i class="fas fa-times-circle"></i></a>
                     </td>
-                    <td><?= $r["sid"] ?></td>
+                    <td style="text-align: center;"><?= $r["sid"] ?></td>
                     <td><?= $r["name"] ?></td>
                     <td><?= $r["introduction"] ?></td>
                     <td><?= $r["attention"] ?></td>
-                    <td><?= $r["price"] ?></td>
+                    <td style="font-size:30px;"><?= $r["price"] ?></td>
                     <td>
                         <a href="travel_edit.php?sid=<?= $r["sid"] ?>"><i class="fas fa-pen-nib"></i></a>
                     </td>
