@@ -58,6 +58,7 @@
         /* navbar樣式結束 */
 
         
+       
          /* 訂票 Tina開始 */
         .ticket-form {
             color: white;
@@ -65,7 +66,7 @@
             margin: 0 auto;
         }
 
-        .ticket-wrap {
+        .ticket-wrap { 
             border-radius: 20px;
             border: 1px solid #05f2f2;
             overflow: hidden;
@@ -164,6 +165,25 @@
             right: 150px;
         }
 
+        .barcode {
+            width: 220px;
+        }
+
+        .myticket-content ul {
+            margin: 0;
+        }
+
+        /* .myticket-content-pic {
+            height: 100px;
+            width: 50px;
+        } */
+
+        .myticket-content-pic img {
+            min-height: 240px;
+            max-height: 241px;
+            width: 100%;
+            object-fit: cover;
+        }
         /* 訂票 Tina結束 */
 
         /* Transportation */
