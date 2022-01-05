@@ -49,7 +49,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link ">
+            <a href="cart.php" class="nav-link ">
                 <svg class="bi me-2" width="25" height="25">
                     <use xlinhref="#people-circle"></use>
                 </svg>
