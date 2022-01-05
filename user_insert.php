@@ -16,15 +16,11 @@ $pageName = 'insert';
                     <h5 class="card-title">新增通訊資料</h5>
                     <form name="form1" onsubmit="sendData(); return false;">
                         <div class="mb-3">
-                            <label for="name" class="form-label">name *</label>
+                            <label for="name" class="form-label">name</label>
                             <input type="name" class="form-control" id="name" name="name">
                             <div class="form-text"></div>
                         </div>
-                        <div class="mb-3">
-                            <label for="gender" class="form-label">gender</label>
-                            <input type="gender" class="form-control" id="gender" name="gender">
-                            <div class="form-text"></div>
-                        </div>
+
                         <div class="mb-3">
                             <label for="email" class="form-label">email</label>
                             <input type="text" class="form-control" id="email" name="email">
@@ -52,11 +48,7 @@ $pageName = 'insert';
 
                             <div class="form-text"></div>
                         </div>
-                        <div class="mb-3">
-                            <label for="nick-name" class="form-label">nick-name</label>
-                            <input type="nick-name" class="form-control" id="nick-name" name="nick-name">
-                            <div class="form-text"></div>
-                        </div>
+
                         <div class="mb-3">
                             <label for="country" class="form-label">country</label>
                             <input type="country" class="form-control" id="country" name="country">
@@ -70,6 +62,27 @@ $pageName = 'insert';
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">資料錯誤</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
 <?php require __DIR__ . "/__scripts.php"; ?>
 <script>
 const name = document.querySelector('#name');
@@ -92,7 +105,7 @@ function sendData() {
         isPass = false;
         name.nextElementSibling.innerHTML = '請輸入正確的姓名';
     }
-    if (email.value && !email_re.test(email.value)) {
+    if (!email_re.test(email.value)) {
         isPass = false;
         email.nextElementSibling.innerHTML = '請輸入正確的email';
     }
@@ -112,6 +125,13 @@ function sendData() {
             }).then(r => r.json())
             .then(obj => {
                 console.log(obj);
+                if (obj.success) {
+                    alert('新增成功');
+                    location.href = 'user_list.php';
+                } else {
+                    document.querySelector('.modal-body').innerHTML = obj.error || '資料新增發生錯誤';
+                    modal.show();
+                }
             })
     }
 

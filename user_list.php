@@ -46,14 +46,14 @@ $user = $pdo->query($sql)->fetchAll();
             <tr class="text-info">
                 <th scope="col">#</th>
                 <th scope="col">姓名</th>
-                <th scope="col">性別</th>
+
                 <th scope="col">信箱</th>
                 <th scope="col">密碼</th>
                 <th scope="col">手機</th>
                 <th scope="col">生日</th>
                 <th scope="col">地址</th>
 
-                <th scope="col">暱稱</th>
+
                 <th scope="col">國籍</th>
                 <th scope="col">新增時間</th>
                 <th scope="col">修改時間</th>
@@ -64,14 +64,14 @@ $user = $pdo->query($sql)->fetchAll();
             <tr>
                 <td><?= $u['sid'] ?></td>
                 <td><?= $u['name'] ?></td>
-                <td><?= $u['gender'] ?></td>
+
                 <td><?= $u['email'] ?></td>
                 <td><?= $u['password'] ?></td>
                 <td><?= $u['mobile'] ?></td>
                 <td><?= $u['birthday'] ?></td>
-                <td><?= $u['address'] ?></td>
+                <td><?= htmlentities($u['address']) ?></td>
 
-                <td><?= $u['nick-name'] ?></td>
+
                 <td><?= $u['country'] ?></td>
                 <td><?= $u['create-date'] ?></td>
                 <td><?= $u['update-date'] ?></td>
