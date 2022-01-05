@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 
 $output = [
     "success" =>  true,
-    "error" => "",
+    "error" => ""
 ];
 
 $ticketsid = isset($_POST['sid']) ? intval($_POST['sid']) : 0;
@@ -14,7 +14,8 @@ $trip = isset($_POST['trip'])? $_POST['trip'] : '';
 $seatLevel = isset($_POST['seatLevel'])? $_POST['seatLevel'] : '';
 $memberNumber = isset($_POST['memberNumber'])? intval($_POST['memberNumber']) : '';
 $member = isset($_POST['member'])? implode(",",$_POST['member']) : '';
-$memberPass = isset($_FILES['memberPass'])? implode(",",$_FILES['memberPass']['name']) : '';
+$memberPass = isset($_FILES['memberPass'])? $_FILES['memberPass'] : '';
+$memberPassName = implode(",",$memberPass['name']);
 
 
 if(empty($flightTime)){
@@ -66,13 +67,14 @@ if(empty($memberPass)){
 $upload_folder = __DIR__."/img/uploaded";
 if(! empty($_FILES['memberPass'])) {
     foreach($_FILES['memberPass']['name'] as $i=>$name){
-        $filename = $memberPass;
+        $filename = $name;
 
         $target = $upload_folder. '/'. $filename;
         if( move_uploaded_file($_FILES['memberPass']['tmp_name'][$i], $target)){
             $output['success'] = true;
             $output['filename'] = $filename;
             $output['i'] = $i;
+            $output["memberpass"] = $memberPass;
         } else {
             $output['error'] = '無法移動檔案';
             $output['target'] = $target;
@@ -91,7 +93,8 @@ $ticketid = $pdo->lastInsertId();
 
 // echo $ticketid;
 
-$memberSql = "INSERT INTO `member`(`ticket_sid`,`name`, `passport`) VALUES ('$ticketid','$member','$memberPass')";
+$memberSql = "INSERT INTO `member`(`ticket_sid`,`name`, `passport`) VALUES ('$ticketid','$member','$memberPassName')";
+// $memberSql = "INSERT INTO `member`(`ticket_sid`,`name`, `passport`) VALUES ('$ticketid','$member','$memberPass')";
 
 $pdo->query($memberSql);
 
