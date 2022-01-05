@@ -85,6 +85,7 @@ $products = $pdo->query($sql)->fetchAll();
           <th scope="col">商品名稱</th>
           <th scope="col">產品照片</th>
           <th scope="col">尺寸</th>
+          <th scope="col">顏色</th>
           <th scope="col">庫存數量</th>
           <th scope="col">價格</th>
           <th scope="col">上架時間</th>
@@ -100,6 +101,7 @@ $products = $pdo->query($sql)->fetchAll();
             <td><?= $p['product_name'] ?></td>
             <td><?= $p['img'] ?></td>
             <td><?= $p['size'] ?></td>
+            <td><?= $p['style'] ?></td>
             <td><?= $p['quantity'] ?></td>
             <td class="text-warning"><?= $p['price'] ?></td>
             <td><?= $p['create_date'] ?></td>
