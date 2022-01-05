@@ -223,9 +223,9 @@ $rows = $pdo->query($sql)->fetchAll();
                 
                 <!-- ?????try --> 
             </div>
-            <div id="result"></div>
+            <!-- <div id="result"></div> -->
             
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered" id="result">
                 <thead>
                 <tr>
                     <th scope="col">編號</th>

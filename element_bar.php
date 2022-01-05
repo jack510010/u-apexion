@@ -10,7 +10,6 @@ require __DIR__. "/__connect_db.php";
   </button>
   <ul class="dropdown-menu ">
     <li><a class="dropdown-item" href="element.php">星座之旅(Element)</a></li>
-    <li><a class="dropdown-item" href="planet.php">星球之旅(Planet)</a></li>
     <li><a class="dropdown-item" href="travel_insert.php">新增行程</a></li>
   </ul>
 </div>

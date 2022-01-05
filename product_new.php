@@ -1,5 +1,6 @@
 <?php require __DIR__ . "/__connect_db.php";
 $title = '周邊商品';
+$pageName = 'product';
 ?>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <div class="d-flex">
@@ -60,7 +61,7 @@ $title = '周邊商品';
         <div class="form-row text-light">
           <div class="mb-3">
             <label for="product_name">商品名稱</label>
-            <input type="text" class="product-wrap form-control" id="product_name" name="product_name" placeholder="名稱" required>
+            <input type="text" class="product-wrap form-control" id="product_name" name="product_name" placeholder="名稱" >
             <div class="text-warning"></div>
           </div>
           <div class=" mb-3">
@@ -81,48 +82,58 @@ $title = '周邊商品';
                   <font style="vertical-align: inherit;">男生</font>
                 </font>
               </option>
+              <option>
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">孩童</font>
+                </font>
+              </option>
+              <option>
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">配件</font>
+                </font>
+              </option>
             </select>
           </div>
           <div class=" mb-3">
             <label for="img">產品照片</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="img" name="img" placeholder="照片" aria-describedby="inputGroupPrepend2" required>
+              <input type="text" class="form-control" id="img" name="img" placeholder="照片" aria-describedby="inputGroupPrepend2">
             </div>
           </div>
           <div class=" mb-3">
             <label for="quantity">庫存數量</label>
             <div class="input-group">
-              <input type="number" class="form-control" id="quantity" name="quantity" placeholder="請填入數字" aria-describedby="inputGroupPrepend2" required>
+              <input type="number" class="form-control" id="quantity" name="quantity" placeholder="請填入數字" aria-describedby="inputGroupPrepend2">
             </div>
           </div>
           <div class=" mb-3">
             <label for="price">價格</label>
             <div class="input-group">
-              <input type="number" class="form-control" id="price" name="price" placeholder="請填入數字" aria-describedby="inputGroupPrepend2" required>
+              <input type="number" class="form-control" id="price" name="price" placeholder="請填入數字" aria-describedby="inputGroupPrepend2">
             </div>
           </div>
         </div>
         <div class="d-flex">
-        <div class="m-1">
-          <label class="text-light">尺寸</label>
-          <select class="mb-3" id="size" name="size">
-            <option value="F">F</option>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="其他">其他</option>
-          </select>
+          <div class="m-1">
+            <label class="text-light">尺寸</label>
+            <select class="mb-3" id="size" name="size">
+              <option value="F">F</option>
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="其他">其他</option>
+            </select>
           </div>
           <div class="m-1">
-          <label class="text-light">顏色</label>
-          <select class="mb-3" id="size" name="style">
-            <option value="黑色">黑色</option>
-            <option value="白色">白色</option>
-            <option value="藍色">藍色</option>
-          </select>
+            <label class="text-light">顏色</label>
+            <select class="mb-3" id="size" name="style">
+              <option value="黑色">黑色</option>
+              <option value="白色">白色</option>
+              <option value="藍色">藍色</option>
+            </select>
+          </div>
         </div>
-        </div>
-      
+
         <button class="btn btn-outline-info" type="submit">資料送出</button>
 
       </form>
@@ -132,9 +143,12 @@ $title = '周邊商品';
     </div>
   </div>
 </div>
+
 <?php require __DIR__ . "/__scripts.php"; ?>
 <script>
   const product_name = document.querySelector('#product_name');
+  const quantity = document.querySelector('#quantity');
+
 
   function sendData() {
     product_name.nextElementSibling.innerHTML = '';
@@ -144,6 +158,11 @@ $title = '周邊商品';
     if (product_name.value.length < 2) {
       isPass = false;
       product_name.nextElementSibling.innerHTML = "請輸入正確商品名稱";
+    }
+   
+    if (quantity.value.length < 0) {
+      isPass = false;
+      product_name.nextElementSibling.innerHTML = "請輸入庫存數量";
     }
 
     //拿取輸入的資料
@@ -155,7 +174,14 @@ $title = '周邊商品';
       }).then(r => r.json())
       .then(obj => {
         console.log(obj);
-      });
+        if (obj.success) {
+          alert('新增成功');
+          //新增完跳回商品頁
+          location.href = 'product.php';
+        } else {
+          alert(obj.error || '資料新增發生錯誤');
+        }
+      })
   }
 </script>
 
