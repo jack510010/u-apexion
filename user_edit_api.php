@@ -7,6 +7,14 @@ $output = [
     'error' => '',
 ];
 
+$sid = isset($_POST['sid']) ? intval($_POST['sid']) : 0;
+if (empty($sid)) {
+    $output['code'] = 400;
+    $output['error'] = '沒有 sid';
+    echo json_encode($output, JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
 $name = $_POST['name'] ?? '';
 $email = $_POST['email'] ?? '';
 $mobile = $_POST['mobile'] ?? '';
@@ -32,7 +40,16 @@ if (empty($mobile) or !preg_match("/^09\d{2}-?\d{3}-?\d{3}$/", $mobile)) {
 }
 
 $sql =
-    "INSERT INTO `user`( `name`, `email`, `password`, `mobile`, `birthday`, `address`, `country`, `create-date`, `update-date`) VALUES(?, ?, ?, ?, ?, ?, ?, NOW(), NOW() )";
+    "UPDATE `user` SET 
+                    `name`=?,
+                    `email`=?,
+                    `password`=?,
+                    `mobile`=?,
+                    `birthday`=?,
+                    `address`=?,
+                    `country`=?,
+                    `update-date`= NOW() 
+    WHERE `sid`=?";
 
 $stmt = $pdo->prepare($sql);
 
@@ -44,7 +61,8 @@ $stmt->execute([
     $mobile,
     empty($_POST['birthday']) ? NULL : $_POST['birthday'],
     $_POST['address'] ?? '',
-    $_POST['country'] ?? ''
+    $_POST['country'] ?? '',
+    $sid
 
 ]);
 

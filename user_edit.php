@@ -1,7 +1,20 @@
 <?php
 require __DIR__ . '/__connect_db.php';
-$title = '新增會員資料';
-$pageName = 'insert';
+$title = '修改資料';
+
+if (!isset($_GET['sid'])) {
+    header('Location: user_list.php');
+    exit;
+}
+
+
+$sid = intval($_GET['sid']);
+$user = $pdo->query("SELECT * FROM `user` WHERE sid=$sid")->fetch();
+if (empty($user)) {
+    header('Location: user_list.php');
+    exit;
+}
+
 
 
 ?>
@@ -13,49 +26,56 @@ $pageName = 'insert';
             <div class="card">
 
                 <div class="card-body">
-                    <h5 class="card-title">新增通訊資料</h5>
+                    <h5 class="card-title">修改會員資料</h5>
                     <form name="form1" onsubmit="sendData(); return false;">
+                        <input type="hidden" name="sid" value="<?= $user['sid'] ?>">
                         <div class="mb-3">
                             <label for="name" class="form-label">name</label>
-                            <input type="name" class="form-control" id="name" name="name">
+                            <input type="name" class="form-control" id="name" name="name"
+                                value="<?= htmlentities($user['name']) ?>">
                             <div class="form-text"></div>
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label">email</label>
-                            <input type="text" class="form-control" id="email" name="email">
+                            <input type="text" class="form-control" id="email" name="email"
+                                value="<?= $user['email'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">password</label>
-                            <input type="text" class="form-control" id="password" name="password">
+                            <input type="text" class="form-control" id="password" name="password"
+                                value="<?= $user['password'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="mobile" class="form-label">mobile</label>
                             <input type="mobile" class="form-control" id="mobile" name="mobile"
-                                data-pattern="09\d{2}-?\d{3}-?\d{3}">
+                                data-pattern="09\d{2}-?\d{3}-?\d{3}" value="<?= $user['mobile'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="birthday" class="form-label">birthday</label>
-                            <input type="date" class="form-control" id="birthday" name="birthday">
+                            <input type="date" class="form-control" id="birthday" name="birthday"
+                                value="<?= $user['birthday'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">address</label>
-                            <textarea class="form-control" name="address" id="address" cols="30" rows="3"></textarea>
+                            <textarea class="form-control" name="address" id="address" cols="30"
+                                rows="3"><?= $user['address'] ?></textarea>
 
                             <div class="form-text"></div>
                         </div>
 
                         <div class="mb-3">
                             <label for="country" class="form-label">country</label>
-                            <input type="country" class="form-control" id="country" name="country">
+                            <input type="country" class="form-control" id="country" name="country"
+                                value="<?= $user['country'] ?>">
                             <div class="form-text"></div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">新增</button>
+                        <button type="submit" class="btn btn-primary">修改</button>
                     </form>
                 </div>
             </div>
@@ -119,17 +139,17 @@ function sendData() {
     if (isPass) {
         const fd = new FormData(document.form1);
 
-        fetch('user_insert_api.php', {
+        fetch('user_edit_api.php', {
                 method: 'POST',
                 body: fd,
             }).then(r => r.json())
             .then(obj => {
                 console.log(obj);
                 if (obj.success) {
-                    alert('新增成功');
-                    location.href = 'user_list.php';
+                    alert('修改成功');
+                    //location.href = 'user_list.php';
                 } else {
-                    document.querySelector('.modal-body').innerHTML = obj.error || '資料新增發生錯誤';
+                    document.querySelector('.modal-body').innerHTML = obj.error || '資料修改發生錯誤';
                     modal.show();
                 }
             })
