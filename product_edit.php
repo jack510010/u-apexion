@@ -109,7 +109,7 @@ if(empty($row)){
                     <div class=" mb-3">
                         <label for="img">產品照片</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="img" name="img" placeholder="照片" aria-describedby="inputGroupPrepend2" value="<?=$row['img'] ?>">
+                            <input accept="image/*" type='file' id="imgInp" class="form-control" name="img[]" placeholder="照片" aria-describedby="inputGroupPrepend2" value="<?=$row['img'] ?>">
                         </div>
                     </div>
                     <div class=" mb-3">

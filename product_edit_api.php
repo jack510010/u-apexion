@@ -40,18 +40,6 @@ if (empty($quantity)) {
 
 $sql = "UPDATE `product` SET `category`=?,`product_name`=?,`img`=?,`style`=?,`size`=?,`quantity`=?,`price`=?,`update_date`=NOW() WHERE `sid`=?";
 
-/*$sql = "UPDATE `product` SET 
-`category`=?,
-`product_name`=?,
-`img`=?,
-`style`=?,
-`size`=?,
-`quantity`=?,
-`price`=?,
-`update_date`=NOW(),
-WHERE `sid`=?";
-*/
-
 $stmt = $pdo->prepare($sql);
 $stmt->execute([
     $category,
