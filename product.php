@@ -18,6 +18,7 @@ if ($page > $totalPages) {
   exit;
 }
 
+
 //提取表單資料
 $sql = sprintf("SELECT * FROM product LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
 
@@ -35,11 +36,11 @@ $products = $pdo->query($sql)->fetchAll();
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle text-light" href="product_w.php" id="womanProduct" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               女生
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">外套</a></li>
+              <li><a class="dropdown-item" href="product_w.php">外套</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
@@ -59,7 +60,7 @@ $products = $pdo->query($sql)->fetchAll();
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">T恤</a></li>
+              <li><a class="dropdown-item" href="product_m.php">T恤</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>

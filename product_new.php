@@ -61,7 +61,7 @@ $pageName = 'product';
         <div class="form-row text-light">
           <div class="mb-3">
             <label for="product_name">商品名稱</label>
-            <input type="text" class="product-wrap form-control" id="product_name" name="product_name" placeholder="名稱" >
+            <input type="text" class="product-wrap form-control" id="product_name" name="product_name" placeholder="名稱" required>
             <div class="text-warning"></div>
           </div>
           <div class=" mb-3">
@@ -97,7 +97,7 @@ $pageName = 'product';
           <div class=" mb-3">
             <label for="img">產品照片</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="img" name="img" placeholder="照片" aria-describedby="inputGroupPrepend2">
+              <input accept="" type='file' id="imgInp" class="form-control" name="img[]" placeholder="照片" aria-describedby="inputGroupPrepend2">
             </div>
           </div>
           <div class=" mb-3">
@@ -138,7 +138,7 @@ $pageName = 'product';
 
       </form>
       <div class="pt-5 mx-2">
-        <img class="img-fluid " src="./img/logo.png" width="75" height="75">
+        <img class="img-fluid " id="product_blah" width="75" height="75">
       </div>
     </div>
   </div>
@@ -159,7 +159,7 @@ $pageName = 'product';
       isPass = false;
       product_name.nextElementSibling.innerHTML = "請輸入正確商品名稱";
     }
-   
+
     if (quantity.value.length < 0) {
       isPass = false;
       product_name.nextElementSibling.innerHTML = "請輸入庫存數量";
@@ -183,6 +183,14 @@ $pageName = 'product';
         }
       })
   }
+  //圖片預覽
+  imgInp.onchange = evt => {
+    const [file] = imgInp.files
+    if (file) {
+      product_blah.src = URL.createObjectURL(file)
+    }
+  }
+
 </script>
 
 <?php require __DIR__ . "/__html_foot.php"; ?>
