@@ -66,20 +66,11 @@ $stmt->execute([
 
 ]);
 
+if ($stmt->rowCount() == 0) {
+    $output['error'] = '資料沒有修改';
+} else {
+    $output['success'] = 'true';
+}
 
 
-$output['success'] = $stmt->rowCount() == 1;
-$output['rowCount'] = $stmt->rowCount();
-
-
-
-
-
-
-
-
-
-
-
-
-echo json_encode($output);
+echo json_encode($output, JSON_UNESCAPED_UNICODE);
