@@ -28,97 +28,111 @@ $user = $pdo->query($sql)->fetchAll();
     <nav class="navbar navbar-expand-lg navbar-light pt-3 shadow ">
         <div class="container-fluid"><i class="fas fa-laptop-house text-warning"></i>
             <a class="navbar text-warning " href="user_list.php" style="text-decoration:none;">所有會員</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
 
 
-
-
-            <button type="button" class="btn btn-info"><a class="text-dark" href="user_insert.php"
-                    style="text-decoration:none;">新增會員</a></button>
-
-
-        </div>
-    </nav>
-</div>
-<!-- 下方列表 -->
-<div class="bd-example p-3">
-    <table class="table table-hover text-light">
-        <thead>
-            <tr class="text-info">
-                <th scope="col">#</th>
-                <th scope="col">姓名</th>
-
-                <th scope="col">信箱</th>
-                <th scope="col">密碼</th>
-                <th scope="col">手機</th>
-                <th scope="col">生日</th>
-                <th scope="col">地址</th>
-
-
-                <th scope="col">國籍</th>
-                <th scope="col">新增時間</th>
-                <th scope="col">修改時間</th>
-                <th scope="col">修改</th>
-                <th scope="col">刪除</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($user as $u) : ?>
-            <tr>
-                <td><?= $u['sid'] ?></td>
-                <td><?= $u['name'] ?></td>
-
-                <td><?= $u['email'] ?></td>
-                <td><?= $u['password'] ?></td>
-                <td><?= $u['mobile'] ?></td>
-                <td><?= $u['birthday'] ?></td>
-                <td><?= htmlentities($u['address']) ?></td>
-
-
-                <td><?= $u['country'] ?></td>
-                <td><?= $u['create-date'] ?></td>
-                <td><?= $u['update-date'] ?></td>
-                <td>
-                    <a href="user_edit.php?sid=<?= $u['sid'] ?>">
-                        <i class="fas fa-pencil-alt"></i>
-                    </a>
-                </td>
-                <td>
-                    <a href="javascript: delete_it(<?= $u['sid'] ?>)">
-                        <i class="fas fa-trash-alt"></i>
-                    </a>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="row">
-        <div class="col text-warning d-flex justify-content-end align-items-center">
-            <p class="px-2">共有<?= $totalRows ?>筆資料</p>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination pagination">
-                    <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $page - 1 ?>" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
                     </li>
-                    <?php for ($i = $page - 2; $i <= $page + 2; $i++)
-                        if ($i >= 1 && $i <= $totalPages) :
-                    ?>
-                    <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                        <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                    </li>
-                    <?php endif; ?>
-                    <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $page + 1 ?>" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
+                    <li class="nav-item dropdown">
+
+
                     </li>
                 </ul>
-            </nav>
-        </div>
 
+
+
+                <button type="button" class="btn btn-info"><a class="text-dark" href="user_insert.php"
+                        style="text-decoration:none;">新增會員</a></button>
+                <form class="d-flex align-items-center ms-2">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-warning" type="submit">Search</button>
+                </form>
+
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- 下方列表 -->
+    <div class="bd-example p-3">
+        <table class="table table-hover text-light">
+            <thead>
+                <tr class="text-info">
+                    <th scope="col">#</th>
+                    <th scope="col">姓名</th>
+                    <th scope="col">信箱</th>
+                    <th scope="col">密碼</th>
+                    <th scope="col">手機</th>
+                    <th scope="col">生日</th>
+                    <th scope="col">地址</th>
+                    <th scope="col">國籍</th>
+                    <th scope="col">新增時間</th>
+                    <th scope="col">修改時間</th>
+                    <th scope="col">修改</th>
+                    <th scope="col">刪除</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($user as $u) : ?>
+                <tr>
+                    <td><?= $u['sid'] ?></td>
+                    <td><?= $u['name'] ?></td>
+                    <td><?= $u['email'] ?></td>
+                    <td><?= $u['password'] ?></td>
+                    <td><?= $u['mobile'] ?></td>
+                    <td><?= $u['birthday'] ?></td>
+                    <td><?= htmlentities($u['address']) ?></td>
+                    <td><?= $u['country'] ?></td>
+                    <td><?= $u['create-date'] ?></td>
+                    <td><?= $u['update-date'] ?></td>
+                    <td>
+                        <a href="user_edit.php?sid=<?= $u['sid'] ?>">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="javascript: delete_it(<?= $u['sid'] ?>)">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col text-warning d-flex justify-content-end align-items-center">
+                <p class="px-2">共有<?= $totalRows ?>筆資料</p>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination">
+                        <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
+                            <a class="page-link" href="?page=<?= $page - 1 ?>" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <?php for ($i = $page - 2; $i <= $page + 2; $i++)
+                            if ($i >= 1 && $i <= $totalPages) :
+                        ?>
+                        <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                            <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                        </li>
+                        <?php endif; ?>
+                        <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
+                            <a class="page-link" href="?page=<?= $page + 1 ?>" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
     </div>
-</div>
 </div>
 
 <?php require __DIR__ . "/__scripts.php"; ?>
