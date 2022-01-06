@@ -15,7 +15,7 @@ $seatrows = $pdo->query($seatsql)->fetchAll();
   <div class="mb-3">
     <div class="d-flex align-items-center ticket-wrap">
     <label for="exampleInputEmail1" class=" align-self-stretch d-flex align-items-center justify-content-center">啟航日程</label>
-    <select required class="ticket-form-select form-select form-control flex-fill" aria-label="Default select example" name="flightTime">
+    <select required id="flightTime" class="ticket-form-select form-select form-control flex-fill" aria-label="Default select example" name="flightTime">
   <option selected disabled>請選擇日程</option>
   <?php foreach ($flightrows as $r) { ?>
     <option><?= $r['flight_time'] ?></option>
@@ -28,7 +28,7 @@ $seatrows = $pdo->query($seatsql)->fetchAll();
   <div class="mb-3">
     <div class="d-flex align-items-center ticket-wrap">
     <label for="exampleInputEmail1" class="form-label  d-flex align-items-center justify-content-center align-self-stretch">旅遊行程</label>
-    <select class="ticket-form-select form-select form-control flex-fill" aria-label="Default select example" name="trip" required>
+    <select id="trip" class="ticket-form-select form-select form-control flex-fill" aria-label="Default select example" name="trip" required>
   <option selected disabled>請選擇行程</option>
   <option value="1">One</option>
   <option value="2">Two</option>
@@ -40,7 +40,7 @@ $seatrows = $pdo->query($seatsql)->fetchAll();
   <div class="mb-3">
     <div class="d-flex align-items-center ticket-wrap">
     <label for="exampleInputEmail1" class="form-label  d-flex align-items-center justify-content-center align-self-stretch">艙等</label>
-    <select required class="ticket-form-select form-select form-control flex-fill" aria-label="Default select example" name="seatLevel">
+    <select required id="seatlvl" class="ticket-form-select form-select form-control flex-fill" aria-label="Default select example" name="seatLevel">
   <option selected disabled>請選擇艙等</option>
   <?php foreach ($seatrows as $r) { ?>
   <option ><?= $r['level'] ?></option>
@@ -52,7 +52,7 @@ $seatrows = $pdo->query($seatsql)->fetchAll();
   <div class="mb-3">
     <div class="d-flex align-items-center ticket-wrap">
     <label for="exampleInputEmail1" class="form-label  d-flex align-items-center justify-content-center align-self-stretch flex-grow-1">人數</label>
-    <input required type="number" maxlength="2" class="form-control " id="members" placeholder="請輸入人數(上限10人)" name="memberNumber">
+    <input type="number" maxlength="2" class="form-control " id="members" placeholder="請輸入人數(上限10人)" name="memberNumber" required>
     <button class="member-confirm d-flex align-items-center justify-content-center align-self-stretch" onclick="memberCount(); return false;">確認</button>
     </div>
     <div class="ticket-incorrect "></div>
@@ -67,14 +67,14 @@ $seatrows = $pdo->query($seatsql)->fetchAll();
 <script>
     const memberInput = `<div class="mb-3">
     <div class="d-flex align-items-center ticket-wrap">
-    <label for="exampleInputEmail1" class="memberName form-label  d-flex align-items-center justify-content-center align-self-stretch">成員姓名</label>
-    <input type="email" class="form-control flex-fill" id="exampleInputEmail1" aria-describedby="emailHelp" name="member[]" placeholder="請輸入護照英文名字">
+    <label for="membername" class="memberName form-label  d-flex align-items-center justify-content-center align-self-stretch">成員姓名</label>
+    <input type="text" class="form-control flex-fill" id="membername" aria-describedby="emailHelp" name="member[]" placeholder="請輸入護照英文名字">
     </div>
     <div class="ticket-incorrect"></div>
   </div><div class="mb-3">
     <div class="d-flex align-items-center ticket-wrap">
-    <label for="exampleInputEmail1" class="memberPassport form-label  d-flex align-items-center justify-content-center align-self-stretch">護照上傳</label>
-    <input type="file" class="form-control UploadPas flex-fill" name="memberPass[]">
+    <label for="memberPass" class="memberPassport form-label  d-flex align-items-center justify-content-center align-self-stretch">護照上傳</label>
+    <input type="file" class="form-control UploadPas flex-fill" id="memberPass" name="memberPass[]">
     </div>
     <div class="ticket-incorrect"></div>
   </div>`;
@@ -94,19 +94,46 @@ $seatrows = $pdo->query($seatsql)->fetchAll();
             v.setAttribute('style' , `background-color: #023E73`);
         }
         })
+        document.querySelector(".ticketBtn").style= "display: block";
         }
         else {
-          alert("人數超過10人了喔");
+          alert("超過人數上限10人，請重新輸入人數");
           document.querySelector(".member-input").innerHTML = "";
+          document.querySelector(".ticketBtn").style= "display: none";
           break;
         } 
         }
-        document.querySelector(".ticketBtn").style= "display: block";
+        
 }
 
 function sendTicketForm(){
   const fd = new FormData(document.ticketForm);
+  let isPass = true;
 
+  if(flightTime.value == "0000-00-00 00:00:00"){
+    isPass = false;
+    alert("請選擇日程");
+  }
+  if(trip.value.length == 0){
+    isPass = false;
+    alert("請選擇行程");
+  }
+  if(seatlvl.value.length == 0){
+    isPass = false;
+    alert("請選擇艙等");
+  }
+  if(members.value.length == 0){
+    isPass = false;
+    alert("請輸入人數");
+  }
+
+  // const isEnglish = /^[A-Za-z]+$/;
+  // if(membername.value.length == 0 | isEnglish.test(membername.value) == false){
+  //   isPass = false;
+  //   alert("請輸入護照英文姓名");
+  // } 
+
+  if(isPass){
   fetch("ticket_insert_api.php",{
     method: 'POST',
     body: fd,
@@ -114,13 +141,13 @@ function sendTicketForm(){
   .then(txt => {
   if(txt.success){
     console.log(txt.memberpass);
-    // location.href = "ticket_myticket.php";
+    location.href = "ticket_myticket.php";
   }else {
     alert(txt.error);
   }
 });
 }
-
+}
 
 </script>
 <?php require __DIR__. "/__html_foot.php";?>
