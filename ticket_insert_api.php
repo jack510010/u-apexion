@@ -4,7 +4,7 @@ require __DIR__. "/__connect_db.php";
 header('Content-Type: application/json');
 
 $output = [
-    "success" =>  true,
+    "success" =>  false,
     "error" => ""
 ];
 
@@ -21,21 +21,21 @@ $memberPassName = implode(",",$memberPass['name']);
 if(empty($flightTime)){
     $output["success"]=false;
     $output["error"]="請選擇日程";
-    echo json_encode($output);
+    echo json_encode($output,JSON_UNESCAPED_UNICODE);
     exit;
 }
 
 if(empty($trip)){
     $output["success"]=false;
     $output["error"]="請選擇行程";
-    echo json_encode($output);
+    echo json_encode($output,JSON_UNESCAPED_UNICODE);
     exit;
 }
 
 if(empty($seatLevel)){
     $output["success"]=false;
     $output["error"]="請選擇艙等";
-    echo json_encode($output);
+    echo json_encode($output,JSON_UNESCAPED_UNICODE);
     exit;
 }
 
@@ -43,7 +43,7 @@ if(empty($seatLevel)){
 if(empty($memberNumber) or $memberNumber > 10){
     $output["success"]=false;
     $output["error"]="人數上限10人，請輸入正確人數";
-    echo json_encode($output);
+    echo json_encode($output,JSON_UNESCAPED_UNICODE);
     exit;
 }
 
@@ -51,14 +51,14 @@ if(empty($memberNumber) or $memberNumber > 10){
 if(empty($member or strlen($member) < 2 or !preg_match("/^[a-zA-Z\s]+$/",$member))){
     $output["success"]=false;
     $output["error"]="請輸入成員護照姓名";
-    echo json_encode($output);
+    echo json_encode($output,JSON_UNESCAPED_UNICODE);
     exit;
 }
 
 if(empty($memberPass)){
     $output["success"]=false;
     $output["error"]="請選擇護照檔案";
-    echo json_encode($output);
+    echo json_encode($output,JSON_UNESCAPED_UNICODE);
     exit;
 }
 
@@ -97,7 +97,6 @@ $memberSql = "INSERT INTO `member`(`ticket_sid`,`name`, `passport`) VALUES ('$ti
 // $memberSql = "INSERT INTO `member`(`ticket_sid`,`name`, `passport`) VALUES ('$ticketid','$member','$memberPass')";
 
 $pdo->query($memberSql);
-
 
 echo json_encode($output,JSON_UNESCAPED_UNICODE);
 

@@ -9,7 +9,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li>
-            <a href="element_bar.php" class="nav-link ">
+            <a href="element_index.php" class="nav-link ">
                 <svg class="bi me-2" width="25" height="25">
                     <use xlink:href="#speedometer2"></use>
                 </svg>

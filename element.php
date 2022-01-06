@@ -32,6 +32,14 @@ $rows = $pdo->query($sql)->fetchAll();
 </style>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="element.php">行程表單</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="travel_insert.php">新增行程</a>
+  </li>
+</ul>
 <div class="container">
     <div class="row">
         <div class="col">
@@ -46,7 +54,7 @@ $rows = $pdo->query($sql)->fetchAll();
                 <th scope="col">行程標題</th>
                 <th scope="col">行程介紹</th>
                 <th scope="col">注意事項</th>
-                <th scope="col">價格</th>
+                <th scope="col">價位</th>
                 <th scope="col">選取</th>
                 <th scope="col" style="text-align: center;">修改</th>
             </tr>
@@ -97,6 +105,10 @@ $rows = $pdo->query($sql)->fetchAll();
             </li>
         </ul>
     </nav>
+
+<div class="div">
+    <img src="./img/640.png" alt="">
+</div>
 
 </div>
 <?php require __DIR__ . "/__scripts.php"; ?>

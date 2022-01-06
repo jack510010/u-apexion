@@ -1,4 +1,5 @@
 <?php
+// 這個是read
 include __DIR__ . "/__connect_db.php";
 
 $title = "購物車列表"; // 這個變數可以吃到從『include __DIR__ . "/__html_head.php"』過來的值。
@@ -6,7 +7,7 @@ $pageName = "cart"; // 意思是給這個『cart.php』檔叫做cart。
 
 //todo 以下開始做分頁
 
-$perPage = 5; //每一頁有幾筆資料
+$perPage = 4; //每一頁有幾筆資料
 
 // intval意思是轉換成整數』如果有的話轉換成整數
 $page = isset($_GET["page"]) ? intval($_GET["page"]) : 1;  // 去拿到所在頁面，
@@ -20,7 +21,7 @@ if ($page < 1) {                   // 如果page的頁數小於1的話就讓他�
 
 $total_sql = "SELECT COUNT(1) FROM cart"; //這養只會有一筆，但裡面有總筆數，寫在COUNT裡面。
 
-$totalRows = $pdo->query($total_sql)->fetch(PDO::FETCH_NUM)[0];  
+$totalRows = $pdo->query($total_sql)->fetch(PDO::FETCH_NUM)[0];
 //因為只有一筆所以用fetch就好了，
 //但是裡面是COUNT(1)的欄位名稱，而我不要欄位名稱，
 //因此fetch()括弧裡面要用，『PDO::FETCH_NUM』
@@ -30,7 +31,7 @@ $totalRows = $pdo->query($total_sql)->fetch(PDO::FETCH_NUM)[0];
 $totalPages = ceil($totalRows / $perPage); // 總頁數
 //todo 分頁做完
 
-if ($page > $totalPages) { 
+if ($page > $totalPages) {
     // 我程式碼寫到這裡才拿到 $totalPages 所以才可以下這個條件
     // if ($page > $totalPages)
     // 要照邏輯走，所以這個條件不能跟『if ($page < 1)』寫在一起
@@ -39,24 +40,26 @@ if ($page > $totalPages) {
     header("location: cart.php?page=" . $totalPages);
     exit;
 };
-//ORDER BY sid DESC意思就是降冪排序
+
 $sql = sprintf("SELECT * FROM cart LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
 // $perPage = 5; 每一頁有幾筆資料。 假設我要看第三頁的資料，那就表示我要從第11筆開示看嘛，因為前兩頁一共有10筆資料
 // 兩頁 * 每頁5筆, 顯示第三頁5筆資料。 所以程式碼才會是($page - 1) * $perPage, $perPage
 
 $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
+
+//print_r($row);
 // ---------在這條線以上做操作---------------
 ?>
-<!---------這條線以下做呈現的頁面------------->
-<?php include __DIR__ . "/__html_head.php"; ?>
-<?php require __DIR__ . "/__navbar.php"; ?>
+<?php include __DIR__ . "/__html_head.php" ?>
+<?php include __DIR__ . "/__navbar.php"; ?>
 <div class="container">
     <div class="row">
         <div class="col">
-            <?= "$totalRows, $totalPages" ?>
-            <!--會顯示總筆數、總頁數。-->
-            <nav aria-label="Page navigation example">
+            <?= "$totalRows, $totalPages" ?> <!--會顯示總筆數、總頁數。-->
+
+            <nav aria-label="Page navigation example">  <!--會顯示頁數的bootstrap-->
                 <ul class="pagination">
+
                     <li class="page-item <?= 1 == $page ? "disabled" : "" ?> "><a class="page-link" href="?page=1 "><i class="fas fa-step-backward"></i></a></li>
                     <!--去到最前頁icon-->
                     <!--如果page已經在第1頁了，就不讓使用者繼續按，所以呈現disabled 『1 == $page ? "disabled" : ""』-->
@@ -68,20 +71,18 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
                     <!--如果page已經在第1頁了，就不讓使用者繼續按，所以呈現disabled 『1 == $page ? "disabled" : ""』-->
                     <!-- && $i <= $totalPages-->
 
-                    <?php for ($i = $page - 2; $i <= $page + 2; $i++) :
-                        if ($i >= 1 && $i <= $totalPages) : ?>
-                            <!--把頁數呈現出來，用for迴圈把$i的值帶入-->
+                    <?php for($i = $page - 2; $i <= $page + 2; $i++):
+                        if ( $i >= 1 && $i <= $totalPages ): ?> 
+                        <!--把頁數呈現出來，用for迴圈把$i的值帶入-->
 
-                            <li class="page-item <?= $i == $page ? "active" : "" ?> ">
-                                <!--這串是要讓使用者的所在頁數反白。如果$i的值等於所在頁數$page，『就反白"active"』，『沒有的話就啥也不做""』-->
+                        <li class="page-item <?= $i == $page ? "active" : "" ?> "> 
+                        <!--這串是要讓使用者的所在頁數反白。如果$i的值等於所在頁數$page，『就反白"active"』，『沒有的話就啥也不做""』-->
 
-                                <a class="page-link" href="?page=<?= $i ?>">
-                                    <!--#字號(改成用?page)後面會顯示所在頁數-->
-                                    <?= $i ?>
-                                    <!--本來是寫死的頁數，改成用變數$i把值帶入-->
-                                </a>
-                            </li>
-
+                            <a class="page-link" href="?page=<?= $i ?>">  <!--#字號(改成用?page)後面會顯示所在頁數-->
+                                <?= $i ?>  <!--本來是寫死的頁數，改成用變數$i把值帶入-->
+                            </a>
+                        </li>
+                   
                     <?php endif;
                     endfor; ?>
                     <li class="page-item <?= $totalPages == $page ? "disabled" : "" ?> "><a class="page-link" href="?page=<?= $page + 1 ?> "><i class="fas fa-chevron-circle-right"></i></a></li>
@@ -92,6 +93,7 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
                     <li class="page-item <?= $totalPages == $page ? "disabled" : "" ?> "><a class="page-link" href="?page=<?= $totalPages ?> "><i class="fas fa-step-forward"></i></a></li>
                     <!--最後一頁的icon-->
                     <!--如果page已經在最後一頁了，就不讓使用者繼續按，所以呈現disabled 『$totalPages == $page ? "disabled" : ""』-->
+
                 </ul>
             </nav>
         </div>
@@ -100,9 +102,10 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
 <div class="container">
     <div class="row">
         <div class="col">
-            <table class="table　table-dark table-striped table-bordered">
+            <table class="table table-dark table-striped table-bordered">
                 <thead>
                     <tr>
+                        
                         <th scope="col">
                             <i class="fas fa-trash-alt"></i>
                         </th>
@@ -116,17 +119,34 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    
+                    <?php foreach ($row as $r) : ?>
+                        <!--不知道foreach哪來的去看這個檔案『4foreach-0有問題要問老師.php』-->
+                        <tr>
+                            <!--這一坨就是後端生畫面-->
+                            <td>
+                                <!-- 裡面這是第一種刪除方法。比較直觀簡單。因為我們要告訴他要刪除哪一筆，所以加上?sid=<?= $r["sid"] ?>，看a標籤 -->
+                                <a href="cart-delete.php?sid=<?= $r["sid"] ?>" onclick="return confirm('確定要刪除這筆資料嗎？')">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                            <td><?= $r["sid"] ?></td>
+                            <td><?= htmlentities($r["user_id"]) ?></td>
+                            <td><?= htmlentities($r["product_id"]) ?></td>
+                            <td><?= htmlentities($r["count_number"]) ?></td>
+                            <!--htmlentities 放這個的原因是防範惡意程式攻擊，例如惡意javaScript系統-->
+                            <td>
+                                <a href="edit.php?sid=<?= $r["sid"] ?>">
+                                    <!--因為我們要告訴他要修改哪一筆，所以加上?sid= 『$r["sid"]』，看a標籤 -->
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-<?php include __DIR__ . "/__scripts.php"; ?>
-<?php include __DIR__ . "/__html_foot.php"; ?>
+<?php include __DIR__ . "/__scripts.php" ?>
+<?php include __DIR__ . "/__html_foot.php" ?>

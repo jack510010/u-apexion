@@ -12,6 +12,14 @@ $pageName = "travel_insert";
 </style>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="element.php">行程表單</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="travel_insert.php">新增行程</a>
+  </li>
+</ul>
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -37,7 +45,7 @@ $pageName = "travel_insert";
                         </div>
                         <br>
                         <div class="mb-3">
-                            <label for="price" class="form-label">價錢</label>
+                            <label for="price" class="form-label">價位</label>
                             <input type="text" class="form-control" id="price" name="price">
                             <div class="form-text"></div>
                             <br>

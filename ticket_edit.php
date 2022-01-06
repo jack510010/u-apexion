@@ -1,16 +1,20 @@
 <?php
 require __DIR__. "/__connect_db.php";
 
-$flightsql = 'SELECT `flight_time` FROM `flight`';
+$flightsql = 'SELECT * FROM `flight`';
 $flightrows = $pdo->query($flightsql)->fetchAll();
 $seatsql = 'SELECT * FROM `flight_seat`';
 $seatrows = $pdo->query($seatsql)->fetchAll();
+$travelsql = "SELECT `name` FROM `travel`";
+$travelnamerows = $pdo->query($travelsql)->fetchAll();
 
 $sid = intval($_GET['sid']);
 $nowDataSql = "SELECT a.`sid`,a.`flight_time`,a.`trip_sid`,a.`seat_sid`,a.`member_count`,b.`ticket_sid`,b.`name`,b.`passport` FROM `ticket` a JOIN `member` b ON a.`sid` = b.`ticket_sid` WHERE a.`sid` = $sid";
 
 $nowDatarow = $pdo->query($nowDataSql)->fetch();
 $nowDatarowName = explode(",",$nowDatarow['name']);
+
+// echo $flightrows["flight_time"];
 ?>
 <?php require __DIR__. "/__html_head.php";?>
 <?php require __DIR__. "/__navbar.php";?>
@@ -22,10 +26,11 @@ $nowDatarowName = explode(",",$nowDatarow['name']);
     <div class="d-flex align-items-center ticket-wrap">
     <label for="exampleInputEmail1" class=" align-self-stretch d-flex align-items-center justify-content-center">啟航日程</label>
     <select required class="ticket-form-select form-select form-control flex-fill" aria-label="Default select example" name="flightTime">
-  <option selected disabled>目前所選日程:&nbsp<?= $nowDatarow['flight_time']?></option>
-  <?php foreach ($flightrows as $r) { ?>
+  <option id="selected" selected><?= $nowDatarow['flight_time']?></option>
+  <?php foreach ($flightrows as $r) { 
+      if($r['flight_time'] != $nowDatarow['flight_time']){?>
     <option><?= $r['flight_time'] ?></option>
-  <?php } ?>
+  <?php }} ?>
 </select>
     <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"> -->
     </div>
@@ -35,10 +40,11 @@ $nowDatarowName = explode(",",$nowDatarow['name']);
     <div class="d-flex align-items-center ticket-wrap">
     <label for="exampleInputEmail1" class="form-label  d-flex align-items-center justify-content-center align-self-stretch">旅遊行程</label>
     <select id="select-trip" class="ticket-form-select form-select form-control flex-fill" aria-label="Default select example" name="trip" required>
-  <option  selected disabled>目前所選行程:&nbsp<?= $nowDatarow['trip_sid']?></option>
-  <option value="50元">One</option>
-  <option value="100元">Two</option>
-  <option value="150元">Three</option>
+    <option selected><?= $nowDatarow['trip_sid']?></option>
+  <?php foreach ($travelnamerows as $r) { 
+     if($r['name'] != $nowDatarow['trip_sid']){?>
+  <option ><?= $r['name'] ?></option>
+  <?php }} ?>
 </select>
     </div>
     <div class="ticket-incorrect"></div>
@@ -47,10 +53,11 @@ $nowDatarowName = explode(",",$nowDatarow['name']);
     <div class="d-flex align-items-center ticket-wrap">
     <label for="exampleInputEmail1" class="form-label  d-flex align-items-center justify-content-center align-self-stretch">艙等</label>
     <select id="select-seat" required class="ticket-form-select form-select form-control flex-fill" aria-label="Default select example" name="seatLevel">
-  <option selected disabled>目前所選艙等:&nbsp<?= $nowDatarow['seat_sid']?></option>
-  <?php foreach ($seatrows as $r) { ?>
+  <option selected><?= $nowDatarow['seat_sid']?></option>
+  <?php foreach ($seatrows as $r) { 
+     if($r['level'] != $nowDatarow['seat_sid']){?>
   <option ><?= $r['level'] ?></option>
-  <?php } ?>
+  <?php }} ?>
 </select>
     </div>
     <div class="ticket-incorrect"></div>
@@ -72,10 +79,20 @@ $nowDatarowName = explode(",",$nowDatarow['name']);
 <script>
 
 //載入當前資料
-    const memberValue = `<div class="mb-3">
+    
+
+window.onload=function (){
+    // document.querySelector(".member-input").innerHTML = "";
+        const membernum = members.value;
+        console.log(membernum);
+        const memberName = <?= json_encode($nowDatarowName)?>;
+        console.log(memberName);
+        
+        for(let i=0;i<membernum;i++){
+          const memberValue = `<div class="mb-3">
     <div class="d-flex align-items-center ticket-wrap">
-    <label for="exampleInputEmail1" class="memberName form-label  d-flex align-items-center justify-content-center align-self-stretch">成員姓名</label>
-    <input type="" class="form-control flex-fill" id="exampleInputEmail1" aria-describedby="emailHelp" name="member[]" placeholder="請輸入護照英文名字" value="<?= $nowDatarowName[0]?>">
+    <label for="membername" class="memberName form-label  d-flex align-items-center justify-content-center align-self-stretch">成員姓名</label>
+    <input type="" class="form-control flex-fill" id="membername" aria-describedby="emailHelp" name="member[]" placeholder="請輸入護照英文名字" value="${memberName[i]}">
     </div>
     <div class="ticket-incorrect"></div>
   </div><div class="mb-3">
@@ -85,12 +102,6 @@ $nowDatarowName = explode(",",$nowDatarow['name']);
     </div>
     <div class="ticket-incorrect"></div>
   </div>`;
-
-window.onload=function (){
-    // document.querySelector(".member-input").innerHTML = "";
-        const membernum = members.value;
-        console.log(membernum);
-        for(let i=1;i<=membernum;i++){
             document.querySelector(".member-input").innerHTML += memberValue;
             const memberInputTitle = document.querySelectorAll("label");
             memberInputTitle.forEach(function(v) {
@@ -108,8 +119,8 @@ window.onload=function (){
 //重新選取人數
 const memberInput = `<div class="mb-3">
     <div class="d-flex align-items-center ticket-wrap">
-    <label for="exampleInputEmail1" class="memberName form-label  d-flex align-items-center justify-content-center align-self-stretch">成員姓名</label>
-    <input type="" class="form-control flex-fill" id="exampleInputEmail1" aria-describedby="emailHelp" name="member[]" placeholder="請輸入護照英文名字">
+    <label for="membername" class="memberName form-label  d-flex align-items-center justify-content-center align-self-stretch">成員姓名</label>
+    <input type="" class="memberNowName form-control flex-fill" id="membername" aria-describedby="emailHelp" name="member[]" placeholder="請輸入護照英文名字">
     </div>
     <div class="ticket-incorrect"></div>
   </div><div class="mb-3">
@@ -136,19 +147,41 @@ const memberInput = `<div class="mb-3">
             v.setAttribute('style' , `background-color: #023E73`);
         }
         })
+        document.querySelector(".ticketBtn").style= "display: block";
         }
         else {
-          alert("人數超過10人了喔");
+          alert("超過人數上限10人，請重新輸入人數");
           document.querySelector(".member-input").innerHTML = "";
+          document.querySelector(".ticketBtn").style= "display: none";
           break;
         } 
         }
-        document.querySelector(".ticketBtn").style= "display: block";
+        
 }
 
 function sendTicketForm(){
   const fd = new FormData(document.ticketForm);
+  let isPass = true;
 
+  if(members.value.length == 0){
+    isPass = false;
+    alert("請輸入人數");
+  }
+  
+
+  //TODO::防呆機制怎麼了?
+  const abc = document.querySelectorAll("input")
+  console.log(abc)
+  const isEnglish = /^[A-Za-z]+$/;
+  // for(let v of eee){
+  // if(v.getAttribute('value').length == 0 | isEnglish.test(v.getAttribute('value')) == false){
+  //   isPass = false;
+  //   alert("請輸入護照英文姓名");
+  // }
+  // }
+
+
+  if(isPass){
   fetch("ticket_edit_api.php",{
     method: 'POST',
     body: fd,
@@ -158,16 +191,6 @@ function sendTicketForm(){
     location.href = "ticket_myticket.php";
 });
 }
-
-const select = document.querySelector("#select");
-select.addEventListener('change', showValue);
-
-function showValue(e){
-  console.log(e.target.value);
-};
+}
 
 </script>
-
-設定監聽器 
-監聽下拉選單value改變 or 使用者點選特定項目
-console.log(value)
