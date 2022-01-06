@@ -12,7 +12,7 @@ $pageName = "insert"; // 新增購物車項目
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">新增購物車資料</h5>
                     <form>
                         <div class="mb-3">
                             <label for="user_id" class="form-label">會員編號</label>
