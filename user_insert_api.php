@@ -46,7 +46,6 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute([
     $name,
     $email,
-
     $password,
     $mobile,
     empty($_POST['birthday']) ? NULL : $_POST['birthday'],
@@ -61,14 +60,4 @@ $output['success'] = $stmt->rowCount() == 1;
 $output['rowCount'] = $stmt->rowCount();
 
 
-
-
-
-
-
-
-
-
-
-
-echo json_encode($output);
+echo json_encode($output, JSON_UNESCAPED_UNICODE);

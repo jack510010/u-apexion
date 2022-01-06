@@ -49,10 +49,13 @@ $user = $pdo->query($sql)->fetchAll();
 
                 <button type="button" class="btn btn-info"><a class="text-dark" href="user_insert.php"
                         style="text-decoration:none;">新增會員</a></button>
-                <form class="d-flex align-items-center ms-2">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-warning" type="submit">Search</button>
-                </form>
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="user_logout.php">登出</a>
+
+                    </li>
+
+                </ul>
 
 
             </div>
