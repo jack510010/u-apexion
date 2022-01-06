@@ -47,11 +47,58 @@ $sql = sprintf("SELECT * FROM cart LIMIT %s, %s", ($page - 1) * $perPage, $perPa
 
 $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
 
-print_r($row);
+//print_r($row);
 // ---------在這條線以上做操作---------------
 ?>
 <?php include __DIR__ . "/__html_head.php" ?>
 <?php include __DIR__ . "/__navbar.php"; ?>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <?= "$totalRows, $totalPages" ?> <!--會顯示總筆數、總頁數。-->
+
+            <nav aria-label="Page navigation example">  <!--會顯示頁數的bootstrap-->
+                <ul class="pagination">
+
+                    <li class="page-item <?= 1 == $page ? "disabled" : "" ?> "><a class="page-link" href="?page=1 "><i class="fas fa-step-backward"></i></a></li>
+                    <!--去到最前頁icon-->
+                    <!--如果page已經在第1頁了，就不讓使用者繼續按，所以呈現disabled 『1 == $page ? "disabled" : ""』-->
+
+                    <li class="page-item <?= 1 == $page ? "disabled" : "" ?> "><a class="page-link" href="?page=<?= $page - 1 ?> "><i class="fas fa-chevron-circle-left"></i></a></li>
+                    <!--『href="?"』連結是『？』代表檔案是同一個檔案-->
+                    <!--上一頁的icon-->
+                    <!--當前所在的頁數減1就是上一頁    href="?page= $page - 1-->
+                    <!--如果page已經在第1頁了，就不讓使用者繼續按，所以呈現disabled 『1 == $page ? "disabled" : ""』-->
+                    <!-- && $i <= $totalPages-->
+
+                    <?php for($i = $page - 2; $i <= $page + 2; $i++):
+                        if ( $i >= 1 && $i <= $totalPages ): ?> 
+                        <!--把頁數呈現出來，用for迴圈把$i的值帶入-->
+
+                        <li class="page-item <?= $i == $page ? "active" : "" ?> "> 
+                        <!--這串是要讓使用者的所在頁數反白。如果$i的值等於所在頁數$page，『就反白"active"』，『沒有的話就啥也不做""』-->
+
+                            <a class="page-link" href="?page=<?= $i ?>">  <!--#字號(改成用?page)後面會顯示所在頁數-->
+                                <?= $i ?>  <!--本來是寫死的頁數，改成用變數$i把值帶入-->
+                            </a>
+                        </li>
+                   
+                    <?php endif;
+                    endfor; ?>
+                    <li class="page-item <?= $totalPages == $page ? "disabled" : "" ?> "><a class="page-link" href="?page=<?= $page + 1 ?> "><i class="fas fa-chevron-circle-right"></i></a></li>
+                    <!--下一頁的icon-->
+                    <!--當前所在的頁數加1就是上一頁   href="?page= $page + 1  -->
+                    <!--如果page已經在最後一頁了，就不讓使用者繼續按，所以呈現disabled 『$totalPages == $page ? "disabled" : ""』-->
+
+                    <li class="page-item <?= $totalPages == $page ? "disabled" : "" ?> "><a class="page-link" href="?page=<?= $totalPages ?> "><i class="fas fa-step-forward"></i></a></li>
+                    <!--最後一頁的icon-->
+                    <!--如果page已經在最後一頁了，就不讓使用者繼續按，所以呈現disabled 『$totalPages == $page ? "disabled" : ""』-->
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
 <div class="container">
     <div class="row">
         <div class="col">
