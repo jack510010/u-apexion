@@ -107,6 +107,7 @@ if (empty($user)) {
 <script>
 const name = document.querySelector('#name');
 const email = document.querySelector('#email');
+const password = document.querySelector('#password');
 const mobile = document.querySelector('#mobile');
 
 
@@ -117,6 +118,7 @@ function sendData() {
 
     name.nextElementSibling.innerHTML = '';
     email.nextElementSibling.innerHTML = '';
+    password.nextElementSibling.innerHTML = '';
     mobile.nextElementSibling.innerHTML = '';
 
     let isPass = true;
@@ -128,6 +130,10 @@ function sendData() {
     if (!email_re.test(email.value)) {
         isPass = false;
         email.nextElementSibling.innerHTML = '請輸入正確的email';
+    }
+    if (password.value.length < 6) {
+        isPass = false;
+        password.nextElementSibling.innerHTML = '請輸入正確的密碼';
     }
     if (mobile.value && !mobile_re.test(mobile.value)) {
         isPass = false;

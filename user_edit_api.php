@@ -17,6 +17,7 @@ if (empty($sid)) {
 
 $name = $_POST['name'] ?? '';
 $email = $_POST['email'] ?? '';
+$password = $_POST['password'] ?? '';
 $mobile = $_POST['mobile'] ?? '';
 
 // TODO: 檢查欄位資料
@@ -29,6 +30,12 @@ if (empty($name)) {
 if (empty($email) or !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $output['code'] = 405;
     $output['error'] = '請輸入正確的email';
+    echo json_encode($output, JSON_UNESCAPED_UNICODE);
+    exit;
+}
+if (empty($password)) {
+    $output['code'] = 406;
+    $output['error'] = '請輸入正確的密碼';
     echo json_encode($output, JSON_UNESCAPED_UNICODE);
     exit;
 }
@@ -57,7 +64,7 @@ $stmt->execute([
     $name,
     $email,
 
-    $_POST['password'] ?? '',
+    $password,
     $mobile,
     empty($_POST['birthday']) ? NULL : $_POST['birthday'],
     $_POST['address'] ?? '',
@@ -69,7 +76,7 @@ $stmt->execute([
 if ($stmt->rowCount() == 0) {
     $output['error'] = '資料沒有修改';
 } else {
-    $output['success'] = 'true';
+    $output['success'] = true;
 }
 
 

@@ -87,16 +87,19 @@ $pageName = 'insert';
 <script>
 const name = document.querySelector('#name');
 const email = document.querySelector('#email');
+const password = document.querySelector('#password');
 const mobile = document.querySelector('#mobile');
 
 
 const email_re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+
 const mobile_re = /^09\d{2}-?\d{3}-?\d{3}$/;
 
 function sendData() {
 
     name.nextElementSibling.innerHTML = '';
     email.nextElementSibling.innerHTML = '';
+    password.nextElementSibling.innerHTML = '';
     mobile.nextElementSibling.innerHTML = '';
 
     let isPass = true;
@@ -108,6 +111,10 @@ function sendData() {
     if (!email_re.test(email.value)) {
         isPass = false;
         email.nextElementSibling.innerHTML = '請輸入正確的email';
+    }
+    if (password.value.length < 6) {
+        isPass = false;
+        password.nextElementSibling.innerHTML = '請輸入正確的password';
     }
     if (mobile.value && !mobile_re.test(mobile.value)) {
         isPass = false;
