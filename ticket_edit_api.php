@@ -5,10 +5,11 @@ header('Content-Type: application/json');
 
 $output = [
     "success" =>  true,
-    "error" => ""
+    "error" => "",
+    "sid" => isset($_POST['sid']) ? intval($_POST['sid']) : "noget"
 ];
 
-$ticketsid = isset($_POST['sid']) ? intval($_POST['sid']) : 0;
+$ticketsid = isset($_POST['sid']) ? intval($_POST['sid']) : "noget";
 $flightTime = isset($_POST['flightTime'])? $_POST['flightTime'] : '';
 $trip = isset($_POST['trip'])? $_POST['trip'] : '';
 $seatLevel = isset($_POST['seatLevel'])? $_POST['seatLevel'] : '';
@@ -74,7 +75,6 @@ if(! empty($_FILES['memberPass'])) {
             $output['success'] = true;
             $output['filename'] = $filename;
             $output['i'] = $i;
-            $output["memberpass"] = $memberPass;
         } else {
             $output['error'] = '無法移動檔案';
             $output['target'] = $target;
@@ -85,18 +85,37 @@ else {
     $output['error'] = '沒有上傳檔案';
 }
 
+// $ticketUpdateSql = "UPDATE `ticket` SET 
+//                           `flight_time`=?,
+//                           `trip_sid`=?,
+//                           `seat_sid`=?,
+//                           `member_count`=?,
+//                           `created_at`=NOW()
+// WHERE `sid`=?";
 
-$ticketSql = sprintf("INSERT INTO `ticket` (`sid`,`flight_time`, `trip_sid`, `seat_sid`, `member_count`,`created_at`) VALUES ('%s','%s', '%s', '%s', '%s', NOW())",$ticketsid,$flightTime,$trip,$seatLevel,$memberNumber);
+// $stmt = $pdo->prepare($ticketUpdateSql);
 
-$stmt = $pdo->query($ticketSql)->fetch();
-$ticketid = $pdo->lastInsertId();
+// $stmt->execute([
+//     $flightTime,
+//     $trip,
+//     $seatLevel,
+//     $memberNumber,
+//     $ticketsid
+// ]);
 
+
+$ticketUpdateSql = sprintf("UPDATE `ticket` SET  `flight_time`='%s', `trip_sid`='%s', `seat_sid`='%s', `member_count`='%s',`created_at`=NOW() WHERE `sid` = '%s'",$flightTime,$trip,$seatLevel,$memberNumber,$ticketsid);
+
+$pdo->query($ticketUpdateSql);
+
+$memberUpdateSql = sprintf("UPDATE `member` SET  `name`='%s', `passport`='%s' WHERE `ticket_sid` = $ticketsid",$member,$memberPassName);
+
+$pdo->query($memberUpdateSql);
 // echo $ticketid;
 
-$memberSql = "INSERT INTO `member`(`ticket_sid`,`name`, `passport`) VALUES ('$ticketid','$member','$memberPassName')";
 // $memberSql = "INSERT INTO `member`(`ticket_sid`,`name`, `passport`) VALUES ('$ticketid','$member','$memberPass')";
 
-$pdo->query($memberSql);
+// $pdo->query($memberSql);
 
 
 echo json_encode($output,JSON_UNESCAPED_UNICODE);

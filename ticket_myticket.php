@@ -16,7 +16,10 @@ $rows = $pdo->query($joinData)->fetchAll();
 <!-- <form class="ticket-form mt-3" name="ticketForm"> -->
 <div class="myticket-wrap"> 
 <h2 class="my-3 text-white">我的訂票資訊</h2>
-<?php foreach($rows as $r):?>
+<?php foreach($rows as $r):
+  $membergroup = explode(",",$r['name']);
+  $memberPassgroup = explode(",",$r['passport']) ?>
+  <?php for($i=0;$i<count($membergroup);$i++): ?>
   <div class="myticket-change d-flex justify-content-end">
     <a class="myticket-edit-btn" href="ticket_edit.php?sid=<?= $r['sid']?>"><i class="far fa-edit"></i>修改</a>
     <a class="myticket-delete-btn" href="ticket_delete.php?sid=<?= $r['sid'] ?>" onclick="return confirm('確定要刪除這筆資料嗎?')"><i class="fas fa-trash-alt"></i>刪除</a>
@@ -26,7 +29,7 @@ $rows = $pdo->query($joinData)->fetchAll();
   <div class="myticket-content-word w-75">
   <h4 class="py-2">My Ticket</h4>
   <ul class="pt-2">
-      <li class="">Name&emsp;<?= $r['name'] ?></li>
+      <li class="">Name&emsp;<?= $membergroup[$i] ?></li>
       <li class="">Date&emsp;<?= $r['flight_time'] ?></li>
       <li class="">Seat lvl&emsp;<?= $r['seat_sid'] ?></li>
       <li class="">Destination&emsp;<?= $r['trip_sid'] ?></li>
@@ -34,11 +37,11 @@ $rows = $pdo->query($joinData)->fetchAll();
   </ul>
   </div>
   <div class="myticket-content-pic w-25">
-      <img src="./img/uploaded/<?= $r["passport"]?>" alt="">
+      <img src="./img/uploaded/<?= $memberPassgroup[$i]?>" alt="">
   </div>
   </div>
   <br>
-<?php endforeach;?>
+<?php endfor; endforeach;?>
 </div>
 <!-- </form> -->
 <?php require __DIR__. "/__scripts.php";?>
