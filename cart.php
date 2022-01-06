@@ -100,13 +100,19 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
 <div class="container">
     <div class="row">
         <div class="col">
-            <table class="table">
+            <table class="table　table-dark table-striped table-bordered">
                 <thead>
                     <tr>
+                        <th scope="col">
+                            <i class="fas fa-trash-alt"></i>
+                        </th>
                         <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col">會員</th>
+                        <th scope="col">商品編號</th>
+                        <th scope="col">數量</th>
+                        <th scope="col">
+                            <i class="fas fa-edit"></i>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -116,17 +122,7 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
                         <td>Otto</td>
                         <td>@mdo</td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
+                    
                 </tbody>
             </table>
         </div>

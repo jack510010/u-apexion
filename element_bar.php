@@ -6,7 +6,7 @@ require __DIR__. "/__connect_db.php";
 <!-- Example single danger button -->
 <div class="btn-group p-3 ">
   <button type="button" class="btn btn-danger dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
-    旅程選擇
+    旅程詳情
   </button>
   <ul class="dropdown-menu ">
     <li><a class="dropdown-item" href="element.php">星座之旅(Element)</a></li>

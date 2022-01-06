@@ -24,10 +24,10 @@ $rows = $pdo->query($sql)->fetchAll();
 ?>
 
 <style>
-    i{
-     font-size: 30px;
-     text-align: center;
-     padding: 20px 10px 10px 10px;
+    i {
+        font-size: 30px;
+        text-align: center;
+        padding: 20px 10px 10px 10px;
     }
 </style>
 <?php require __DIR__ . "/__html_head.php"; ?>
@@ -41,13 +41,14 @@ $rows = $pdo->query($sql)->fetchAll();
     <table class="table table-dark table-hover table-bordered">
         <thead>
             <tr>
-                <th scope="col"style="text-align: center;">刪除</th>
+                <th scope="col" style="text-align: center;">刪除</th>
                 <th scope="col">行程編號</th>
                 <th scope="col">行程標題</th>
                 <th scope="col">行程介紹</th>
                 <th scope="col">注意事項</th>
                 <th scope="col">價格</th>
-                <th scope="col"style="text-align: center;">修改</th>
+                <th scope="col">選取</th>
+                <th scope="col" style="text-align: center;">修改</th>
             </tr>
         </thead>
         <tbody>
@@ -63,6 +64,9 @@ $rows = $pdo->query($sql)->fetchAll();
                     <td><?= $r["introduction"] ?></td>
                     <td><?= $r["attention"] ?></td>
                     <td style="font-size:30px;"><?= $r["price"] ?></td>
+                    <td>
+                        <a href="travel_select.php?sid=<?= $r["sid"] ?>"><i class="far fa-hand-pointer"></i></a>
+                    </td>
                     <td>
                         <a href="travel_edit.php?sid=<?= $r["sid"] ?>"><i class="fas fa-pen-nib"></i></a>
                     </td>
