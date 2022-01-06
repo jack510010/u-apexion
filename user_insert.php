@@ -133,8 +133,8 @@ function sendData() {
             .then(obj => {
                 console.log(obj);
                 if (obj.success) {
-                    alert('新增成功');
-                    location.href = 'user_list.php';
+                    alert('註冊成功');
+                    location.href = 'user_iogin.php';
                 } else {
                     document.querySelector('.modal-body').innerHTML = obj.error || '資料新增發生錯誤';
                     modal.show();
