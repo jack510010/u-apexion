@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . '/__connect_db.php';
 
+
 if (isset($_GET['sid'])) {
     $sid = intval($_GET['sid']);
 

@@ -1,6 +1,8 @@
 <?php
 require __DIR__ . '/__connect_db.php';
 
+
+
 $output = [
     'success' => false,
     'code' => 0,
@@ -39,7 +41,7 @@ if (empty($mobile) or !preg_match("/^09\d{2}-?\d{3}-?\d{3}$/", $mobile)) {
 }
 
 $sql =
-    "INSERT INTO `user`( `name`, `email`, `password`, `mobile`, `birthday`, `address`, `country`, `create-date`, `update-date`) VALUES(?, ?, ?, ?, ?, ?, ?, NOW(), NOW() )";
+    "INSERT INTO `user`( `name`, `email`, `password`, `mobile`, `birthday`, `address`, `country`, `create-date`) VALUES(?, ?, ?, ?, ?, ?, ?, NOW() )";
 
 $stmt = $pdo->prepare($sql);
 

@@ -24,12 +24,12 @@ if (empty($user)) {
     exit;
 }
 
-if (password_verify($password, $user['password'])) {
+if ($password == $user['password']) {
     $output['success'] = true;
     $output['error'] = '';
     $_SESSION['admin'] = [
         'email' => $user['email'],
-
+        'name' => $user['name'],
     ];
 }
 echo json_encode($output, JSON_UNESCAPED_UNICODE);
