@@ -15,6 +15,7 @@ $output = [
 
 $response = $_POST['response'] ?? '';
 
+
 // TODO: 檢查欄位資料
 if(empty($response)){
     $output['code'] = 401;
