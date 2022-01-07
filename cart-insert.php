@@ -18,7 +18,7 @@ $pageName = "insert"; // 新增購物車項目
                         <!--不要讓表單用傳統的方式送出，就是指『method="post"』-->
                         <div class="mb-3">
                             <label for="user_id" class="form-label">會員編號</label>
-                            <input type="text" class="form-control" id="user_id" name="user_id" required>
+                            <input type="text" class="form-control" id="user_id" name="user_id" >
                             <div class="form-text text-danger"></div>
                         </div>
                         <div class="mb-3">
