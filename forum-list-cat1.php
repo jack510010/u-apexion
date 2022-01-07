@@ -184,6 +184,25 @@ $rows = $pdo->query($sql)->fetchAll();
     .category-list{
         background-color: #021943;
     }
+    .forum-list-title{
+        text-decoration:none;
+        color:#FFD700;
+    }
+    .forum-list-title:hover{
+        text-decoration:none;
+        color:#05F2F2;
+    }
+
+    .forum-list-content{
+        /* width:100%; */
+        height:20px;
+    }
+    .ellipsis{
+        width:400px;
+        overflow:hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
     
 
 
@@ -243,8 +262,14 @@ $rows = $pdo->query($sql)->fetchAll();
                     <tr>
                         <td><?= $r['sid'] ?></td>
                         <td><?= $r['for_category'] ?></td>
-                        <td><?= $r['art_title'] ?></td>
-                        <td><?= $r['art_content'] ?></td>
+                        <td>
+                            <a href="forum-article-response.php" class="forum-list-title">
+                               <?= $r['art_title'] ?> 
+                            </a>
+                        </td> 
+                        <td class="forum-list-content">
+                            <p class="ellipsis"><?= $r['art_content'] ?></p>
+                        </td>
                         <td><?= $r['art_create_time'] ?></td>
                         <td>
                             <a href="forum-edit.php?sid=<?= $r['sid'] ?>">

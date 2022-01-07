@@ -56,8 +56,14 @@ if($stmt->rowCount()){
 		<tr>
 			<td>'.$r["sid"]. '</td>
 			<td>'.$r["for_category"].'</td>
-			<td>'.$r["art_title"]. '</td>
-			<td>'.$r["art_content"]. '</td>
+			<td>
+                <a href="forum-article-response.php" class="forum-list-title">
+                    '.$r['art_title'].'
+                </a>
+        	</td> 
+            <td class="forum-list-content">
+                <p class="ellipsis">'.$r['art_content'].'</p>
+            </td>
 			<td>'.$r["art_create_time"]. '</td>
 			<td>
                 <a href="forum-edit.php?sid=<?= $r["sid"] ?>
@@ -70,6 +76,7 @@ if($stmt->rowCount()){
                 </a>
             </td>
 		</tr>
+
 		'
 		
 		

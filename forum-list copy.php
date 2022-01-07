@@ -24,8 +24,13 @@ if($page>$totalPages){
     exit;
 } 
 
+$nowCat = '';
+if(isset($_GET["cat"])){
+    $nowCat = " WHERE art_category_sid=" . $_GET["cat"];
+}
 
-$sql = sprintf("SELECT * FROM forum_article LEFT JOIN forum_category ON forum_category.cat_sid=forum_article.art_category_sid ORDER BY forum_article.sid DESC LIMIT %s, %s", ($page-1)*$perPage, $perPage);
+
+$sql = sprintf("SELECT * FROM forum_article LEFT JOIN forum_category ON forum_category.cat_sid=forum_article.art_category_sid %s ORDER BY forum_article.sid DESC LIMIT %s, %s", $nowCat, ($page-1)*$perPage, $perPage);
 
 $rows = $pdo->query($sql)->fetchAll();
 
@@ -183,6 +188,25 @@ $rows = $pdo->query($sql)->fetchAll();
     .category-list{
         background-color: #021943;
     }
+    .forum-list-title{
+        /* text-decoration:none; */
+        color:#FFD700;
+    }
+    .forum-list-title:hover{
+        text-decoration:none;
+        color:#05F2F2;
+    }
+
+    .forum-list-content{
+        /* width:100%; */
+        height:20px;
+    }
+    .ellipsis{
+        width:400px;
+        overflow:hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
     
 
 
@@ -204,8 +228,8 @@ $rows = $pdo->query($sql)->fetchAll();
                         </button>
                         <ul class="category-list dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li><a class="dropdown-item" href="forum-list copy.php">全部文章</a></li>
-                            <li><a class="dropdown-item" href="forum-list-cat1.php">事前準備</a></li>
-                            <li><a class="dropdown-item" href="forum-list-cat2.php">旅遊心得</a></li>
+                            <li><a class="dropdown-item" href="forum-list copy.php?cat=1">事前準備</a></li>
+                            <li><a class="dropdown-item" href="forum-list copy.php?cat=2">旅遊心得</a></li>
                             <li><a class="dropdown-item" href="#">太空冷知識</a></li>
                             <li><a class="dropdown-item" href="#">音樂推薦</a></li>
                             <li><a class="dropdown-item" href="#">星座</a></li>
@@ -244,8 +268,14 @@ $rows = $pdo->query($sql)->fetchAll();
                     <tr>
                         <td><?= $r['sid'] ?></td>
                         <td><?= $r['for_category'] ?></td>
-                        <td><?= $r['art_title'] ?></td>
-                        <td><?= $r['art_content'] ?></td>
+                        <td>
+                            <a href="forum-article-response.php" class="forum-list-title">
+                               <?= $r['art_title'] ?> 
+                            </a>
+                        </td> 
+                        <td class="forum-list-content">
+                            <p class="ellipsis"><?= $r['art_content'] ?></p>
+                        </td>
                         <td><?= $r['art_create_time'] ?></td>
                         <td>
                             <a href="forum-edit.php?sid=<?= $r['sid'] ?>">
@@ -307,7 +337,7 @@ $rows = $pdo->query($sql)->fetchAll();
     }
     // copy新增的部分
     $(document).ready(function(){
-		load_data();
+		// load_data();
 		function load_data(query){
 			$.ajax({
 				url:"forum-list-fetch.php",

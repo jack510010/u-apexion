@@ -24,11 +24,19 @@ date_default_timezone_set('Asia/Taipei');
             font-family: 'Noto Sans TC', sans-serif;
         }
     form .form-text {
-        color: red;
+        color: #fff;
     }
     .forum-card{
         background: linear-gradient(to right, #021943 0%, #023f74 100%);
-        color:#fff;
+        color:#2980B9;
+    }
+    .card-title{
+        animation: ChangeColor 3s infinite;
+    }
+
+    @keyframes ChangeColor {
+        from { color: #2980B9; }
+        to { color: #6DD5FA; }
     }
     .post-form{
         /* border:1px solid red; */
@@ -52,7 +60,7 @@ date_default_timezone_set('Asia/Taipei');
         border:0;
     }
     .post-btn-group .btn:hover{
-        background-color: #fff;
+        background-color: #FFD700;
         color:#023f74;
     }
     .post-btn-group .btn-cancel{
@@ -61,6 +69,39 @@ date_default_timezone_set('Asia/Taipei');
     .post-title{
         margin-left:15px;
     }
+
+    .cat-choice button{
+        border:0;
+        margin:10px;
+        background-color: #FFD700;
+        color:#021943;
+        padding:8px;
+        border-radius:10px;
+    }
+
+    .form-label{
+        color:#fff;
+    }
+    .card-title-flex{
+        margin-bottom:15px;
+    }
+
+
+    .rocket-icon{
+        font-size:25px;
+        color:#FFD700;
+        margin-left:15px;
+        margin-top:-5px;
+        animation: MoveToRight 3s infinite;
+    }
+
+    @keyframes MoveToRight {
+        from { color: #f5af19; }
+        to { color: #f12711; }
+    }
+
+
+
 </style>
 <div class="container">
     <div class="row">
@@ -76,8 +117,24 @@ date_default_timezone_set('Asia/Taipei');
                         <!-- 要寫程式放時間 -->
                         </div>
                     </div>
-                    
-                    <h5 class="card-title post-title">新增貼文</h5>
+                    <div class="card-title-flex d-flex">
+                        <h5 class="card-title post-title">新增貼文</h5>
+                        <div class="rocket-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                    </div>
+
+                    <!-- btn -->
+                    <div class="cat-choice d-flex justify-content-center">
+                        <button type="button">1.事前準備</button>
+                        <button type="button">2.事前準備</button>
+                        <button type="button">3.太空冷知識</button>
+                        <button type="button">4.星球介紹</button>
+                        <button type="button">5.音樂推薦</button>
+                        <button type="button">6.星座</button>
+                        <button type="button">7.太空美食</button>
+                    </div>
+                    <!-- btn -->
 
                     <form name="form1" class="post-form" onsubmit="sendData(); return false;">
                         <div class="mb-3">
@@ -87,12 +144,12 @@ date_default_timezone_set('Asia/Taipei');
                         </div>
 
                         <div class="mb-3">
-                            <label for="category" class="form-label">分類</label>
+                            <label for="category" class="form-label">分類*</label>
                             <input type="text" class="form-control" id="category" name="category">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
-                            <label for="content" class="form-label">內文</label>
+                            <label for="content" class="form-label">內文*</label>
                             <textarea class="form-control" name="content" id="content"
                                       cols="30"
                                       rows="15"></textarea>
