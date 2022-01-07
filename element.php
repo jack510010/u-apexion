@@ -33,12 +33,12 @@ $rows = $pdo->query($sql)->fetchAll();
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
 <ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" href="element.php">行程表單</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="travel_insert.php">新增行程</a>
-  </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="element.php">行程表單</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " href="travel_insert.php">新增行程</a>
+    </li>
 </ul>
 <div class="container">
     <div class="row">
@@ -106,9 +106,9 @@ $rows = $pdo->query($sql)->fetchAll();
         </ul>
     </nav>
 
-<div class="div">
-    <img src="./img/640.png" alt="">
-</div>
+    <div class="div">
+        <img src="./img/640.png" alt="">
+    </div>
 
 </div>
 <?php require __DIR__ . "/__scripts.php"; ?>

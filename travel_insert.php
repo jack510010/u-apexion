@@ -4,21 +4,21 @@ $pageName = "travel_insert";
 ?>
 
 <style>
-    .row{
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-}
+    .row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 </style>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
 <ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" href="element.php">行程表單</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="travel_insert.php">新增行程</a>
-  </li>
+    <li class="nav-item">
+        <a class="nav-link " href="element.php">行程表單</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="travel_insert.php">新增行程</a>
+    </li>
 </ul>
 <div class="container">
     <div class="row">
@@ -60,16 +60,16 @@ $pageName = "travel_insert";
 
 <?php require __DIR__ . "/__scripts.php"; ?>
 <script>
-    function sendData(){
+    function sendData() {
         const fd = new FormData(document.form1);
 
         fetch('travel_insert-api.php', {
-            method: 'POST',
-            body: fd,
-        }).then(r=>r.json())
-        .then(obj=>{
-            console.log(obj);
-        })
+                method: 'POST',
+                body: fd,
+            }).then(r => r.json())
+            .then(obj => {
+                console.log(obj);
+            })
     }
 </script>
 <?php require __DIR__ . "/__html_foot.php"; ?>

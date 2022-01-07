@@ -1,5 +1,5 @@
 <?php require __DIR__ . "/__connect_db.php";
-$title = "新增星座行程列表";
+$title = "修改星座行程列表";
 $pageName = "travel_edit";
 
 if (!isset($_GET['sid'])) {
