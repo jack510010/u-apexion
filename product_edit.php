@@ -1,14 +1,14 @@
 <?php require __DIR__ . "/__connect_db.php";
 $title = '商品資訊修改';
 
-if(! isset($_GET['sid'])) {
+if (!isset($_GET['sid'])) {
     header('Location: product.php');
     exit;
 }
 $sid = intval($_GET['sid']);
 $row = $pdo->query("SELECT* FROM `product` WHERE sid=$sid")->fetch();
 //如果資料是空的轉向回去列表頁
-if(empty($row)){
+if (empty($row)) {
     header('Location: product.php');
     exit;
 }
@@ -69,19 +69,19 @@ if(empty($row)){
         <!-- 下方新增表單列表 -->
         <div class="d-flex">
             <form class="container pt-3 mx-2" name="productForm" onsubmit="sendData(); return false;">
-            <input type="hidden" name="sid" value="<?=$row['sid']?>">
+                <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
                 <div class="form-row text-light">
                     <div class="mb-3">
                         <label for="product_name">商品名稱</label>
-                        <input type="text" class="product-wrap form-control" id="product_name" name="product_name" placeholder="名稱" value="<?=$row['product_name'] ?>">
+                        <input type="text" class="product-wrap form-control" id="product_name" name="product_name" placeholder="名稱" value="<?= $row['product_name'] ?>">
                         <div class="text-warning"></div>
                     </div>
                     <div class=" mb-3">
                         <label for="category">產品分類</label>
-                        <select class="custom-select d-block w-100 form-control" id="category" name="category" required="">
+                        <select class="custom-select d-block w-100 form-control" id="category" name="category" required>
                             <option>
                                 <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;"><?=$row['category'] ?></font>
+                                    <font style="vertical-align: inherit;"><?= $row['category'] ?></font>
                                 </font>
                             </option>
                             <option>
@@ -109,19 +109,19 @@ if(empty($row)){
                     <div class=" mb-3">
                         <label for="img">產品照片</label>
                         <div class="input-group">
-                            <input accept="image/*" type='file' id="imgInp" class="form-control" name="img[]" placeholder="照片" aria-describedby="inputGroupPrepend2" value="<?=$row['img'] ?>">
+                            <input accept="image/*" type='file' id="imgInp" class="form-control" name="img" placeholder="照片" aria-describedby="inputGroupPrepend2" value="<?= $row['img'] ?>">
                         </div>
                     </div>
                     <div class=" mb-3">
                         <label for="quantity">庫存數量</label>
                         <div class="input-group">
-                            <input type="number" class="form-control" id="quantity" name="quantity" placeholder="請填入數字" aria-describedby="inputGroupPrepend2" value="<?=$row['quantity'] ?>">
+                            <input type="number" class="form-control" id="quantity" name="quantity" placeholder="請填入數字" aria-describedby="inputGroupPrepend2" value="<?= $row['quantity'] ?>">
                         </div>
                     </div>
                     <div class=" mb-3">
                         <label for="price">價格</label>
                         <div class="input-group">
-                            <input type="number" class="form-control" id="price" name="price" placeholder="請填入數字" aria-describedby="inputGroupPrepend2" value="<?=$row['price'] ?>">
+                            <input type="number" class="form-control" id="price" name="price" placeholder="請填入數字" aria-describedby="inputGroupPrepend2" value="<?= $row['price'] ?>">
                         </div>
                     </div>
                 </div>
@@ -129,7 +129,7 @@ if(empty($row)){
                     <div class="m-1">
                         <label class="text-light">尺寸</label>
                         <select class="mb-3" id="size" name="size">
-                        <option><?=$row['size'] ?></option>
+                            <option><?= $row['size'] ?></option>
                             <option value="F">F</option>
                             <option value="S">S</option>
                             <option value="M">M</option>
@@ -140,7 +140,7 @@ if(empty($row)){
                     <div class="m-1">
                         <label class="text-light">顏色</label>
                         <select class="mb-3" id="size" name="style">
-                        <option><?=$row['style'] ?></option>
+                            <option><?= $row['style'] ?></option>
                             <option value="黑色">黑色</option>
                             <option value="白色">白色</option>
                             <option value="藍色">藍色</option>
@@ -152,7 +152,7 @@ if(empty($row)){
 
             </form>
             <div class="pt-5 mx-2">
-                <img class="img-fluid " src="./img/logo.png" width="75" height="75">
+                <img class="img-fluid " id="product_blah" width="75" height="75">
             </div>
         </div>
     </div>
@@ -162,7 +162,10 @@ if(empty($row)){
 <script>
     const product_name = document.querySelector('#product_name');
     const quantity = document.querySelector('#quantity');
-
+    //拿取img路徑
+    const data = "<?= $row['img'] ?>";
+    console.log('data', data);
+    document.querySelector('#product_blah').setAttribute("src", `./img/product_img/${data}`);
 
     function sendData() {
         product_name.nextElementSibling.innerHTML = '';
@@ -196,6 +199,14 @@ if(empty($row)){
                     alert(obj.error || '資料修改發生錯誤');
                 }
             })
+    }
+    //圖片預覽
+    const imgInp = document.querySelector('#imgInp');
+    imgInp.onchange = evt => {
+        const [file] = imgInp.files
+        if (file) {
+            product_blah.src = URL.createObjectURL(file)
+        }
     }
 </script>
 
