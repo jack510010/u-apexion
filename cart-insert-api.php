@@ -23,13 +23,13 @@ if (empty($user_id)){                      // 如果沒有輸入user_id
                                         // 直接結束exit，告訴前端說『啊你沒有給我會員編號，所以後面我不做了』。
 }
 
-if (empty($product_id)){
+if (empty($product_id) or !preg_match("/^[a-zA-Z0-9]+$/", $product_id)){
     $output["code"] = 403;
     $output["error"] = "請輸入想購買的商品編號";
     echo json_encode($output); exit;
 }
 
-if (empty($count_number)){
+if (empty($count_number) or !preg_match("/^[a-zA-Z0-9]+$/", $product_id)){
     $output["code"] = 407;
     $output["error"] = "您想購入的數量";
     echo json_encode($output); exit;

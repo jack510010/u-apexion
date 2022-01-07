@@ -97,7 +97,7 @@ $pageName = 'product';
           <div class=" mb-3">
             <label for="img">產品照片</label>
             <div class="input-group">
-              <input accept="" type='file' id="imgInp" class="form-control" name="img[]" placeholder="照片" aria-describedby="inputGroupPrepend2">
+              <input accept="image/*" type='file' id="imgInp" class="form-control" name="img" placeholder="照片" aria-describedby="inputGroupPrepend2">
             </div>
           </div>
           <div class=" mb-3">
@@ -184,13 +184,13 @@ $pageName = 'product';
       })
   }
   //圖片預覽
+  const imgInp = document.querySelector('#imgInp');
   imgInp.onchange = evt => {
     const [file] = imgInp.files
     if (file) {
       product_blah.src = URL.createObjectURL(file)
     }
   }
-
 </script>
 
 <?php require __DIR__ . "/__html_foot.php"; ?>

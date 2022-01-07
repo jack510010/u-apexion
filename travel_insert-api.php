@@ -23,3 +23,5 @@ $output['success'] =  $stmt->rowCount()==1;
 $output['rowCount'] = $stmt->rowCount();
 
 echo json_encode($_output);
+
+

@@ -1,5 +1,5 @@
 <?php require __DIR__ . "/__connect_db.php";
-$title = "新增星座行程列表";
+$title = "修改星座行程列表";
 $pageName = "travel_edit";
 
 if (!isset($_GET['sid'])) {
@@ -13,15 +13,7 @@ if (empty($row)) {
     header('Location:element.php');
     exit;
 }
-
-
-
-
-
 ?>
-
-
-
 
 <style>
     .row {
@@ -30,14 +22,12 @@ if (empty($row)) {
         align-items: center;
     }
 </style>
+
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link active" href="element.php">行程表單</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="travel_insert.php">新增行程</a>
+    <a class="nav-link active" href="element.php">回行程表單</a>
   </li>
 </ul>
 <div class="container">
@@ -50,25 +40,25 @@ if (empty($row)) {
                     <form name="form1" onsubmit="sendData();return false;">
                     <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
                         <div class="mb-3">
-                            <label for="name" class="form-label">行程名稱</label>
+                            <label for="name" class="form-label">行程名稱:</label>
                             <input type="text" class="form-control" id="name" name="name" value="<?= htmlentities($row['name']) ?>">
                             <div class="form-text"></div>
                         </div>
                         <br>
                         <div class="input-group">
-                            <span for="introduction" class="input-group-text">行程介紹填寫</span>
+                            <span for="introduction" class="input-group-text">行程介紹填寫:</span>
                             <textarea class="form-control" id="introduction" name="introduction" rows="5">
                                 <?= $row['introduction'] ?></textarea>
                         </div>
                         <br>
                         <div class="input-group">
-                            <span for="attention" class="input-group-text">注意事項填寫</span>
+                            <span for="attention" class="input-group-text">注意事項填寫:</span>
                             <textarea class="form-control" id="attention" name="attention" rows="5">
                                 <?= $row['attention'] ?></textarea>
                         </div>
                         <br>
                         <div class="mb-3">
-                            <label for="price" class="form-label">價錢</label>
+                            <label for="price" class="form-label">價錢:</label>
                             <input type="text" class="form-control" id="price" name="price" value="<?= htmlentities($row['price']) ?>">
                             <div class="form-text"></div>
                             <br>

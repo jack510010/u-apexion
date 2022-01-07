@@ -143,7 +143,7 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
                             <td><?= htmlentities($r["create_at"]) ?></td>
                             <!--htmlentities 放這個的原因是防範惡意程式攻擊，例如惡意javaScript系統-->
                             <td>
-                                <a href="edit.php?sid=<?= $r["sid"] ?>">
+                                <a href="cart-edit.php?sid=<?= $r["sid"] ?>">
                                     <!--因為我們要告訴他要修改哪一筆，所以加上?sid= 『$r["sid"]』，看a標籤 -->
                                     <i class="fas fa-edit"></i>
                                 </a>
