@@ -45,7 +45,7 @@ if (empty($row)){                        // 如果$row是空的，就讓你回�
                         <div  class="form-text text-danger"></div>
                     </div>
                     <div class="mb-3">
-                        <label for="count_number" class="form-label text-light">count_number</label>
+                        <label for="count_number" class="form-label text-light">數量</label>
                         <input type="text" class="form-control" id="count_number" name="count_number" 
                         value="<?= htmlentities($row["count_number"]) ?>">  <!--value是為了讓你進去修改頁面的時候，已把值show在該欄位上-->
                         <div  class="form-text text-danger"></div>
@@ -95,17 +95,17 @@ if (empty($row)){                        // 如果$row是空的，就讓你回�
                             // 邏輯上的意思是說，我先預設你是通過的。但是！你只要有一個欄位沒通過就算沒通過。
                             //todo 檢查表單的資料。 這行以下開始檢查資料。
 
-        if(user_id.value.length < 1 && user_id.value > 0){
+        if(user_id.value.length < 1 || user_id.value < 1){
             isPass = false;
             user_id.nextElementSibling.innerHTML = "請輸入正確的會員編號"
         }
 
-        if(product_id.value.length < 1 && product_id.value > 0){
+        if(product_id.value.length < 1 || product_id.value < 1){
             isPass = false;
             product_id.nextElementSibling.innerHTML = "請輸入想修改商品編號"
         }
 
-        if(count_number.value.length < 1 && count_number.value > 0){
+        if(count_number.value.length < 1 || count_number.value < 1){
             isPass = false;
             count_number.nextElementSibling.innerHTML = "請輸入想下單的數量"
         }
