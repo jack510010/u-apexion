@@ -8,7 +8,6 @@ $output = [               // $output這個變數是要告訴前端一些訊息�
     "code" => 0,
     "error" => "",
 ];
-
 $user_id = $_POST["user_id"] ?? "";      //如果有$_POST["user_id"]的話就給$_POST["user_id"]，
                                          //沒有的話就給""
 $product_id = $_POST["product_id"] ?? "";
@@ -39,7 +38,8 @@ if (empty($count_number)){
 $sql = "INSERT INTO `cart`( 
                     `user_id`, 
                     `product_id`, 
-                    `count_number`
+                    `count_number`,
+                    `create_at`
                     ) VALUES (?, ?, ?, NOW())";
 
 $stmt = $pdo->prepare($sql); // 我要準備來執行這個$sql，只有準備而已還沒有執行
@@ -48,7 +48,8 @@ $stmt = $pdo->prepare($sql); // 我要準備來執行這個$sql，只有準備�
 $stmt->execute([             // execute 執行的意思，中括號裡面的是array。
 $user_id,                    // VALUES(?, ?, ?) 會依照順序把對應的值放入
 $product_id,
-$count_number
+$count_number,
+
 ]); // 但是這樣的寫法比較不容易除錯，因為我不會看到這個值塞進去長什麼樣子。
 
 $output["success"] = $stmt->rowCount() == 1; // 這串的意思是說，如果我成功新增了會顯示"success" => true

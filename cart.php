@@ -52,10 +52,10 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
 ?>
 <?php include __DIR__ . "/__html_head.php" ?>
 <?php include __DIR__ . "/__navbar.php"; ?>
+
 <div class="container">
     <div class="row">
-        <div class="col">
-            <?= "$totalRows, $totalPages" ?> <!--會顯示總筆數、總頁數。-->
+        <div class="col-2">
 
             <nav aria-label="Page navigation example">  <!--會顯示頁數的bootstrap-->
                 <ul class="pagination">
@@ -97,8 +97,14 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
                 </ul>
             </nav>
         </div>
+        <div class="col-8"></div>
+        <div class="col-2 justify-content-end">
+            <a class="btn btn-primary col <?= $pageName == "cart" ? "active disabled" : "" ?> " href="#" role="button">清單</a>
+            <a class="btn btn-primary col " href="cart-insert.php" role="button">新增購入項目</a>
+        </div>
     </div>
 </div>
+
 <div class="container">
     <div class="row">
         <div class="col">
@@ -113,6 +119,7 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
                         <th scope="col">會員</th>
                         <th scope="col">商品編號</th>
                         <th scope="col">數量</th>
+                        <th scope="col">下單時間</th>
                         <th scope="col">
                             <i class="fas fa-edit"></i>
                         </th>
@@ -133,6 +140,7 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
                             <td><?= htmlentities($r["user_id"]) ?></td>
                             <td><?= htmlentities($r["product_id"]) ?></td>
                             <td><?= htmlentities($r["count_number"]) ?></td>
+                            <td><?= htmlentities($r["create_at"]) ?></td>
                             <!--htmlentities 放這個的原因是防範惡意程式攻擊，例如惡意javaScript系統-->
                             <td>
                                 <a href="edit.php?sid=<?= $r["sid"] ?>">
