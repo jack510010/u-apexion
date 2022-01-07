@@ -354,10 +354,12 @@ $rows = $pdo->query($sql)->fetchAll();
 				load_data(search);
 			}
 			else{
-				load_data();
+			location.href='forum-list copy.php';
 			}
 		});
+       
 	});
+    
     // copy新增的部分
 </script>
 
