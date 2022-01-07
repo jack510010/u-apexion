@@ -1,6 +1,8 @@
 <?php
 require __DIR__ . '/__connect_db.php';
 
+
+
 $output = [
     'success' => false,
     'code' => 0,
@@ -19,6 +21,7 @@ $name = $_POST['name'] ?? '';
 $email = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
 $mobile = $_POST['mobile'] ?? '';
+
 
 // TODO: 檢查欄位資料
 if (empty($name)) {
@@ -54,8 +57,8 @@ $sql =
                     `mobile`=?,
                     `birthday`=?,
                     `address`=?,
-                    `country`=?,
-                    `update-date`= NOW() 
+                    `country`=?
+                   
     WHERE `sid`=?";
 
 $stmt = $pdo->prepare($sql);
@@ -63,7 +66,6 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute([
     $name,
     $email,
-
     $password,
     $mobile,
     empty($_POST['birthday']) ? NULL : $_POST['birthday'],

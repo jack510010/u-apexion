@@ -1,5 +1,5 @@
 <?php
-$db_host= 'localhost';
+$db_host= '192.168.40.17';
 $db_name='bteam';
 $db_user='bteam';
 $db_pass='12345678';
@@ -18,4 +18,3 @@ try{
 if(! isset($_SESSION)){
     session_start();
 }
-?>

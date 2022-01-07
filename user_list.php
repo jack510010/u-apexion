@@ -1,4 +1,7 @@
 <?php require __DIR__ . "/__connect_db.php";
+
+
+
 $title = '所有會員';
 //幾筆資料一頁
 $perPage = 3;
@@ -63,8 +66,8 @@ $user = $pdo->query($sql)->fetchAll();
     </nav>
 
     <!-- 下方列表 -->
-    <div class="bd-example p-3">
-        <table class="table table-hover text-light">
+    <div class="bd-example p-3" style="overflow-x: scroll; height: 90vh">
+        <table class="table table-hover text-light" ;>
             <thead>
                 <tr class="text-info">
                     <th scope="col">#</th>
@@ -76,7 +79,7 @@ $user = $pdo->query($sql)->fetchAll();
                     <th scope="col">地址</th>
                     <th scope="col">國籍</th>
                     <th scope="col">新增時間</th>
-                    <th scope="col">修改時間</th>
+                    <!-- <th scope="col">修改時間</th> -->
                     <th scope="col">修改</th>
                     <th scope="col">刪除</th>
                 </tr>
@@ -93,7 +96,8 @@ $user = $pdo->query($sql)->fetchAll();
                     <td><?= htmlentities($u['address']) ?></td>
                     <td><?= $u['country'] ?></td>
                     <td><?= $u['create-date'] ?></td>
-                    <td><?= $u['update-date'] ?></td>
+                    <?php // <td><?= $u['update-date'] 
+                        ?></td> ?>
                     <td>
                         <a href="user_edit.php?sid=<?= $u['sid'] ?>">
                             <i class="fas fa-pencil-alt"></i>

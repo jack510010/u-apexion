@@ -154,7 +154,7 @@ function sendData() {
                 console.log(obj);
                 if (obj.success) {
                     alert('修改成功');
-                    //location.href = 'user_list.php';
+                    location.href = 'user_list.php';
                 } else {
                     document.querySelector('.modal-body').innerHTML = obj.error || '資料修改發生錯誤';
                     modal.show();
