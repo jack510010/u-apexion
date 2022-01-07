@@ -54,7 +54,6 @@ $pageName = "insert"; // 新增購物車項目
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
@@ -62,6 +61,8 @@ $pageName = "insert"; // 新增購物車項目
 <!--這條線以上只是在設定bootstrap modal而已，跟要學的php東西無關，就是讓網頁好看這樣子。-->
 <?php include __DIR__ . "/__scripts.php" ?>
 <script>
+    let modal = new bootstrap.Modal(document.querySelector("#exampleModal")); 
+    //這串只是在設定bootstrap裡面的modal而已，跟要學的php東西無關
     let user_id = document.querySelector("#user_id");
     let product_id = document.querySelector("#product_id");
     let count_number = document.querySelector("#count_number");
