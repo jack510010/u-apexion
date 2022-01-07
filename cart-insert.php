@@ -10,33 +10,29 @@ $pageName = "insert"; // 新增購物車項目
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">新增購物車資料</h5>
-                    <form name="form1" onsubmit="sendData(); return false;">
-                        <!--onsubmit 事件會在表單中的確認按鈕被點選時發生。-->
-                        <!--不要讓表單用傳統的方式送出，就是指『method="post"』-->
-                        <div class="mb-3">
-                            <label for="user_id" class="form-label">會員編號</label>
-                            <input type="text" class="form-control" id="user_id" name="user_id" >
-                            <div class="form-text text-danger"></div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="product_id" class="form-label">商品編號</label>
-                            <input type="text" class="form-control" id="product_id" name="product_id">
-                            <div class="form-text text-danger"></div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="count_number" class="form-label">數量</label>
-                            <input type="text" class="form-control" id="count_number" name="count_number">
-                            <div class="form-text text-danger"></div>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">加入清單</button>
-                        <!--如果『標籤button』沒有要送出資料的話，裡面的type要下button。就像這樣type="button"-->
-                    </form>
-
-                </div>
+            <div class="card-body">
+                <h5 class="card-title text-white">新增購物車資料</h5>
+                <form name="form1"  onsubmit="sendData(); return false;">
+                    <!--onsubmit 事件會在表單中的確認按鈕被點選時發生。-->
+                    <!--不要讓表單用傳統的方式送出，就是指『method="post"』-->
+                    <div class="mb-3">
+                        <label for="user_id" class="form-label text-white">會員編號</label>
+                        <input type="text" class="form-control" id="user_id" name="user_id" >
+                        <div class="form-text text-danger"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="product_id" class="form-label text-white">商品編號</label>
+                        <input type="text" class="form-control" id="product_id" name="product_id">
+                        <div class="form-text text-danger"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="count_number" class="form-label text-white">數量</label>
+                        <input type="text" class="form-control" id="count_number" name="count_number">
+                        <div class="form-text text-danger"></div>
+                    </div>
+                    <button type="submit" class="btn btn-outline-warning">加入清單</button>
+                    <!--如果『標籤button』沒有要送出資料的話，裡面的type要下button。就像這樣type="button"-->
+                </form>
             </div>
         </div>
     </div>
