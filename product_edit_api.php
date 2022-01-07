@@ -16,7 +16,7 @@ if (empty($sid)) {
 }
 $category = $_POST['category'] ?? '';
 $product_name = $_POST['product_name'] ?? '';
-$img = $_POST['img'] ?? '';
+$img = $_FILES['img'] ?? '';
 $style = $_POST['style'] ?? '';
 $size = $_POST['size'] ?? '';
 $quantity = $_POST['quantity'] ?? '';
@@ -44,7 +44,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute([
     $category,
     $product_name,
-    $img = $_POST['img'] ?? '',
+    $img,
     $style = $_POST['style'] ?? '',
     $size = $_POST['size'] ?? '',
     $quantity,
