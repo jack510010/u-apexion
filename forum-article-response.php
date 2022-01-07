@@ -4,6 +4,8 @@ require __DIR__. '/__connect_db.php';
 $title = '論壇文章';
 $pageName = 'forum-article';
 
+
+
 $perPage = 20;
 $page= isset($_GET['page'])? intval($_GET['page']) : 1;
 
@@ -21,7 +23,7 @@ $sql = sprintf("SELECT * FROM forum_response LEFT JOIN forum_user ON forum_respo
 
 $rows = $pdo->query($sql)->fetchAll();
 
-$sql2 = sprintf("SELECT * FROM forum_article LEFT JOIN forum_category ON forum_category.cat_sid=forum_article.art_category_sid WHERE sid=2 ");
+$sql2 = sprintf("SELECT * FROM forum_article LEFT JOIN forum_category ON forum_category.cat_sid=forum_article.art_category_sid WHERE sid=13 ");
 // 變數目前先寫死
 
 $row2=$pdo->query($sql2)->fetch();

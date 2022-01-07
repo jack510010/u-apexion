@@ -41,9 +41,17 @@ $row=$pdo->query("SELECT * FROM `forum_article` WHERE sid=$sid")->fetch();
     form .form-text {
         color: red;
     }
+    .card-title{
+        animation: ChangeColor 3s infinite;
+    }
+
+    @keyframes ChangeColor {
+        from { color: #2980B9; }
+        to { color: #6DD5FA; }
+    }
     .forum-card{
         background: linear-gradient(to right, #021943 0%, #023f74 100%);
-        color:#fff;
+        color:#2980B9;
     }
     .post-form{
         /* border:1px solid red; */
@@ -76,6 +84,37 @@ $row=$pdo->query("SELECT * FROM `forum_article` WHERE sid=$sid")->fetch();
     .post-title{
         margin-left:15px;
     }
+
+    .cat-choice button{
+        border:0;
+        margin:10px;
+        background-color: #FFD700;
+        color:#021943;
+        padding:8px;
+        border-radius:10px;
+    }
+
+    .form-label{
+        color:#fff;
+    }
+    .card-title-flex{
+        margin-bottom:15px;
+    }
+
+
+    .rocket-icon{
+        font-size:25px;
+        color:#FFD700;
+        margin-left:15px;
+        margin-top:-5px;
+        animation: MoveToRight 3s infinite;
+    }
+
+    @keyframes MoveToRight {
+        from { color: #f5af19; }
+        to { color: #f12711; }
+    }
+
 </style>
 </style>
 <div class="container">
@@ -94,26 +133,44 @@ $row=$pdo->query("SELECT * FROM `forum_article` WHERE sid=$sid")->fetch();
                     </div>
                 </div>
 
-                    <h5 class="card-title post-title">修改通訊資料</h5>
+                <div class="card-title-flex d-flex">
+                        <h5 class="card-title post-title">修改通訊資料</h5>
+                        <div class="rocket-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                    </div>
+
+                    <!-- btn -->
+                    <div class="cat-choice d-flex justify-content-center">
+                        <button type="button">1.事前準備</button>
+                        <button type="button">2.事前準備</button>
+                        <button type="button">3.太空冷知識</button>
+                        <button type="button">4.星球介紹</button>
+                        <button type="button">5.音樂推薦</button>
+                        <button type="button">6.星座</button>
+                        <button type="button">7.太空美食</button>
+                    </div>
+                    <!-- btn -->
+
 
                     <form name="form1" class="post-form" method="POST"
                     onsubmit="sendData(); return false;">
                         <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
                         
                         <div class="mb-3">
-                            <label for="title" class="form-label">標題</label>
+                            <label for="title" class="form-label">標題*</label>
                             <input type="text" class="form-control" id="title" name="title" value="<?=$row['art_title']?>"> 
                             <div class="form-text"></div>
                         </div>
 
                         <div class="mb-3">
-                            <label for="category" class="form-label">分類</label>
+                            <label for="category" class="form-label">分類*</label>
                             <input type="text" class="form-control" id="category" name="category" value="<?= htmlentities($row['art_category_sid']) ?>"> 
                             <div class="form-text"></div>
                         </div>
 
                         <div class="mb-3">
-                            <label for="content" class="form-label">內文</label>
+                            <label for="content" class="form-label">內文*</label>
                             <textarea class="form-control" name="content" id="content"
                                       cols="30"
                                       rows="15"><?= $row['art_content'] ?></textarea>
