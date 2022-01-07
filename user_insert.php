@@ -7,7 +7,7 @@ $pageName = 'insert';
 ?>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
-<div class="container">
+< class="container">
     <div class="row">
         <div class="col-md-6">
             <div class="card">
@@ -61,89 +61,89 @@ $pageName = 'insert';
             </div>
         </div>
     </div>
-</div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">資料錯誤</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">資料錯誤</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
+    </div>
 
-<?php require __DIR__ . "/__scripts.php"; ?>
-<script>
-const name = document.querySelector('#name');
-const email = document.querySelector('#email');
-const password = document.querySelector('#password');
-const mobile = document.querySelector('#mobile');
+    <?php require __DIR__ . "/__scripts.php"; ?>
+    <script>
+    const name = document.querySelector('#name');
+    const email = document.querySelector('#email');
+    const password = document.querySelector('#password');
+    const mobile = document.querySelector('#mobile');
 
 
-const email_re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    const email_re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 
-const mobile_re = /^09\d{2}-?\d{3}-?\d{3}$/;
+    const mobile_re = /^09\d{2}-?\d{3}-?\d{3}$/;
 
-function sendData() {
+    function sendData() {
 
-    name.nextElementSibling.innerHTML = '';
-    email.nextElementSibling.innerHTML = '';
-    password.nextElementSibling.innerHTML = '';
-    mobile.nextElementSibling.innerHTML = '';
+        name.nextElementSibling.innerHTML = '';
+        email.nextElementSibling.innerHTML = '';
+        password.nextElementSibling.innerHTML = '';
+        mobile.nextElementSibling.innerHTML = '';
 
-    let isPass = true;
-    // 檢查表單的資料
-    if (name.value.length < 2) {
-        isPass = false;
-        name.nextElementSibling.innerHTML = '請輸入正確的姓名';
+        let isPass = true;
+        // 檢查表單的資料
+        if (name.value.length < 2) {
+            isPass = false;
+            name.nextElementSibling.innerHTML = '請輸入正確的姓名';
+        }
+        if (!email_re.test(email.value)) {
+            isPass = false;
+            email.nextElementSibling.innerHTML = '請輸入正確的email';
+        }
+        if (password.value.length < 6) {
+            isPass = false;
+            password.nextElementSibling.innerHTML = '請輸入正確的password';
+        }
+        if (mobile.value && !mobile_re.test(mobile.value)) {
+            isPass = false;
+            mobile.nextElementSibling.innerHTML = '請輸入正確的手機號碼';
+        }
+
+
+
+        if (isPass) {
+            const fd = new FormData(document.form1);
+
+            fetch('user_insert_api.php', {
+                    method: 'POST',
+                    body: fd,
+                }).then(r => r.json())
+                .then(obj => {
+                    console.log(obj);
+                    if (obj.success) {
+                        alert('註冊成功');
+                        location.href = 'user_iogin.php';
+                    } else {
+                        document.querySelector('.modal-body').innerHTML = obj.error || '資料新增發生錯誤';
+                        modal.show();
+                    }
+                })
+        }
+
+
     }
-    if (!email_re.test(email.value)) {
-        isPass = false;
-        email.nextElementSibling.innerHTML = '請輸入正確的email';
-    }
-    if (password.value.length < 6) {
-        isPass = false;
-        password.nextElementSibling.innerHTML = '請輸入正確的password';
-    }
-    if (mobile.value && !mobile_re.test(mobile.value)) {
-        isPass = false;
-        mobile.nextElementSibling.innerHTML = '請輸入正確的手機號碼';
-    }
+    </script>
 
-
-
-    if (isPass) {
-        const fd = new FormData(document.form1);
-
-        fetch('user_insert_api.php', {
-                method: 'POST',
-                body: fd,
-            }).then(r => r.json())
-            .then(obj => {
-                console.log(obj);
-                if (obj.success) {
-                    alert('註冊成功');
-                    location.href = 'user_iogin.php';
-                } else {
-                    document.querySelector('.modal-body').innerHTML = obj.error || '資料新增發生錯誤';
-                    modal.show();
-                }
-            })
-    }
-
-
-}
-</script>
-
-<?php require __DIR__ . "/__html_foot.php"; ?>
+    <?php require __DIR__ . "/__html_foot.php"; ?>
