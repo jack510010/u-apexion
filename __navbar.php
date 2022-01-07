@@ -57,7 +57,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="user_list.php" class="nav-link active" aria-current="page">
+            <a href="user_login.php" class="nav-link active" aria-current="page">
                 <svg class="bi me-2" width="25" height="25">
                     <use xlink:href="#home"></use>
                 </svg>
@@ -77,19 +77,15 @@
             <strong><?= $_SESSION['admin']['name'] ?? '會員' ?></strong>
         </a>
         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser1">
-            <li><a class="dropdown-item" href="#">我的帳戶</a></li>
-            <li><a class="dropdown-item" href="#">購買清單</a></li>
-            <li>
-                <hr class="dropdown-divider bg-white">
-            </li>
+
             <li>
                 <?php if (!isset($_SESSION['admin']['email']) && !isset($_SESSION['admin']['name'])) { ?>
-                <a class="dropdown-item" href="#">登入</a>
+                <a class="dropdown-item" href="user_login.php">登入</a>
                 <?php } ?>
             </li>
             <li>
                 <?php if (isset($_SESSION['admin']['email']) && isset($_SESSION['admin']['name'])) { ?>
-                <a class="dropdown-item" href="#">登出</a>
+                <a class="dropdown-item" href="user_login.php">登出</a>
                 <?php } ?>
             </li>
         </ul>
