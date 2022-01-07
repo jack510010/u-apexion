@@ -6,36 +6,51 @@ $pageName = "insert"; // 新增購物車項目
 ?>
 
 <?php include __DIR__ . "/__html_head.php" ?>
+<style>
+.row_1{
+    margin-left: 1%;
+}
+</style>
 <?php include __DIR__ . "/__navbar.php" ?>
 <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card-body">
-                <h5 class="card-title text-white">新增購物車資料</h5>
-                <form name="form1"  onsubmit="sendData(); return false;">
-                    <!--onsubmit 事件會在表單中的確認按鈕被點選時發生。-->
-                    <!--不要讓表單用傳統的方式送出，就是指『method="post"』-->
-                    <div class="mb-3">
-                        <label for="user_id" class="form-label text-white">會員編號</label>
-                        <input type="text" class="form-control" id="user_id" name="user_id" >
-                        <div class="form-text text-danger"></div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="product_id" class="form-label text-white">商品編號</label>
-                        <input type="text" class="form-control" id="product_id" name="product_id">
-                        <div class="form-text text-danger"></div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="count_number" class="form-label text-white">數量</label>
-                        <input type="text" class="form-control" id="count_number" name="count_number">
-                        <div class="form-text text-danger"></div>
-                    </div>
-                    <button type="submit" class="btn btn-outline-warning">加入清單</button>
-                    <!--如果『標籤button』沒有要送出資料的話，裡面的type要下button。就像這樣type="button"-->
-                </form>
-            </div>
+    <div class="row ">
+        <div class="col-md-12 mt-3 ">
+            
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title text-white">新增購物車資料</h5>
+                    <a class="btn btn-primary col-2 " href="cart.php" role="button">返回</a>
+                </div>
         </div>
     </div>
+    <div class="row_1">
+        <div class="col-md-6 ">
+            <form name="form1"  onsubmit="sendData(); return false;">
+                <!--onsubmit 事件會在表單中的確認按鈕被點選時發生。-->
+                <!--不要讓表單用傳統的方式送出，就是指『method="post"』-->
+                <div class="mb-3">
+                    <label for="user_id" class="form-label text-white">會員編號</label>
+                    <input type="text" class="form-control" id="user_id" name="user_id" >
+                    <div class="form-text text-danger"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="product_id" class="form-label text-white">商品編號</label>
+                    <input type="text" class="form-control" id="product_id" name="product_id">
+                    <div class="form-text text-danger"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="count_number" class="form-label text-white">數量</label>
+                    <input type="text" class="form-control" id="count_number" name="count_number">
+                    <div class="form-text text-danger"></div>
+                </div>
+                <button type="submit" class="btn btn-outline-warning">加入清單</button>
+                    <!--如果『標籤button』沒有要送出資料的話，裡面的type要下button。就像這樣type="button"-->
+            </form>
+        </div>
+    </div>
+
+            
+        
+    
 </div>
 <!--這條線以下只是在設定bootstrap modal而已，跟要學的php東西無關，就是讓網頁好看這樣子。-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -72,16 +87,16 @@ $pageName = "insert"; // 新增購物車項目
         // 邏輯上的意思是說，我先預設你是通過的。但是！你只要有一個欄位沒通過就算沒通過。
         //todo 檢查表單的資料。 這行以下開始檢查資料。
 
-        if (user_id.value.length < 1 && user_id.value > 0) {
+        if (user_id.value.length < 1 || user_id.value < 1) {
             isPass = false;
             user_id.nextElementSibling.innerHTML = "請輸入正確的會員編號"
         }
 
-        if (product_id.value.length < 1 && product_id.value > 0) {
+        if (product_id.value.length < 1 || product_id.value < 1) {
             isPass = false;
             product_id.nextElementSibling.innerHTML = "請輸入正確的商品編號"
         }
-        if (count_number.value.length < 1 && count_number.value > 0) {
+        if (count_number.value.length < 1 || count_number.value < 1) {
             isPass = false;
             count_number.nextElementSibling.innerHTML = "請輸入想下單的數量"
         }
