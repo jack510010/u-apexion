@@ -29,23 +29,23 @@ $pageName = "travel_insert";
                     <br>
                     <form name="form1" onsubmit="sendData();return false;">
                         <div class="mb-3">
-                            <label for="name" class="form-label">行程名稱</label>
+                            <label for="name" class="form-label">行程名稱:</label>
                             <input type="text" class="form-control" id="name" name="name">
                             <div class="form-text"></div>
                         </div>
                         <br>
                         <div class="input-group">
-                            <span for="introduction" class="input-group-text">行程介紹填寫</span>
+                            <span for="introduction" class="input-group-text">行程介紹填寫:</span>
                             <textarea class="form-control" id="introduction" name="introduction" rows="5"></textarea>
                         </div>
                         <br>
                         <div class="input-group">
-                            <span for="attention" class="input-group-text">注意事項填寫</span>
+                            <span for="attention" class="input-group-text">注意事項填寫:</span>
                             <textarea class="form-control" id="attention" name="attention" rows="5"></textarea>
                         </div>
                         <br>
                         <div class="mb-3">
-                            <label for="price" class="form-label">價位</label>
+                            <label for="price" class="form-label">價位:</label>
                             <input type="text" class="form-control" id="price" name="price">
                             <div class="form-text"></div>
                             <br>
