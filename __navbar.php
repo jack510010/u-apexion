@@ -57,37 +57,32 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="user_login.php" class="nav-link active" aria-current="page">
+            <a href="user_list.php" class="nav-link <?= $pageName == 'list' ? 'active disabled' : '' ?>">
                 <svg class="bi me-2" width="25" height="25">
                     <use xlink:href="#home"></use>
                 </svg>
                 會員
             </a>
+
         </li>
     </ul>
     <hr>
     <div class="dropdown">
-        <a href="#" class="d-flex align-items-center  text-decoration-none dropdown-toggle" id="dropdownUser1"
+        <a href="#" class="d-flex align-items-center  text-decoration-none " id="dropdownUser1"
             data-bs-toggle="dropdown" aria-expanded="false">
             <div id="userPic"><img src="https://github.com/mdo.png" alt="" width="32" height="32"
                     class="rounded-circle me-2"></div>
             <svg class="bi me-2" width="5" height="5">
                 <use xlink:href="#speedometer2"></use>
             </svg>
-            <strong><?= $_SESSION['admin']['name'] ?? '會員' ?></strong>
-        </a>
-        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser1">
+            <strong><?= $_SESSION['admin']['name'] ?? '會員你好' ?></strong>
 
-            <li>
-                <?php if (!isset($_SESSION['admin']['email']) && !isset($_SESSION['admin']['name'])) { ?>
-                <a class="dropdown-item" href="user_login.php">登入</a>
-                <?php } ?>
-            </li>
-            <li>
-                <?php if (isset($_SESSION['admin']['email']) && isset($_SESSION['admin']['name'])) { ?>
-                <a class="dropdown-item" href="user_login.php">登出</a>
-                <?php } ?>
-            </li>
-        </ul>
+        </a>
+
+
+
+
+
+
     </div>
 </div>

@@ -6,11 +6,8 @@ session_start();
 <?php require __DIR__ . "/__navbar.php"; ?>
 <nav class="navbar navbar-expand-lg navbar-light pt-3 shadow ">
     <div class="container-fluid"><i class="fas fa-laptop-house text-warning"></i>
-        <a class="navbar text-warning " href="#" style="text-decoration:none;"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
@@ -24,18 +21,13 @@ session_start();
             </ul>
             <button type="button" class="btn btn-info"><a class="text-dark" href="user_insert.php"
                     style="text-decoration:none;">註冊會員</a></button>
-            <ul class="navbar-nav mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
 
-
-                </li>
-
-            </ul>
 
 
         </div>
     </div>
 </nav>
+
 <div class="container">
     <div class="row">
         <div class="col-lg-6">

@@ -20,6 +20,13 @@ if (empty($user)) {
 ?>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
+<nav class="navbar navbar-expand-lg navbar-light pt-3 shadow ">
+    <div class="container-fluid"><i class="fas fa-laptop-house text-warning"></i>
+
+
+    </div>
+
+</nav>
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -88,7 +95,7 @@ if (empty($user)) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">資料錯誤</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">發生錯誤</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
