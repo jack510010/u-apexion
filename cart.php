@@ -41,7 +41,7 @@ if ($page > $totalPages) {
     exit;
 };
 
-$sql = sprintf("SELECT * FROM cart LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+$sql = sprintf("SELECT * FROM cart ORDER BY sid DESC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
 // $perPage = 5; 每一頁有幾筆資料。 假設我要看第三頁的資料，那就表示我要從第11筆開示看嘛，因為前兩頁一共有10筆資料
 // 兩頁 * 每頁5筆, 顯示第三頁5筆資料。 所以程式碼才會是($page - 1) * $perPage, $perPage
 
@@ -99,7 +99,7 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
         </div>
         <div class="col-8"></div>
         <div class="col-2 justify-content-end">
-            <a class="btn btn-primary col <?= $pageName == "cart" ? "active disabled" : "" ?> " href="#" role="button">清單</a>
+            <!-- <a class="btn btn-primary col <?= $pageName == "cart" ? "active disabled" : "" ?> " href="#" role="button">清單</a> -->
             <a class="btn btn-primary col " href="cart-insert.php" role="button">新增購入項目</a>
         </div>
     </div>

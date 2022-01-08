@@ -26,9 +26,9 @@ if (empty($row)) {
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
 <ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" href="element.php">回行程表單</a>
-  </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="element.php">回行程表單</a>
+    </li>
 </ul>
 <div class="container">
     <div class="row">
@@ -38,7 +38,7 @@ if (empty($row)) {
                     <h5 class="card-title">修改行程列表</h5>
                     <br>
                     <form name="form1" onsubmit="sendData();return false;">
-                    <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
+                        <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
                         <div class="mb-3">
                             <label for="name" class="form-label">行程名稱:</label>
                             <input type="text" class="form-control" id="name" name="name" value="<?= htmlentities($row['name']) ?>">
@@ -47,14 +47,12 @@ if (empty($row)) {
                         <br>
                         <div class="input-group">
                             <span for="introduction" class="input-group-text">行程介紹填寫:</span>
-                            <textarea class="form-control" id="introduction" name="introduction" rows="5">
-                                <?= $row['introduction'] ?></textarea>
+                            <textarea class="form-control" id="introduction" name="introduction" rows="5"><?= trim($row['introduction']) ?></textarea>
                         </div>
                         <br>
                         <div class="input-group">
                             <span for="attention" class="input-group-text">注意事項填寫:</span>
-                            <textarea class="form-control" id="attention" name="attention" rows="5">
-                                <?= $row['attention'] ?></textarea>
+                            <textarea class="form-control" id="attention" name="attention" rows="5"><?= trim($row['attention'])  ?></textarea>
                         </div>
                         <br>
                         <div class="mb-3">
@@ -75,7 +73,6 @@ if (empty($row)) {
 <script>
     function sendData() {
         const fd = new FormData(document.form1);
-
         fetch('travel_edit-api.php', {
                 method: 'POST',
                 body: fd,
