@@ -1,7 +1,10 @@
 <?php 
 // 這個是create
-include __DIR__ . "/__connect_db.php";
-//!只有處理資料沒有畫面!!!!!!!!!!!!!!! 因為是API
+include __DIR__ . "/__connect_db.php";   //!只有處理資料沒有畫面!!!!!!!!!!!!!!! 因為是API
+if (!isset($_SESSION['admin'])) {
+    header('Location: user_login.php');
+    exit;
+}
 
 $output = [               // $output這個變數是要告訴前端一些訊息用的，例如success拉，error拉等等。
     "success" => false,

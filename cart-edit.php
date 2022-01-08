@@ -1,5 +1,10 @@
 <?php  
 include __DIR__. "/__connect_db.php";
+if (!isset($_SESSION['admin'])) {
+    header('Location: user_login.php');
+    exit;
+}
+
 $title = "清單資料";
 
 if (!isset($_GET["sid"])){             // 如果沒有這個值就直接返回列表頁，不讓你繼續往下做。

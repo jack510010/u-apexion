@@ -1,6 +1,12 @@
+
+
 <?php
 // 這個是read
 include __DIR__ . "/__connect_db.php";
+if (!isset($_SESSION['admin'])) {
+    header('Location: user_login.php');
+    exit;
+}
 
 $title = "購物車列表"; // 這個變數可以吃到從『include __DIR__ . "/__html_head.php"』過來的值。
 $pageName = "cart"; // 意思是給這個『cart.php』檔叫做cart。

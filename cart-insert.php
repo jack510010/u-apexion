@@ -1,6 +1,11 @@
 <?php
 // 這個是create
 include __DIR__ . "/__connect_db.php";
+if (!isset($_SESSION['admin'])) {
+    header('Location: user_login.php');
+    exit;
+}
+
 $title = "新增購物車資料";
 $pageName = "insert"; // 新增購物車項目
 ?>

@@ -2,6 +2,10 @@
 // 現在要做delete。
 
 include __DIR__ . "/__connect_db.php"; //__connect_db.php
+if (!isset($_SESSION['admin'])) {
+    header('Location: user_login.php');
+    exit;
+}
 
 if (isset($_GET["sid"])){
     $sid = intval($_GET["sid"]);  // 這邊拿到的一定是整數，因為有intval。
