@@ -1,7 +1,14 @@
 <?php
 session_start();
 
+if (isset($_SESSION['admin'])) {
+    header('Location: user_list.php');
+    exit;
+}
+
+
 ?>
+
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
 <nav class="navbar navbar-expand-lg navbar-light pt-3 shadow ">
@@ -46,6 +53,7 @@ session_start();
                         </div>
                         <button type="submit" class="btn btn-primary">登入</button>
                     </form>
+
                 </div>
             </div>
         </div>
