@@ -1,6 +1,12 @@
 <?php require __DIR__ . "/__connect_db.php";
-$title='周邊商品';
+$title = '周邊商品';
 $pageName = 'product';
+
+//if(!isset($_SESSION['admin'])){
+//     header('Location: user_list.php');
+ //   exit;
+// }
+
 //幾筆資料一頁
 $perPage = 5;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
@@ -18,9 +24,13 @@ if ($page > $totalPages) {
   exit;
 }
 
+$nowProduct = '';
+if (isset($_GET["category"])) {
+  $nowProduct = " WHERE category='" . $_GET["category"] . "' AND product_name='" . $_GET["product_name"] . "'";
+}
 
 //提取表單資料
-$sql = sprintf("SELECT * FROM product LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+$sql = sprintf("SELECT * FROM product %s LIMIT %s, %s", $nowProduct, ($page - 1) * $perPage, $perPage);
 
 $products = $pdo->query($sql)->fetchAll();
 ?>
@@ -36,19 +46,19 @@ $products = $pdo->query($sql)->fetchAll();
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-light" href="product_w.php" id="womanProduct" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle text-light" href="product.php?category=1" id="womanProduct" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               女生
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="product_w.php">外套</a></li>
+              <li><a class="dropdown-item" href="product.php?category=女生&product_name=外套">外套</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">T恤</a></li>
+              <li><a class="dropdown-item" href="product.php?category=女生&product_name=T恤">T恤</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">帽子</a></li>
+              <li><a class="dropdown-item" href="product.php?category=女生&product_name=帽子">帽子</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -56,15 +66,15 @@ $products = $pdo->query($sql)->fetchAll();
               男生
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">外套</a></li>
+              <li><a class="dropdown-item" href="product.php?category=男生&product_name=外套">外套</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="product_m.php">T恤</a></li>
+              <li><a class="dropdown-item" href="product.php?category=男生&product_name=T恤">T恤</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">帽子</a></li>
+              <li><a class="dropdown-item" href="product.php?category=男生&product_name=帽子">帽子</a></li>
             </ul>
           </li>
         </ul>
@@ -108,13 +118,13 @@ $products = $pdo->query($sql)->fetchAll();
             <td><?= $p['create_date'] ?></td>
             <td>
               <a href="product_edit.php?sid=<?= $p['sid'] ?>">
-              <i class="fas fa-pencil-alt"></i>
+                <i class="fas fa-pencil-alt"></i>
               </a>
             </td>
             <td>
               <a href="product_delete.php?sid=<?= $p['sid'] ?>" onclick="return conform('確定要刪除這筆資料嗎')">
-              <i class="fas fa-trash-alt"></i>
-            </a>
+                <i class="fas fa-trash-alt"></i>
+              </a>
             </td>
           </tr>
         <?php endforeach; ?>
