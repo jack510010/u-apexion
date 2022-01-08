@@ -2,7 +2,7 @@
 $title='周邊商品';
 $pageName = 'product';
 //幾筆資料一頁
-$perPage = 10;
+$perPage = 5;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 if ($page < 1) {
   header('Location: product.php');
