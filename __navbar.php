@@ -57,11 +57,12 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="user_list.php" class="nav-link <?= $pageName == 'list' ? 'active disabled' : '' ?>">
+            <a href="user_login.php" class="nav-link <?= $pageName == 'list' ? 'active disabled' : '' ?>">
                 <svg class="bi me-2" width="25" height="25">
                     <use xlink:href="#home"></use>
                 </svg>
                 會員
+
             </a>
 
         </li>

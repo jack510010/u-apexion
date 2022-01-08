@@ -1,5 +1,9 @@
 <?php require __DIR__ . "/__connect_db.php";
 
+if (!isset($_SESSION['admin'])) {
+    header('Location: user_login.php');
+    exit;
+}
 
 $title = '所有會員';
 $pageName = 'list';
