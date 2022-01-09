@@ -8,14 +8,23 @@ $pageName = 'product';
 // }
 
 //幾筆資料一頁
-$perPage = 5;
+$perPage = 7;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 if ($page < 1) {
   header('Location: product.php');
   exit;
 }
 
-$t_sql = "SELECT COUNT(1) FROM product";
+$newProduct = '';
+if (isset($_GET["category"])) {
+  $newProduct = " WHERE category='" . $_GET["category"] . "' AND product_name='" . $_GET["product_name"] . "'";
+}
+
+//提取表單資料
+$sql = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM product %s LIMIT %s, %s", $newProduct, ($page - 1) * $perPage, $perPage);
+$products = $pdo->query($sql)->fetchAll();
+
+$t_sql = "SELECT FOUND_ROWS()";
 // 算總比數
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 $totalPages = ceil($totalRows / $perPage);
@@ -24,15 +33,6 @@ if ($page > $totalPages) {
   exit;
 }
 
-$nowProduct = '';
-if (isset($_GET["category"])) {
-  $nowProduct = " WHERE category='" . $_GET["category"] . "' AND product_name='" . $_GET["product_name"] . "'";
-}
-
-//提取表單資料
-$sql = sprintf("SELECT * FROM product %s LIMIT %s, %s", $nowProduct, ($page - 1) * $perPage, $perPage);
-
-$products = $pdo->query($sql)->fetchAll();
 ?>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
