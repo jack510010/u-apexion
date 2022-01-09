@@ -9,7 +9,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li>
-            <a href="element_index.php" class="nav-link ">
+            <a href="element_index.php" class="nav-link <?= $pageName == 'element' ? 'active disabled' : '' ?>">
                 <svg class="bi me-2" width="25" height="25">
                     <use xlink:href="#speedometer2"></use>
                 </svg>
@@ -17,7 +17,7 @@
             </a>
         </li>
         <li>
-            <a href="ticket_insert.php" class="nav-link">
+            <a href="ticket_insert.php" class="nav-link <?= $pageName == 'ticket_insert' ? 'active disabled' : '' ?>">
                 <svg class="bi me-2" width="25" height="25">
                     <use xlink:href="#table"></use>
                 </svg>
@@ -49,7 +49,7 @@
             </a>
         </li>
         <li>
-            <a href="cart.php" class="nav-link ">
+            <a href="cart.php" class="nav-link <?= $pageName == 'cart' ? 'active disabled' : '' ?>">
                 <svg class="bi me-2" width="25" height="25">
                     <use xlinhref="#people-circle"></use>
                 </svg>
@@ -57,7 +57,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="user_login.php" class="nav-link <?= $pageName == 'list' ? 'active disabled' : '' ?>">
+            <a href="user_login.php" class="nav-link <?= $pageName == 'user_list' ? 'active disabled' : '' ?>">
                 <svg class="bi me-2" width="25" height="25">
                     <use xlink:href="#home"></use>
                 </svg>
