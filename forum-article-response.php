@@ -59,7 +59,7 @@ date_default_timezone_set('Asia/Taipei');
     }
     .forum-list-group{
         border-radius:0;
-        margin-bottom:30px;
+        /* margin-bottom:30px; */
         /* background: linear-gradient(to right, #021943 0%, #023f74 100%); */
     }
     .forum-list-group li{
@@ -137,9 +137,9 @@ date_default_timezone_set('Asia/Taipei');
     }
     .fix-response{
         /* border:1px solid red; */
-        position:fixed;
+        position:sticky;
         bottom:0;
-        width:64.8%;
+        /* width:64.8%; */
         z-index:999;
     }
     .respose-fix{
@@ -241,7 +241,13 @@ date_default_timezone_set('Asia/Taipei');
                         </a> 
                     </div>
                     
-                    <p class="card-text"><?= $row2['art_content'] ?></p>
+                    <p class="card-text">
+                        <?= $row2['art_content'] ?>
+                        <div class="forum-photo" >
+                            <img src="./img/<?= $row2['art_photo']?>" alt="" style="width:50%;">
+                        </div>
+                        
+                    </p>
                     <div class="article_emoji d-flex justify-content-between">
                         <div class="article_emoji-left d-flex">
                             <a href="">
@@ -315,16 +321,17 @@ date_default_timezone_set('Asia/Taipei');
                     <li class="page-item <?= $totalPages==$page ? 'disabled' : '' ?>">
                     <a class="page-link" href="?page=<?= $page+1 ?>">
                             <i class="fas fa-arrow-circle-right"></i>
-                        </a></li>
+                    </a></li>
                 </ul>
             </nav>
         </div>
     </div>
                 </li>
 
-                <li class="forum-list-group-title list-group-item disabled" aria-disabled="true"></li>
+                <!-- <li class="forum-list-group-title list-group-item disabled" aria-disabled="true"></li> -->
 
                 <!-- fix-response -->
+
                 <div class="fix-response">
                     <ul class="respose-fix list-group">
                         <form name="form2" class="post-form" onsubmit="sendData(); return false;">
@@ -334,7 +341,6 @@ date_default_timezone_set('Asia/Taipei');
                                 <button>送出</button>
                             </li> 
                         </form>
-                        
                     </ul>
                 </div>
                 
@@ -354,7 +360,6 @@ date_default_timezone_set('Asia/Taipei');
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
                     </div>
                 </div>
             </div>

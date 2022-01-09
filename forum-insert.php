@@ -148,6 +148,12 @@ date_default_timezone_set('Asia/Taipei');
                             <input type="text" class="form-control" id="category" name="category">
                             <div class="form-text"></div>
                         </div>
+                        <!-- photo upload -->
+                        <div class="mb-3">
+                            <label for="photo" class="form-label">照片分享</label>
+                            <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
+                            <div class="form-text"></div>
+                        </div>
                         <div class="mb-3">
                             <label for="content" class="form-label">內文*</label>
                             <textarea class="form-control" name="content" id="content"
