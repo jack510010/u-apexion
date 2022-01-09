@@ -6,7 +6,7 @@ if (!isset($_SESSION['admin'])) {
 }
 
 $title = '所有會員';
-$pageName = 'list';
+$pageName = 'user_list';
 
 //幾筆資料一頁
 $perPage = 3;
