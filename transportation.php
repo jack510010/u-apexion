@@ -76,7 +76,7 @@ $boarding = $pdo->query($board_sql)->fetchAll();
 ?>
 <?php include __DIR__ . '/__html_head.php'; ?>
 <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-<link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
 <style>
     .transports {
         width: 70%;
@@ -105,6 +105,11 @@ $boarding = $pdo->query($board_sql)->fetchAll();
     }
 
     .btn {
+        filter: saturate(.7);
+        border-radius: 20px;
+        box-shadow: inset 5px 8px 10px rgb(67, 195, 255, .5);
+    }
+    .date {
         filter: saturate(.7);
         border-radius: 20px;
         box-shadow: inset 5px 8px 10px rgb(67, 195, 255, .5);
@@ -144,12 +149,13 @@ $boarding = $pdo->query($board_sql)->fetchAll();
                     </select>
                 </div>
                 <h4>Select Your Departure Datetime...</h4>
-                <div class="input-group date" id='departure-date datetime'>
-                    <input type="text" class="form-control" name="date" value="" onclick="qqqq()">
-                    <span class="input-group-addon">
-                        <i class="glyphicon glyphicon-calendar "></i>
-                        <!-- <i class="far fa-calendar-alt"></i> -->
-                    </span>
+                <div class="input-group" id='departure-date datetime'>
+                    <input type="date" class="form-control date" name="date" value="">
+                    
+                      
+                        <!-- <i class="far fa-calendar-alt"></i>
+                    <input type="date" class="form-control" id="birthday" name="birthday"> -->
+                    
                 </div>
                 <div class="seat">
                     <h4>Chosse Your Seat?</h4>
@@ -174,19 +180,8 @@ $boarding = $pdo->query($board_sql)->fetchAll();
 <?php include __DIR__ . '/__scripts.php'; ?>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 
-<script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
-
-<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 <script>
-    function qqqq(){
-    $('#departure-date').datetimepicker({
-        format: 'YYYY/MM/DD',
-        locale: moment.locale('zh-tw'),
-        minDate: moment().add(1, 'days'),
-        maxDate: moment().add(30, 'days'),
-    });
-
-    }
+    
     <?php $boarding_view_dto = json_encode($boarding_view) ?>
     <?php $seats_view_dto = json_encode($seats_view) ?>
 
@@ -246,60 +241,6 @@ $boarding = $pdo->query($board_sql)->fetchAll();
     //     }
     // }
 
-
-
-
-    // function test2(){
-    //     let datetime = ''
-
-    //     datetime = document.getElementById('datetime').value;
-    //     if(!datetime) {
-    //         document.getElementsByClassName('board')[0].style.display = 'none';
-    //         document.getElementsByClassName('seat')[0].style.display = 'none';
-    //     } else {
-    //         document.getElementsByClassName('board')[0].style.display = 'block';
-    //         document.getElementsByClassName('seat')[0].style.display = 'block';
-
-    //         console.log(transportSelect)
-    //         if(transportSelect === 'plan') {
-    //             document.getElementsByClassName('plan')[0].style.display = 'block';
-    //             document.getElementsByClassName('curise')[0].style.display = 'none';
-    //             document.getElementsByClassName('train')[0].style.display = 'none';
-    //             document.getElementsByClassName('plan')[1].style.display = 'block';
-    //             document.getElementsByClassName('curise')[1].style.display = 'none';
-    //             document.getElementsByClassName('train')[1].style.display = 'none';
-    //         }
-    //         if( transportSelect === 'curise') {
-    //             document.getElementsByClassName('plan')[0].style.display = 'none';
-    //             document.getElementsByClassName('curise')[0].style.display = 'block';
-    //             document.getElementsByClassName('train')[0].style.display = 'none';
-    //             document.getElementsByClassName('plan')[1].style.display = 'none';
-    //             document.getElementsByClassName('curise')[1].style.display = 'block';
-    //             document.getElementsByClassName('train')[1].style.display = 'none';
-    //         }
-    //         if( transportSelect === 'train') {
-    //             document.getElementsByClassName('plan')[0].style.display = 'none';
-    //             document.getElementsByClassName('curise')[0].style.display = 'none';
-    //             document.getElementsByClassName('train')[0].style.display = 'block';
-    //             document.getElementsByClassName('plan')[1].style.display = 'none';
-    //             document.getElementsByClassName('curise')[1].style.display = 'none';
-    //             document.getElementsByClassName('train')[1].style.display = 'block';
-    //         }
-    //     }
-
-
-    // }
-
-
-
-
-
-
-
-
-
-
-    // update();
 
 
     // transport.addEventListener("click", function() {
