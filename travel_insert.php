@@ -4,24 +4,31 @@ $pageName = "travel_insert";
 ?>
 
 <style>
-    .row {
+    .d-flex {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .bg_img3 {
+        min-height: 100vh;
+        background-image: url(./img/0300.jpg);
+        background-position: center;
+        background-size: cover;
     }
 </style>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
 <ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link text-warning" href="element.php">行程表單</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link active text-warning" href="travel_insert.php">新增行程</a>
-    </li>
-</ul>
-<div class="container">
-    <div class="row">
+        <li class="nav-item">
+            <a class="nav-link text-warning" href="element.php">行程表單</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active text-warning" href="travel_insert.php">新增行程</a>
+        </li>
+    </ul>
+<div class="bg_img3">
+    <div class="d-flex">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
