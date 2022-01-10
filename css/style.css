@@ -21,6 +21,12 @@
         }
 
         /* navbar樣式開始 */
+        .nav-bg{
+            background-color: #00002D;
+            box-shadow: 0px 6px 8px 0px rgba(108, 108, 108, 0.214);
+            /* border:1px solid red; */
+            z-index:99;
+        }
         #navbar {
             position: fixed;
             left: 0;
@@ -28,7 +34,7 @@
         }
 
         #navbar a {
-            color: #00002D;
+            color: #fff;
         }
 
         .nav-pills .nav-link.active {
