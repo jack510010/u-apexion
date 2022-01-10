@@ -1,5 +1,5 @@
 <div class="nav-bg d-flex flex-column flex-shrink-0 p-3" id="navbar" style="width: 20%;height: 100vh">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto  text-decoration-none">
+    <a href="index_.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto  text-decoration-none">
         <div class="logo"><img src="./img/logo.png" alt=""></div>
         <svg class="bi me-2" width="5" height="5">
             <use xlink:href="#speedometer2"></use>
@@ -25,7 +25,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link ">
+            <a href="trans-button.php" class="nav-link ">
                 <svg class="bi me-2" width="25" height="25">
                     <use xlink:href="#grid"></use>
                 </svg>
