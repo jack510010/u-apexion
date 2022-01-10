@@ -1,4 +1,4 @@
-<?php require __DIR__ . '/ua__connect.php';
+<?php require __DIR__ . '/__connect_db.php';
 $title = 'Transportation';
 $user_sql  = "SELECT * FROM `user` WHERE `sid`=3 ";
 $user_country_sid = json_encode($pdo->query($user_sql)->fetch()["country_sid"]);
