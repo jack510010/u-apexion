@@ -20,6 +20,14 @@ if (empty($user)) {
 ?>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
+
+<style>
+    .row{
+        margin-top:50px;
+        margin-bottom:50px;
+    }
+</style>
+
 <nav class="navbar navbar-expand-lg navbar-light pt-3 shadow ">
     <div class="container-fluid"><i class="fas fa-laptop-house text-warning"></i>
 
@@ -28,7 +36,7 @@ if (empty($user)) {
 
 </nav>
 <div class="container">
-    <div class="row">
+    <div class="row d-flex justify-content-center align-items-center">
         <div class="col-md-6">
             <div class="card">
 
