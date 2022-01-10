@@ -114,14 +114,14 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
 <div class="container">
     <div class="row">
         <div class="col">
-            <table class="table table-dark table-striped table-bordered">
+            <table class="table  text-white">
                 <thead>
                     <tr>
                         
                         <th scope="col">
                             <i class="fas fa-trash-alt"></i>
                         </th>
-                        <th scope="col">#</th>
+                        <th scope="col">編號</th>
                         <th scope="col">會員</th>
                         <th scope="col">商品編號</th>
                         <th scope="col">數量</th>
