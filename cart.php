@@ -4,6 +4,10 @@
 // 這個是read
 include __DIR__ . "/__connect_db.php";
 if (!isset($_SESSION['admin'])) {
+    $path=explode("?","$_SERVER[REQUEST_URI]");
+    $filename=basename($path[0]);
+    $_SESSION['page_from'] = $filename;
+    
     header('Location: user_login.php');
     exit;
 }

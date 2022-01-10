@@ -6,15 +6,19 @@ if (isset($_SESSION['admin'])) {
     exit;
 }
 
+if( isset($_GET['pagefrom']) ){
+    $_SESSION['page_from'] = "user_list.php";
+};
 
 ?>
 
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
 <nav class="navbar navbar-expand-lg navbar-light pt-3 shadow ">
+
     <div class="container-fluid"><i class="fas fa-laptop-house text-warning"></i>
 
-
+    
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
@@ -39,7 +43,7 @@ if (isset($_SESSION['admin'])) {
     <div class="row">
         <div class="col-lg-6">
             <div class="card">
-
+                <?= $_SESSION['page_from'] ?>
                 <div class="card-body">
                     <h5 class="card-title">Login</h5>
                     <form name="form1" onsubmit="doLogin(); return false;">
@@ -63,6 +67,9 @@ if (isset($_SESSION['admin'])) {
 <?php require __DIR__ . "/__scripts.php"; ?>
 
 <script>
+     previous = "javascript:history.go(-1)";
+     console.log('previous',previous);
+
 function doLogin() {
     const fd = new FormData(document.form1);
 
@@ -72,7 +79,8 @@ function doLogin() {
     }).then(r => r.json()).then(obj => {
         console.log(obj);
         if (obj.success) {
-            location.href = 'user_list.php';
+            location.href = "<?= $_SESSION['page_from']; ?> ";
+
         } else {
             alert(obj.error);
         }
