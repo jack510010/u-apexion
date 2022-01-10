@@ -2,14 +2,14 @@
 $title = '周邊商品';
 $pageName = 'product';
 
-// if(!isset($_SESSION['admin'])){
-//     $path=explode("?","$_SERVER[REQUEST_URI]");
-//     $filename=basename($path[0]);
-//     $_SESSION['page_from'] = $filename;
+if(!isset($_SESSION['admin'])){
+    $path=explode("?","$_SERVER[REQUEST_URI]");
+    $filename=basename($path[0]);
+    $_SESSION['page_from'] = $filename;
     
-//     header('Location: user_list.php');
-//     exit;
-// }
+    header('Location: user_list.php');
+    exit;
+}
 
 //幾筆資料一頁
 $perPage = 7;
