@@ -24,11 +24,17 @@ if ($page > $totalPages) {
     header('Location: user_list.php?page=' . $totalPages);
     exit;
 }
-
+// SELECT t.*, s.name FROM `trans_mainlists` t LEFT JOIN `user` s ON t.user_sid = s.sid;
 //提取表單資料
 $sql = sprintf("SELECT * FROM user ORDER BY sid DESC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
 
 $user = $pdo->query($sql)->fetchAll();
+
+$country_sql = "SELECT u.*, c.country_name FROM `user` u LEFT JOIN `country` c ON u.country_sid = c.sid;
+";
+$country = $pdo->query($country_sql)->fetchAll();
+
+
 ?>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
@@ -90,7 +96,8 @@ $user = $pdo->query($sql)->fetchAll();
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($user as $u) : ?>
+            <?php foreach ($country as $u) { ?>
+                
                 <tr>
                     <td><?= $u['sid'] ?></td>
                     <td><?= $u['name'] ?></td>
@@ -99,7 +106,9 @@ $user = $pdo->query($sql)->fetchAll();
                     <td><?= $u['mobile'] ?></td>
                     <td><?= $u['birthday'] ?></td>
                     <td><?= htmlentities($u['address']) ?></td>
-                    <td><?= $u['country'] ?></td>
+                   
+                    <td><?= $u ['country_name'];
+                       ?></td>
                     <td><?= $u['create-date'] ?></td>
 
                     <td>
@@ -113,7 +122,7 @@ $user = $pdo->query($sql)->fetchAll();
                         </a>
                     </td>
                 </tr>
-                <?php endforeach; ?>
+                <?php } ?>
             </tbody>
         </table>
         <div class="row">
