@@ -106,7 +106,7 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
         <div class="col-8"></div>
         <div class="col-2 justify-content-end">
             <!-- <a class="btn btn-primary col <?= $pageName == "cart" ? "active disabled" : "" ?> " href="#" role="button">清單</a> -->
-            <a class="btn btn-primary col " href="cart-insert.php" role="button">新增購入項目</a>
+            <a class="btn btn-info col text-dark" href="cart-insert.php" role="button">新增購入項目</a>
         </div>
     </div>
 </div>
@@ -116,7 +116,7 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
         <div class="col">
             <table class="table  text-white">
                 <thead>
-                    <tr>
+                    <tr class="text-info">
                         
                         <th scope="col">
                             <i class="fas fa-trash-alt"></i>

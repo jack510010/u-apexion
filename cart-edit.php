@@ -31,8 +31,8 @@ if (empty($row)){                        // 如果$row是空的，就讓你回�
         <div class="col-md-12">
             <div class="card-body">
                 <div class="col d-flex justify-content-between">
-                    <h5 class="card-title text-light">修改購物車清單</h5>
-                    <a class="btn btn-primary" href="cart.php" role="button">返回</a>
+                    <h5 class="card-title text-warning">修改購物車清單</h5>
+                    <a class="btn btn-info" href="cart.php" role="button">返回</a>
                 </div>
             </div>
             <div class="card-body col-md-6">    
