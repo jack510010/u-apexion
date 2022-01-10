@@ -57,7 +57,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="user_login.php" class="nav-link <?= $pageName == 'user_list' ? 'active disabled' : '' ?>">
+            <a href="user_login.php?pagefrom=login" class="nav-link <?= $pageName == 'user_list' ? 'active disabled' : '' ?>">
                 <svg class="bi me-2" width="10" height="25">
                     <use xlink:href="#home"></use>
                 </svg>

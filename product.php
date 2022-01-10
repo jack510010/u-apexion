@@ -3,7 +3,11 @@ $title = '周邊商品';
 $pageName = 'product';
 
 if(!isset($_SESSION['admin'])){
-     header('Location: user_list.php');
+    $path=explode("?","$_SERVER[REQUEST_URI]");
+    $filename=basename($path[0]);
+    $_SESSION['page_from'] = $filename;
+    
+    header('Location: user_list.php');
     exit;
 }
 
