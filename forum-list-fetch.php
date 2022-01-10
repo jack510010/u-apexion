@@ -21,18 +21,6 @@ $output = '';
 	$stmt -> execute(['%'.$search.'%','%'.$search.'%','%'.$search.'%']);
 
 	$rows = $stmt->fetchAll();
-// 	// echo $rows["for_category"];
-// }
-// else
-// {
-// 	$query = "
-// 	SELECT * FROM forum_article ORDER BY sid";
-// 	$stmt = $pdo -> prepare($query);
-// 	$stmt -> execute();
-
-// 	$rows = $stmt->fetchAll();
-// 	// echo 'fff';
-// }
 
 
 
@@ -54,7 +42,7 @@ if($stmt->rowCount()){
 	foreach ($rows as $r){
 		$output .='
 		<tr>
-			<td>'.$r["sid"]. '</td>
+			<td>'.$r["sid"].'</td>
 			<td>'.$r["for_category"].'</td>
 			<td>
                 <a href="forum-article-response.php" class="forum-list-title">
@@ -66,22 +54,21 @@ if($stmt->rowCount()){
             </td>
 			<td>'.$r["art_create_time"]. '</td>
 			<td>
-                <a href="forum-edit.php?sid=<?= $r["sid"] ?>
+                <a href="forum-edit.php?sid='.$r["sid"].'">
                     <i class="fas fa-edit"></i>
                 </a>
             </td>
 			<td>
-                <a href="javascript: delete_it(<?= $r["sid"] )
-                    <i class="fas fa-trash-alt"></i>
+                <a href="javascript: delete_it('.$r["sid"].')">
+                    <i class="fas fa-trash-alt">
+					</i>
                 </a>
             </td>
 		</tr>
-
 		'
-		
-		
 		;
 	}
+
 	echo $output;
 }
 else{

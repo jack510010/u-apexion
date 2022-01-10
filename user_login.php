@@ -14,6 +14,24 @@ if( isset($_GET['pagefrom']) ){
 
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
+
+<style>
+    .container{
+        /* border:1px solid red; */
+        /* height:500px; */
+        /* align-items:center; */
+    }
+    /* .center-container{
+        display:flex;
+        justify-content:center; */
+        /* margin-top:; */
+    /* } */
+
+    .row{
+        margin-top:50px;
+    }
+</style>
+
 <nav class="navbar navbar-expand-lg navbar-light pt-3 shadow ">
 
     <div class="container-fluid"><i class="fas fa-laptop-house text-warning"></i>
@@ -40,7 +58,7 @@ if( isset($_GET['pagefrom']) ){
 </nav>
 
 <div class="container">
-    <div class="row">
+    <div class="row d-flex justify-content-center align-items-center">
         <div class="col-lg-6">
             <div class="card">
                 <?= $_SESSION['page_from'] ?>
