@@ -1,10 +1,10 @@
-<div class="nav-bg d-flex flex-column flex-shrink-0 p-3" id="navbar" style="width: 20%;height: 100vh">
+<div class="nav-bg d-flex flex-column flex-shrink-0 p-3" id="navbar" style="width: 15%;height: 100vh">
     <a href="index_.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto  text-decoration-none">
-        <div class="logo"><img src="./img/logo.png" alt=""></div>
-        <svg class="bi me-2" width="5" height="5">
+        <div class="logo"><img src="./img/logo.jpg" alt=""></div>
+        <!-- <svg class="bi me-2" width="5" height="5">
             <use xlink:href="#speedometer2"></use>
-        </svg>
-        <span class="fs-4">U-Apexion</span>
+        </svg> -->
+        <!-- <span class="fs-4">U-Apexion</span> -->
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
@@ -71,8 +71,8 @@
     <div class="dropdown">
         <a href="#" class="d-flex align-items-center  text-decoration-none dropdown-toggle " id="dropdownUser1"
             data-bs-toggle="dropdown" aria-expanded="false">
-            <div id="userPic"><img src="https://github.com/mdo.png" alt="" width="32" height="32"
-                    class="rounded-circle me-2"></div>
+            <div id="userPic"><img src="./img/userpic.jpg" alt="" width="32" height="32"
+                    class="rounded-circle me-2"></i></div>
             <svg class="bi me-2" width="5" height="5">
                 <use xlink:href="#speedometer2"></use>
             </svg>
