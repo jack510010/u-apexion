@@ -39,7 +39,7 @@ $pageName = "insert"; // 新增購物車項目
                 </div>
                 <div class="mb-3">
                     <label for="product_id" class="form-label text-white">商品編號</label>
-                    <input type="text" class="form-control" id="product_id" name="product_id">
+                    <input type="text" class="form-control" id="product_id" name="product_id" placeholder="請輸入國際條碼13碼">
                     <div class="form-text text-danger"></div>
                 </div>
                 <div class="mb-3">
@@ -82,7 +82,7 @@ $pageName = "insert"; // 新增購物車項目
     let user_id = document.querySelector("#user_id");
     let product_id = document.querySelector("#product_id");
     let count_number = document.querySelector("#count_number");
-
+    let product_re = /^471[\d]{10}$/;
     function sendData() {
         user_id.nextElementSibling.innerHTML = "";
         product_id.nextElementSibling.innerHTML = "";
@@ -97,7 +97,7 @@ $pageName = "insert"; // 新增購物車項目
             user_id.nextElementSibling.innerHTML = "請輸入正確的會員編號"
         }
 
-        if (product_id.value.length < 1 || product_id.value < 1) {
+        if(product_id.value.length !== 13 || !product_re.test(product_id.value)){
             isPass = false;
             product_id.nextElementSibling.innerHTML = "請輸入正確的商品編號"
         }

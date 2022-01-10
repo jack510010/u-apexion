@@ -51,7 +51,7 @@ if (empty($row)){                        // 如果$row是空的，就讓你回�
                     <div class="mb-3">
                         <label for="product_id" class="form-label text-light">商品編號</label>
                         <input type="text" class="form-control" id="product_id" name="product_id"
-                        value="<?= htmlentities($row["product_id"]) ?>">  <!--value是為了讓你進去修改頁面的時候，已把值show在該欄位上-->
+                        value="<?= htmlentities($row["product_id"]) ?>" placeholder="請輸入國際條碼13碼">  <!--value是為了讓你進去修改頁面的時候，已把值show在該欄位上-->
                         <div  class="form-text text-danger"></div>
                     </div>
                     <div class="mb-3">
@@ -92,10 +92,10 @@ if (empty($row)){                        // 如果$row是空的，就讓你回�
     let modal = new bootstrap.Modal(document.querySelector("#exampleModal"));
     //這串只是在設定bootstrap裡面的modal而已，跟要學的php東西無關
 
-    let user_id = document.querySelector("#user_id");
-    let product_id = document.querySelector("#product_id");
+    let user_id = document.querySelector("#user_id");  
+    let product_id = document.querySelector("#product_id");  // 
     let count_number = document.querySelector("#count_number");
-
+    let product_re = /^471[\d]{10}$/;
     function sendData(){
         user_id.nextElementSibling.innerHTML = "";
         product_id.nextElementSibling.innerHTML = "";
@@ -110,7 +110,7 @@ if (empty($row)){                        // 如果$row是空的，就讓你回�
             user_id.nextElementSibling.innerHTML = "請輸入正確的會員編號"
         }
 
-        if(product_id.value.length < 1 || product_id.value < 1){
+        if(product_id.value.length !== 13 || !product_re.test(product_id.value)){
             isPass = false;
             product_id.nextElementSibling.innerHTML = "請輸入想修改商品編號"
         }
