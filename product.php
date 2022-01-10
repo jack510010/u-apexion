@@ -2,10 +2,10 @@
 $title = '周邊商品';
 $pageName = 'product';
 
-//if(!isset($_SESSION['admin'])){
-//     header('Location: user_list.php');
- //   exit;
-// }
+if(!isset($_SESSION['admin'])){
+     header('Location: user_list.php');
+    exit;
+}
 
 //幾筆資料一頁
 $perPage = 7;
