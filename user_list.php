@@ -1,8 +1,13 @@
 <?php require __DIR__ . "/__connect_db.php";
 
-
+if (!isset($_SESSION['admin'])) {
+    header('Location: user_login.php');
+    exit;
+}
 
 $title = '所有會員';
+$pageName = 'user_list';
+
 //幾筆資料一頁
 $perPage = 3;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
@@ -30,7 +35,7 @@ $user = $pdo->query($sql)->fetchAll();
 <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light pt-3 shadow ">
         <div class="container-fluid"><i class="fas fa-laptop-house text-warning"></i>
-            <a class="navbar text-warning " href="user_list.php" style="text-decoration:none;">所有會員</a>
+            <a class="navbar text-warning " href="#" style="text-decoration:none;">所有會員</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -66,7 +71,7 @@ $user = $pdo->query($sql)->fetchAll();
     </nav>
 
     <!-- 下方列表 -->
-    <div class="bd-example p-3" style="overflow-x: scroll; height: 90vh">
+    <div class="bd-example p-3">
         <table class="table table-hover text-light" ;>
             <thead>
                 <tr class="text-info">
@@ -79,7 +84,7 @@ $user = $pdo->query($sql)->fetchAll();
                     <th scope="col">地址</th>
                     <th scope="col">國籍</th>
                     <th scope="col">新增時間</th>
-                    <!-- <th scope="col">修改時間</th> -->
+
                     <th scope="col">修改</th>
                     <th scope="col">刪除</th>
                 </tr>
@@ -96,8 +101,7 @@ $user = $pdo->query($sql)->fetchAll();
                     <td><?= htmlentities($u['address']) ?></td>
                     <td><?= $u['country'] ?></td>
                     <td><?= $u['create-date'] ?></td>
-                    <?php // <td><?= $u['update-date'] 
-                        ?></td> ?>
+
                     <td>
                         <a href="user_edit.php?sid=<?= $u['sid'] ?>">
                             <i class="fas fa-pencil-alt"></i>

@@ -30,6 +30,7 @@ if ($password == $user['password']) {
     $_SESSION['admin'] = [
         'email' => $user['email'],
         'name' => $user['name'],
+        'sid' => $user['sid'],
     ];
 }
 echo json_encode($output, JSON_UNESCAPED_UNICODE);

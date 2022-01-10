@@ -108,7 +108,7 @@ $ticketUpdateSql = sprintf("UPDATE `ticket` SET  `flight_time`='%s', `trip_sid`=
 
 $pdo->query($ticketUpdateSql);
 
-$memberUpdateSql = sprintf("UPDATE `member` SET  `name`='%s', `passport`='%s' WHERE `ticket_sid` = $ticketsid",$member,$memberPassName);
+$memberUpdateSql = sprintf("UPDATE `member` SET  `member_name`='%s', `passport`='%s' WHERE `ticket_sid` = $ticketsid",$member,$memberPassName);
 
 $pdo->query($memberUpdateSql);
 // echo $ticketid;

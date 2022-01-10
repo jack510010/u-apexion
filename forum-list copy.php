@@ -202,7 +202,13 @@ $rows = $pdo->query($sql)->fetchAll();
         height:20px;
     }
     .ellipsis{
-        width:400px;
+        width:300px;
+        overflow:hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .photo_ellipsis{
+        width:200px;
         overflow:hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -256,6 +262,7 @@ $rows = $pdo->query($sql)->fetchAll();
                     <th scope="col">分類</th>
                     <th scope="col">標題</th>
                     <th scope="col">內文</th>
+                    <th scope="col">照片</th>
                     <th scope="col">發布時間</th>
                     <th scope="col"><i class="fas fa-edit"></i></th>
                     <!-- edit -->
@@ -275,6 +282,9 @@ $rows = $pdo->query($sql)->fetchAll();
                         </td> 
                         <td class="forum-list-content">
                             <p class="ellipsis"><?= $r['art_content'] ?></p>
+                        </td>
+                        <td class="forum-list-content">
+                            <p class="photo-ellipsis"><?= $r['art_photo'] ?></p>
                         </td>
                         <td><?= $r['art_create_time'] ?></td>
                         <td>

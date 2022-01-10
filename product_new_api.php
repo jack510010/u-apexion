@@ -29,7 +29,11 @@ if (empty($quantity)) {
     echo json_encode($output);
     exit;
 }
-
+$exts = [
+    'image/jpeg' => '.jpg',
+    'image/png' => '.png',
+    'image/gif' => '.gif',
+];
 
 
 header('Content-Type: application/json');
@@ -37,11 +41,15 @@ header('Content-Type: application/json');
 $upload_folder = __DIR__ . '/img/product_img';
 
 if (!empty($_FILES['img'])) {
-    $filename = sha1($_FILES['img']['name'] . rand());
-    $target = $upload_folder . '/' . $filename;
-    if (move_uploaded_file($_FILES['img']['tmp_name'], $target)) {
-        $output['success'] = true;
-        $output['filename'] = $filename;
+    $ext = $exts[$_FILES['img']['type']] ?? '';  // 拿到對應的副檔名
+    if (!empty($ext)) {
+
+        $filename = $_FILES['img']['name'] . rand() . $ext;
+        //設定變數去接
+        $target = $upload_folder . '/' . $filename;
+        if (move_uploaded_file($_FILES['img']['tmp_name'], $target)) {
+            $output['success'] = true;
+            $output['filename'] = $filename;
 
         $sql = "INSERT INTO `product`(`category`, `product_name`, `img`, `style`,
  `size`, `quantity`, `price`, `create_date`, `update_date`) VALUES (?,?,?,?,?,?,?,NOW(),NOW())";
@@ -61,7 +69,10 @@ if (!empty($_FILES['img'])) {
         $output['error'] = '無法移動檔案';
     }
 } else {
-    $output['error'] = '沒有上傳檔案';
+    $output['error'] = '不合法的檔案類型';
+}
+} else {
+$output['error'] = '沒有上傳檔案';
 }
 
 /*

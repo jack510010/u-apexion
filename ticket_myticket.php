@@ -5,19 +5,20 @@ $allData = "SELECT COUNT(1) FROM `ticket`";
 $allDataCount = $pdo->query($allData)->fetch(PDO::FETCH_NUM)[0];
 // echo json_encode($allDataCount);
 
-$joinData = "SELECT a.`sid`,a.`flight_time`, a.`trip_sid`, a.`seat_sid`, b.`name`,b.`passport` FROM `ticket` a JOIN `member` b ON a.sid = b.`ticket_sid`";
+$joinData = "SELECT a.`sid`,a.`flight_time`, a.`trip_sid`, a.`seat_sid`, b.`member_name`,b.`passport`,c.`level`,d.`name` FROM `ticket` a JOIN `member` b ON a.sid = b.`ticket_sid` JOIN `flight_seat` c ON a.`seat_sid` = c.`price` JOIN `travel` d ON d.`price` = a.`trip_sid` ORDER BY a.`sid` DESC ";
 $rows = $pdo->query($joinData)->fetchAll();
 
 ?>
 
 <?php require __DIR__. "/__html_head.php";?>
 <?php require __DIR__. "/__navbar.php";?>
-
+<div class="all-bg">
 <!-- <form class="ticket-form mt-3" name="ticketForm"> -->
+<div class="all-wrap">
 <div class="myticket-wrap"> 
-<h2 class="my-3 text-white">我的訂票資訊</h2>
+<h2 class="my-3 text-white">訂票資訊一覽</h2>
 <?php foreach($rows as $r):
-  $membergroup = explode(",",$r['name']);
+  $membergroup = explode(",",$r['member_name']);
   $memberPassgroup = explode(",",$r['passport']) ?>
   <?php for($i=0;$i<count($membergroup);$i++): ?>
   <div class="myticket-change d-flex justify-content-end">
@@ -31,8 +32,8 @@ $rows = $pdo->query($joinData)->fetchAll();
   <ul class="pt-2">
       <li class="">Name&emsp;<?= $membergroup[$i] ?></li>
       <li class="">Date&emsp;<?= $r['flight_time'] ?></li>
-      <li class="">Seat lvl&emsp;<?= $r['seat_sid'] ?></li>
-      <li class="">Destination&emsp;<?= $r['trip_sid'] ?></li>
+      <li class="">Seat lvl&emsp;<?= $r['level'] ?></li>
+      <li class="">Trip&emsp;<?= $r['name'] ?></li>
       <li class=" barcode"><img src="./img/barcode.png" alt=""></li>
   </ul>
   </div>
@@ -42,6 +43,8 @@ $rows = $pdo->query($joinData)->fetchAll();
   </div>
   <br>
 <?php endfor; endforeach;?>
+</div>
+</div>
 </div>
 <!-- </form> -->
 <?php require __DIR__. "/__scripts.php";?>

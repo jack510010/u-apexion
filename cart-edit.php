@@ -1,5 +1,10 @@
 <?php  
 include __DIR__. "/__connect_db.php";
+if (!isset($_SESSION['admin'])) {
+    header('Location: user_login.php');
+    exit;
+}
+
 $title = "清單資料";
 
 if (!isset($_GET["sid"])){             // 如果沒有這個值就直接返回列表頁，不讓你繼續往下做。
@@ -23,9 +28,14 @@ if (empty($row)){                        // 如果$row是空的，就讓你回�
 <?php include __DIR__. "/__navbar.php" ?>
 <div class="container">
     <div class="rol">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="card-body">
-                <h5 class="card-title text-light">修改購物車清單</h5>
+                <div class="col d-flex justify-content-between">
+                    <h5 class="card-title text-light">修改購物車清單</h5>
+                    <a class="btn btn-primary" href="cart.php" role="button">返回</a>
+                </div>
+            </div>
+            <div class="card-body col-md-6">    
                 <form name="form1" onsubmit="sendData();return false;">
                 <!--onsubmit 事件會在表單中的確認按鈕被點選時發生。-->
                 <!--不要讓表單用傳統的方式送出，就是指『method="post"』-->
