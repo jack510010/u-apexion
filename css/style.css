@@ -25,7 +25,7 @@
         .container-wrap {
             background: linear-gradient(to right, #021943 0%, #023f74 100%);
             min-height: 100vh;  /*為了讓背景色顯示，預設高度100vh。*/
-            width: 80%;
+            width: 85%;
             position: absolute;
             right: 0;
         }
@@ -61,15 +61,18 @@
             border: none;
         }
 
+        
+
         .logo {
-            width: 40px;
-            border-radius: 50%;
-            overflow: hidden;
+            width: 100%;
+            /* border-radius: 50%; */
+            /* overflow: hidden; */
         }
 
         .userPic {
             width: 32px;
             height: 32px;
+            border-radius: 50%;
         }
 
         .dropdown-menu {

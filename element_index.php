@@ -5,23 +5,30 @@ $pageName = "element";
 ?>
 
 <style>
-img {
-    border-radius: 60px;
-}
+    h1, h2 {
+        color: White;
+        text-align: center;
+    }
 
-h1 {
-    color: White;
-    text-align: center;
-}
+    .bg_img{
+        min-height: 100vh;
+        background-image: url(./img/123.jpg);
+        background-position: center;
+        background-size: cover;
+        
+
+    }
 </style>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
 <!-- Example single danger button -->
-<h1>行程選擇</h1>
-<div class="container">
-    <div class="row">
-        <div class="col mb-5"><a href="element.php"><img src="./img/639.png" alt=""></a></div>
-        <div class="col mb-5"><a href="https://youtu.be/072tU1tamd0"><img src="./img/638.png" alt=""></a></div>
+<div class="bg_img">
+    <div class="box_1" style="padding-top: 10px;">
+        <h1></h1>
+        <div class="row ">
+            <div class="col mb-5"><a href="element.php"><img src="./img/74635.png" alt=""></a><h2>星座之旅(Twelve Constellations)</h2></div>
+            <div class="col mb-5"><a href="https://youtu.be/072tU1tamd0"><img src="./img/28473.png" alt=""></a><h2>星球之旅(Planet)</h2></div>
+        </div>
     </div>
 </div>
 

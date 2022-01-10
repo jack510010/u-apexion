@@ -2,7 +2,11 @@
 require __DIR__ . '/__connect_db.php';
 $title = '新增會員資料';
 $pageName = 'insert';
+$country_sql = "SELECT * FROM `country`";
+$country = $pdo->query($country_sql)->fetchAll();
 
+$user_sql = "SELECT `country_sid` FROM `user`";
+$user_country = $pdo->query($user_sql)->fetchAll();
 
 
 ?>
@@ -67,7 +71,13 @@ $pageName = 'insert';
 
                         <div class="mb-3">
                             <label for="country" class="form-label">country</label>
-                            <input type="country" class="form-control" id="country" name="country">
+                            <select class="form-select" aria-label="Default select example" name="country">
+
+                            <?php foreach($country as $count){ ?>
+                                    <option selected value="<?= $count['sid'] ?>"><?= $count['name'] ?></option>
+                                    <?php } ?>
+                            <!-- <input type="country" class="form-control" id="country" name="country"> -->
+                            </select>
                             <div class="form-text"></div>
                         </div>
 

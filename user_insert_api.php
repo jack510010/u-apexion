@@ -13,7 +13,7 @@ $name = $_POST['name'] ?? '';
 $email = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
 $mobile = $_POST['mobile'] ?? '';
-
+$country_name = isset($_POST['country']) ? $_POST['country'] : '';
 // TODO: 檢查欄位資料
 if (empty($name)) {
     $output['code'] = 401;
@@ -41,7 +41,7 @@ if (empty($mobile) or !preg_match("/^09\d{2}-?\d{3}-?\d{3}$/", $mobile)) {
 }
 
 $sql =
-    "INSERT INTO `user`( `name`, `email`, `password`, `mobile`, `birthday`, `address`, `country`, `create-date`) VALUES(?, ?, ?, ?, ?, ?, ?, NOW() )";
+    "INSERT INTO `user`( `name`, `email`, `password`, `mobile`, `birthday`, `address`, `country_sid`, `create-date`) VALUES(?, ?, ?, ?, ?, ?, ?, NOW() )";
 
 $stmt = $pdo->prepare($sql);
 

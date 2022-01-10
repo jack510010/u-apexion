@@ -22,8 +22,8 @@ $pageName = "insert"; // 新增購物車項目
         <div class="col-md-12 mt-3 ">
             
                 <div class="d-flex justify-content-between">
-                    <h5 class="card-title text-white">新增購物車資料</h5>
-                    <a class="btn btn-primary " href="cart.php" role="button">返回</a>
+                    <h5 class="card-title text-warning">新增購物車資料</h5>
+                    <a class="btn btn-info " href="cart.php" role="button">返回</a>
                 </div>
         </div>
     </div>
