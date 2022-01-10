@@ -43,19 +43,19 @@ i {
 <?php require __DIR__ . "/__navbar.php"; ?>
 <ul class="nav nav-tabs">
     <li class="nav-item">
-        <a class="nav-link active" href="element.php">行程表單</a>
+        <a class="nav-link active text-warning" href="element.php">行程表單</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link " href="travel_insert.php">新增行程</a>
+        <a class="nav-link text-warning" href="travel_insert.php">新增行程</a>
     </li>
 </ul>
 <div class="container">
     <div class="row">
         <div class="col">
-            <table class="table table-dark table-striped table-bordered">
+            <table class="table table-bordered text-light">
                 <thead>
-                    <tr>
-                        <th scope="col" style="text-align: center;">刪除</th>
+                    <tr class="text-info">
+                        <th  scope="col" style="text-align: center;">刪除</th>
                         <th scope="col">行程編號</th>
                         <th scope="col">行程標題</th>
                         <th scope="col">行程介紹</th>

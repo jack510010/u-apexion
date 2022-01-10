@@ -14,10 +14,10 @@ $pageName = "travel_insert";
 <?php require __DIR__ . "/__navbar.php"; ?>
 <ul class="nav nav-tabs">
     <li class="nav-item">
-        <a class="nav-link " href="element.php">行程表單</a>
+        <a class="nav-link text-warning" href="element.php">行程表單</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" href="travel_insert.php">新增行程</a>
+        <a class="nav-link active text-warning" href="travel_insert.php">新增行程</a>
     </li>
 </ul>
 <div class="container">

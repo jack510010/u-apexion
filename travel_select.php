@@ -51,7 +51,7 @@ if (empty($row)) {
                         </div>
                         <br>
                         <div class="mb-3">
-                            <span for="introduction" class="input-group-text" style="color: red;">行程介紹填寫</span>
+                            <span for="introduction" class="input-group-text" style="color: red;">行程介紹</span>
                             <td><?= $row["introduction"] ?></td>
                         </div>
                         <br>
