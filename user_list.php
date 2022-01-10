@@ -30,8 +30,8 @@ $sql = sprintf("SELECT * FROM user ORDER BY sid DESC LIMIT %s, %s", ($page - 1) 
 
 $user = $pdo->query($sql)->fetchAll();
 
-$country_sql = "SELECT u.*, c.country_name FROM `user` u LEFT JOIN `country` c ON u.country_sid = c.sid;
-";
+$country_sql = sprintf( "SELECT u.*, c.country_name FROM `user` u LEFT JOIN `country` c ON u.country_sid = c.sid ORDER BY sid DESC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+
 $country = $pdo->query($country_sql)->fetchAll();
 
 
