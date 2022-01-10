@@ -4,7 +4,7 @@ require __DIR__ . '/ua__connect.php';
 
 if(isset($_GET['sid'])){
     $usersid = intval($_GET['sid']);
-    $pdo->query("DELETE FROM `trans_mainlist` WHERE sid='$usersid'");
+    $pdo->query("DELETE FROM `trans_mainlists` WHERE sid='$usersid'");
 }else{
     echo 'ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss';
 }

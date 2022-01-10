@@ -151,7 +151,7 @@ if (empty($row)) {
                 <button class="btn btn-outline-warning" type="submit">修改完成送出</button>
 
             </form>
-            <div class="pt-5 mx-2">
+            <div class="pt-4 mx-2">
                 <img class="img-fluid " id="product_blah" width="75" height="75">
             </div>
         </div>

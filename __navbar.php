@@ -9,7 +9,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li>
-            <a href="element_index.php" class="nav-link ">
+            <a href="element_index.php" class="nav-link <?= $pageName == 'element' ? 'active disabled' : '' ?>">
                 <svg class="bi me-2" width="25" height="25">
                     <use xlink:href="#speedometer2"></use>
                 </svg>
@@ -17,7 +17,7 @@
             </a>
         </li>
         <li>
-            <a href="ticket_insert.php" class="nav-link">
+            <a href="ticket_insert.php" class="nav-link <?= $pageName == 'ticket_insert' ? 'active disabled' : '' ?>">
                 <svg class="bi me-2" width="25" height="25">
                     <use xlink:href="#table"></use>
                 </svg>
@@ -49,7 +49,7 @@
             </a>
         </li>
         <li>
-            <a href="cart.php" class="nav-link ">
+            <a href="cart.php" class="nav-link <?= $pageName == 'cart' ? 'active disabled' : '' ?>">
                 <svg class="bi me-2" width="25" height="25">
                     <use xlinhref="#people-circle"></use>
                 </svg>
@@ -57,7 +57,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="user_login.php" class="nav-link <?= $pageName == 'list' ? 'active disabled' : '' ?>">
+            <a href="user_login.php" class="nav-link <?= $pageName == 'user_list' ? 'active disabled' : '' ?>">
                 <svg class="bi me-2" width="25" height="25">
                     <use xlink:href="#home"></use>
                 </svg>
@@ -69,7 +69,7 @@
     </ul>
     <hr>
     <div class="dropdown">
-        <a href="#" class="d-flex align-items-center  text-decoration-none " id="dropdownUser1"
+        <a href="#" class="d-flex align-items-center  text-decoration-none dropdown-toggle " id="dropdownUser1"
             data-bs-toggle="dropdown" aria-expanded="false">
             <div id="userPic"><img src="https://github.com/mdo.png" alt="" width="32" height="32"
                     class="rounded-circle me-2"></div>
@@ -77,8 +77,19 @@
                 <use xlink:href="#speedometer2"></use>
             </svg>
             <strong><?= $_SESSION['admin']['name'] ?? '會員你好' ?></strong>
-
         </a>
+        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser1">
+            <li>
+                <?php if (!isset($_SESSION['admin']['email']) && !isset($_SESSION['admin']['name'])) { ?>
+                <a class="dropdown-item" href="user_login.php">登入</a>
+                <?php } ?>
+            </li>
+            <li>
+                <?php if (isset($_SESSION['admin']['email']) && isset($_SESSION['admin']['name'])) { ?>
+                <a class="dropdown-item" href="user_logout.php">登出</a>
+                <?php } ?>
+            </li>
+        </ul>
 
 
 

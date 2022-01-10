@@ -2,7 +2,7 @@
 require __DIR__ . "/__connect_db.php";
 
 $title = "星座行程列表";
-$pageName = "element";
+
 
 
 $perPage = 3;
@@ -24,20 +24,20 @@ $rows = $pdo->query($sql)->fetchAll();
 ?>
 
 <style>
-    i {
-        font-size: 30px;
-        text-align: center;
-        padding: 35px 10px 10px 10px;
-    }
+i {
+    font-size: 30px;
+    text-align: center;
+    padding: 35px 10px 10px 10px;
+}
 
-    .fa-times-circle {
-        color: red;
-    }
+.fa-times-circle {
+    color: red;
+}
 
-    .text_e {
-        text-align: center;
-        line-height: 100px;
-    }
+.text_e {
+    text-align: center;
+    line-height: 100px;
+}
 </style>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
@@ -68,22 +68,23 @@ $rows = $pdo->query($sql)->fetchAll();
 
                 <tbody>
                     <?php foreach ($rows as $r) : ?>
-                        <tr>
-                            <td>
-                                <a href="travel_delete.php?sid=<?= $r["sid"] ?>" onclick="return confirm('確定要刪除嗎?')"><i class="fas fa-times-circle"></i></a>
-                            </td>
-                            <td class="text_e"><?= $r["sid"] ?></td>
-                            <td class="text_e"><?= $r["name"] ?></td>
-                            <td><?= $r["introduction"] ?></td>
-                            <td><?= $r["attention"] ?></td>
-                            <td class="text_e" style="font-size:30px;"><?= $r["price"] ?></td>
-                            <td>
-                                <a href="travel_select.php?sid=<?= $r["sid"] ?>"><i class="far fa-hand-pointer"></i></a>
-                            </td>
-                            <td>
-                                <a href="travel_edit.php?sid=<?= $r["sid"] ?>"><i class="fas fa-pen-nib"></i></a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            <a href="travel_delete.php?sid=<?= $r["sid"] ?>" onclick="return confirm('確定要刪除嗎?')"><i
+                                    class="fas fa-times-circle"></i></a>
+                        </td>
+                        <td class="text_e"><?= $r["sid"] ?></td>
+                        <td class="text_e"><?= $r["name"] ?></td>
+                        <td><?= $r["introduction"] ?></td>
+                        <td><?= $r["attention"] ?></td>
+                        <td class="text_e" style="font-size:30px;"><?= $r["price"] ?></td>
+                        <td>
+                            <a href="travel_select.php?sid=<?= $r["sid"] ?>"><i class="far fa-hand-pointer"></i></a>
+                        </td>
+                        <td>
+                            <a href="travel_edit.php?sid=<?= $r["sid"] ?>"><i class="fas fa-pen-nib"></i></a>
+                        </td>
+                    </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -97,9 +98,9 @@ $rows = $pdo->query($sql)->fetchAll();
                     </li>
 
                     <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                        </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                    </li>
                     <?php endfor; ?>
 
                     <li class="page-item">

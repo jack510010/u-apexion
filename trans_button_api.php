@@ -7,14 +7,14 @@ $output = [
     'success' => false,
     'error' => '',
 ];
-// $usersid = isset($_POST['sid']) ? intval($_POST['sid']) : 1;
+
+$user_sid = isset($_POST['user_sid']) ? $_POST['user_sid'] : '';
 $destination_address = isset($_POST['destination_add']) ? $_POST['destination_add'] : '';
 $transportation_kind = isset($_POST['transport']) ? $_POST['transport'] : '';
 $boarding_locat = isset($_POST['board']) ? $_POST['board'] : '';
 $date = isset($_POST['date']) ? $_POST['date'] : '';
 $seats = isset($_POST['seat']) ? $_POST['seat'] : '';
 
-// $memberPass = isset($_FILES['memberPass'])? implode(",",$_FILES['memberPass']['name']) : '';
 
 
 if (empty($date)) {
@@ -39,9 +39,7 @@ if (empty($transportation_kind)) {
 }
 
 
-// $transql = "UPDATE `trans_mainlist` SET `transportation_way`='bus' WHERE `sid` = 2";
-// $pdo->query($transql);
-$transql = "UPDATE `trans_mainlists` SET  `boarding_location_main`=?, `seat_main`=?, `transportation_way`=?, `destination_address_main`=?, `schedule`=? WHERE sid=2";
+$transql = "UPDATE `trans_mainlists` SET  `boarding_location_main`=?, `seat_main`=?, `transportation_way`=?, `destination_address_main`=?, `schedule`=? WHERE sid=?";
 
 
 $stmt = $pdo->prepare($transql); //prepare() 準備執行
@@ -52,7 +50,8 @@ $stmt->execute([
     $seats,
     $transportation_kind,
     $destination_address,
-    $date
+    $date,
+    $user_sid
 ]); 
 
 

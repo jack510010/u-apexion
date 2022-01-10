@@ -88,12 +88,13 @@ else {
 
 $ticketSql = sprintf("INSERT INTO `ticket` (`sid`,`flight_time`, `trip_sid`, `seat_sid`, `member_count`,`created_at`) VALUES ('%s','%s', '%s', '%s', '%s', NOW())",$ticketsid,$flightTime,$trip,$seatLevel,$memberNumber);
 
-$stmt = $pdo->query($ticketSql)->fetch();
+$stmt = $pdo->query($ticketSql);
+// TODO::$stmtRead = $stmt->fetchAll(); 加了fetch()壞了?
 $ticketid = $pdo->lastInsertId();
 
 // echo $ticketid;
 
-$memberSql = "INSERT INTO `member`(`ticket_sid`,`name`, `passport`) VALUES ('$ticketid','$member','$memberPassName')";
+$memberSql = "INSERT INTO `member`(`ticket_sid`, `member_name`, `passport`) VALUES ('$ticketid','$member','$memberPassName')";
 // $memberSql = "INSERT INTO `member`(`ticket_sid`,`name`, `passport`) VALUES ('$ticketid','$member','$memberPass')";
 
 $pdo->query($memberSql);

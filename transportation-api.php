@@ -9,10 +9,15 @@ $output = [
 ];
 // $usersid = isset($_POST['sid']) ? intval($_POST['sid']) : 1;
 $destination_address = isset($_POST['destination_add']) ? $_POST['destination_add'] : '';
+
 $transportation_kind = isset($_POST['transport']) ? $_POST['transport'] : '';
+
 $boarding_locat = isset($_POST['board']) ? $_POST['board'] : '';
+
 $date = isset($_POST['date']) ? $_POST['date'] : '';
+
 $seats = isset($_POST['seat']) ? $_POST['seat'] : '';
+
 
 // $memberPass = isset($_FILES['memberPass'])? implode(",",$_FILES['memberPass']['name']) : '';
 
@@ -39,11 +44,12 @@ if(empty($transportation_kind)){
 }
 
 
-$transql = sprintf("INSERT INTO `trans_mainlist` ( `boarding_location_main`, `seat_main`, `transportation_way`,`destination_address_main`,`schedule`) VALUES (?,?,?,?,?)");
+$transql = sprintf("INSERT INTO `trans_mainlists` ( `boarding_location_main`, `seat_main`, `transportation_way`,`destination_address_main`,`schedule`) VALUES (?,?,?,?,?)");
+
+//$transql = sprintf("INSERT INTO `trans_mainlists` ( `boarding_location_main`) VALUES ('TTB')");
 
 
 $stmt = $pdo->prepare($transql);//prepare() 準備執行
-
 
 $stmt->execute([
     $boarding_locat,
@@ -52,7 +58,9 @@ $stmt->execute([
     $destination_address,
     $date
 ]);
-$output['success'] = $stmt->rowCount() ==1;
+$output['success'] = $stmt->rowCount() == 1;
+//$output['success'] = true;
+// echo $output;
 echo json_encode($output);
 
 ?>
