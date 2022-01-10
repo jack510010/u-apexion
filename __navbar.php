@@ -1,4 +1,4 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" id="navbar" style="width: 20%;height: 100vh">
+<div class="nav-bg d-flex flex-column flex-shrink-0 p-3" id="navbar" style="width: 20%;height: 100vh">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto  text-decoration-none">
         <div class="logo"><img src="./img/logo.png" alt=""></div>
         <svg class="bi me-2" width="5" height="5">
@@ -41,7 +41,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link ">
+            <a href="forum-list copy.php" class="nav-link <?= $pageName == 'forum' ? 'active disabled' : '' ?>">
                 <svg class="bi me-2" width="25" height="25">
                     <use xlink:href="#people-circle"></use>
                 </svg>
@@ -69,7 +69,7 @@
     </ul>
     <hr>
     <div class="dropdown">
-        <a href="#" class="d-flex align-items-center  text-decoration-none " id="dropdownUser1"
+        <a href="#" class="d-flex align-items-center  text-decoration-none dropdown-toggle " id="dropdownUser1"
             data-bs-toggle="dropdown" aria-expanded="false">
             <div id="userPic"><img src="https://github.com/mdo.png" alt="" width="32" height="32"
                     class="rounded-circle me-2"></div>
@@ -77,8 +77,19 @@
                 <use xlink:href="#speedometer2"></use>
             </svg>
             <strong><?= $_SESSION['admin']['name'] ?? '會員你好' ?></strong>
-
         </a>
+        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser1">
+            <li>
+                <?php if (!isset($_SESSION['admin']['email']) && !isset($_SESSION['admin']['name'])) { ?>
+                <a class="dropdown-item" href="user_login.php">登入</a>
+                <?php } ?>
+            </li>
+            <li>
+                <?php if (isset($_SESSION['admin']['email']) && isset($_SESSION['admin']['name'])) { ?>
+                <a class="dropdown-item" href="user_logout.php">登出</a>
+                <?php } ?>
+            </li>
+        </ul>
 
 
 

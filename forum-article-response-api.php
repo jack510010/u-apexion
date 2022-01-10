@@ -7,11 +7,11 @@ $output = [
     'error' => '',
 ];
 
-// if(!isset($_SESSION['admin'])){
-//     $output['error'] = '請登入管理帳號';
-//     echo json_encode($output, JSON_UNESCAPED_UNICODE);
-//     exit;
-// }
+if(!isset($_SESSION['admin'])){
+    $output['error'] = '請登入管理帳號';
+    echo json_encode($output, JSON_UNESCAPED_UNICODE);
+    exit;
+}
 
 $response = $_POST['response'] ?? '';
 
@@ -30,7 +30,7 @@ $sql = "INSERT INTO `forum_response`(
 $stmt = $pdo->prepare($sql);
 
 $stmt->execute([
-    2,
+    $_SESSION['admin']['sid'],
     // 待設定變數
     2,
     // 待設定變數

@@ -18,8 +18,13 @@ if($page>$totalPages){
     exit;
 } 
 
+// 抓會員
+$sql3 = sprintf("SELECT * FROM user WHERE `sid` = %s" , $_SESSION['admin']['sid']);
 
-$sql = sprintf("SELECT * FROM forum_response LEFT JOIN forum_user ON forum_response.user_sid=forum_user.sid WHERE res_art_sid=2 ORDER BY forum_response.sid DESC LIMIT %s, %s", ($page-1)*$perPage, $perPage);
+$row3= $pdo->query($sql3)->fetch();
+
+
+$sql = sprintf("SELECT * FROM forum_response LEFT JOIN user ON forum_response.user_sid=user.sid WHERE res_art_sid=13 ORDER BY forum_response.sid DESC LIMIT %s, %s", ($page-1)*$perPage, $perPage);
 
 $rows = $pdo->query($sql)->fetchAll();
 
@@ -27,6 +32,8 @@ $sql2 = sprintf("SELECT * FROM forum_article LEFT JOIN forum_category ON forum_c
 // 變數目前先寫死
 
 $row2=$pdo->query($sql2)->fetch();
+
+
 
 
 
@@ -284,8 +291,8 @@ date_default_timezone_set('Asia/Taipei');
                             <div class="user-img">
                                 <i class="fas fa-user"></i>
                             </div>
-                            <div class="user-resopnse-space">
-                                <div class="user-title">Amanda Chiu</div>
+                            <div class="user-resopnse-space">  
+                                <div class="user-title"><?= $r['name'] ?></div>
                                 <div class="response-words"><?= $r['res_content'] ?></div>
                                 <div class="response-time"><?= $r['res_time'] ?></div>
                             </div>
