@@ -71,8 +71,13 @@
     <div class="dropdown">
         <a href="#" class="d-flex align-items-center  text-decoration-none dropdown-toggle " id="dropdownUser1"
             data-bs-toggle="dropdown" aria-expanded="false">
+            <?php if(isset($_SESSION['admin'])){ ?>
             <div id="userPic" style="width: 50px"><img src="./img/userpic.png" alt=""  height=""
                     class=" me-2"></i></div>
+                <?php }else {?>
+                    <div id="userPic" style="width: 50px"><img src="" alt=""  height=""
+                    class=" me-2"><i class="fas fa-user"></i></div>
+                    <?php } ?>
             <svg class="bi me-2" width="5" height="5">
                 <use xlink:href="#speedometer2"></use>
             </svg>
