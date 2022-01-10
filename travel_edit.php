@@ -16,10 +16,16 @@ if (empty($row)) {
 ?>
 
 <style>
-    .row {
-        display: flex;
+    .te {
         justify-content: center;
         align-items: center;
+    }
+
+    .bg_img4 {
+        min-height: 100vh;
+        background-image: url(./img/0302.jpg);
+        background-position: center;
+        background-size: cover;
     }
 </style>
 
@@ -30,8 +36,8 @@ if (empty($row)) {
         <a class="nav-link active" href="element.php">回行程表單</a>
     </li>
 </ul>
-<div class="container">
-    <div class="row">
+<div class="bg_img4">
+    <div class="te d-flex">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
