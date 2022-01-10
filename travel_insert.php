@@ -4,8 +4,7 @@ $pageName = "travel_insert";
 ?>
 
 <style>
-    .d-flex {
-        display: flex;
+    .ti {
         justify-content: center;
         align-items: center;
     }
@@ -28,7 +27,7 @@ $pageName = "travel_insert";
         </li>
     </ul>
 <div class="bg_img3">
-    <div class="d-flex">
+    <div class="ti d-flex">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
