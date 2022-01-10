@@ -136,10 +136,10 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
                         <!--不知道foreach哪來的去看這個檔案『4foreach-0有問題要問老師.php』-->
                         <tr>
                             <!--這一坨就是後端生畫面-->
-                            <td>
+                            <td >
                                 <!-- 裡面這是第一種刪除方法。比較直觀簡單。因為我們要告訴他要刪除哪一筆，所以加上?sid=<?= $r["sid"] ?>，看a標籤 -->
                                 <a href="cart-delete.php?sid=<?= $r["sid"] ?>" onclick="return confirm('確定要刪除這筆資料嗎？')">
-                                    <i class="fas fa-trash-alt"></i>
+                                    <i class="fas fa-trash-alt text-white"></i>
                                 </a>
                             </td>
                             <td><?= $r["sid"] ?></td>
@@ -151,7 +151,7 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
                             <td>
                                 <a href="cart-edit.php?sid=<?= $r["sid"] ?>">
                                     <!--因為我們要告訴他要修改哪一筆，所以加上?sid= 『$r["sid"]』，看a標籤 -->
-                                    <i class="fas fa-edit"></i>
+                                    <i class="fas fa-edit text-white"></i>
                                 </a>
                             </td>
 
