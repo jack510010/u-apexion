@@ -16,7 +16,7 @@ $rows = $pdo->query($joinData)->fetchAll();
 <!-- <form class="ticket-form mt-3" name="ticketForm"> -->
 <div class="all-wrap">
 <div class="myticket-wrap"> 
-<h2 class="my-3 text-white">我的訂票資訊</h2>
+<h2 class="my-3 text-white">訂票資訊一覽</h2>
 <?php foreach($rows as $r):
   $membergroup = explode(",",$r['member_name']);
   $memberPassgroup = explode(",",$r['passport']) ?>
@@ -33,7 +33,7 @@ $rows = $pdo->query($joinData)->fetchAll();
       <li class="">Name&emsp;<?= $membergroup[$i] ?></li>
       <li class="">Date&emsp;<?= $r['flight_time'] ?></li>
       <li class="">Seat lvl&emsp;<?= $r['level'] ?></li>
-      <li class="">Destination&emsp;<?= $r['name'] ?></li>
+      <li class="">Trip&emsp;<?= $r['name'] ?></li>
       <li class=" barcode"><img src="./img/barcode.png" alt=""></li>
   </ul>
   </div>
