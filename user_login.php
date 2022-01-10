@@ -61,7 +61,7 @@ if( isset($_GET['pagefrom']) ){
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-lg-6">
             <div class="card">
-                <?= $_SESSION['page_from'] ?>
+            <!-- /* $_SESSION['page_from']  */ -->
                 <div class="card-body">
                     <h5 class="card-title">Login</h5>
                     <form name="form1" onsubmit="doLogin(); return false;">
