@@ -69,7 +69,7 @@
     </ul>
     <hr>
     <div class="dropdown">
-        <a href="#" class="d-flex align-items-center  text-decoration-none " id="dropdownUser1"
+        <a href="#" class="d-flex align-items-center  text-decoration-none dropdown-toggle " id="dropdownUser1"
             data-bs-toggle="dropdown" aria-expanded="false">
             <div id="userPic"><img src="https://github.com/mdo.png" alt="" width="32" height="32"
                     class="rounded-circle me-2"></div>
@@ -77,8 +77,19 @@
                 <use xlink:href="#speedometer2"></use>
             </svg>
             <strong><?= $_SESSION['admin']['name'] ?? '會員你好' ?></strong>
-
         </a>
+        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser1">
+            <li>
+                <?php if (!isset($_SESSION['admin']['email']) && !isset($_SESSION['admin']['name'])) { ?>
+                <a class="dropdown-item" href="user_login.php">登入</a>
+                <?php } ?>
+            </li>
+            <li>
+                <?php if (isset($_SESSION['admin']['email']) && isset($_SESSION['admin']['name'])) { ?>
+                <a class="dropdown-item" href="user_logout.php">登出</a>
+                <?php } ?>
+            </li>
+        </ul>
 
 
 
