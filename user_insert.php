@@ -2,6 +2,8 @@
 require __DIR__ . '/__connect_db.php';
 $title = '新增會員資料';
 $pageName = 'insert';
+
+
 $country_sql = "SELECT * FROM `country`";
 $country = $pdo->query($country_sql)->fetchAll();
 
@@ -74,7 +76,7 @@ $user_country = $pdo->query($user_sql)->fetchAll();
                             <select class="form-select" aria-label="Default select example" name="country">
 
                             <?php foreach($country as $count){ ?>
-                                    <option selected value="<?= $count['sid'] ?>"><?= $count['name'] ?></option>
+                                    <option selected value="<?= $count['sid'] ?>"><?= $count['country_name'] ?></option>
                                     <?php } ?>
                             <!-- <input type="country" class="form-control" id="country" name="country"> -->
                             </select>

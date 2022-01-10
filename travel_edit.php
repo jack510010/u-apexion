@@ -16,8 +16,7 @@ if (empty($row)) {
 ?>
 
 <style>
-    .d-flex {
-        display: flex;
+    .te {
         justify-content: center;
         align-items: center;
     }
@@ -38,7 +37,7 @@ if (empty($row)) {
     </li>
 </ul>
 <div class="bg_img4">
-    <div class="d-flex">
+    <div class="te d-flex">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">

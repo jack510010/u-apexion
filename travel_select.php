@@ -13,37 +13,38 @@ if (empty($row)) {
     header('Location:element.php');
     exit;
 }
-
-
-
-
-
 ?>
 
 
 
-
 <style>
-    .row {
-        display: flex;
+    .ts {
         justify-content: center;
         align-items: center;
     }
-    .next{
+
+    .next {
         margin-top: 10px;
+    }
+
+    .bg_img5 {
+        min-height: 100vh;
+        background-image: url(./img/640.png);
+        background-position: center;
+        background-size: cover;
     }
 </style>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
-<div class="container">
-    <div class="row">
+<div class="bg_img5">
+    <div class="ts d-flex">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
                     <h1 class="card-title">行程清單:</h1>
                     <br>
                     <form name="form1" onsubmit="sendData();return false;">
-                    <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
+                        <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
                         <div class="mb-3">
                             <label for="name" class="input-group-text" style="color: red;">行程名稱</label>
                             <td><br><?= $row["name"] ?></td>

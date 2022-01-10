@@ -7,9 +7,19 @@ if (!isset($_GET['sid'])) {
     exit;
 }
 
+// $country_sql = "SELECT u.*, c.country_name FROM `user` u LEFT JOIN `country` c ON u.country_sid = c.sid;
+// ";
+// $country = $pdo->query($country_sql)->fetchAll();
 
+// SELECT s.*, t.country_name FROM `user` s LEFT JOIN `country` t ON t.sid = s.sid WHERE s.sid=$sid;
+
+$country_sql = "SELECT * FROM `country`";
+$country = $pdo->query($country_sql)->fetchAll();
+
+$user_sql = "SELECT `country_sid` FROM `user`";
+$user_country = $pdo->query($user_sql)->fetchAll();
 $sid = intval($_GET['sid']);
-$user = $pdo->query("SELECT * FROM `user` WHERE sid=$sid")->fetch();
+$user = $pdo->query("SELECT s.*, t.country_name FROM `user` s LEFT JOIN `country` t ON t.sid = s.sid WHERE s.sid=$sid")->fetch();
 if (empty($user)) {
     header('Location: user_list.php');
     exit;
@@ -84,10 +94,14 @@ if (empty($user)) {
                         </div>
 
                         <div class="mb-3">
-                            <label for="country" class="form-label">country</label>
-                            <input type="country" class="form-control" id="country" name="country"
-                                value="<?= $user['country'] ?>">
-                            <div class="form-text"></div>
+                        <label for="country" class="form-label">country</label>
+                            <select class="form-select" aria-label="Default select example" name="country">
+
+                            <?php foreach($country as $count){ ?>
+                                    <option selected value="<?= $count['sid'] ?>"><?= $count['country_name'] ?></option>
+                                    <?php } ?>
+                            <!-- <input type="country" class="form-control" id="country" name="country"> -->
+                            </select>
                         </div>
 
                         <button type="submit" class="btn btn-primary">修改</button>
