@@ -126,7 +126,7 @@ if ($page > $totalPages) {
               </a>
             </td>
             <td>
-              <a href="product_delete.php?sid=<?= $p['sid'] ?>" onclick="return conform('確定要刪除這筆資料嗎')">
+              <a href="javascript: delete_it(<?= $p['sid'] ?>)">
                 <i class="fas fa-trash-alt"></i>
               </a>
             </td>
@@ -165,4 +165,11 @@ if ($page > $totalPages) {
 </div>
 
 <?php require __DIR__ . "/__scripts.php"; ?>
+<script>
+    function delete_it(sid){
+        if(confirm(`確定要刪除編 ${sid} 的資料嗎?`)){
+            location.href = `product_delete.php?sid=${sid}`;
+        }
+    }
+</script>
 <?php require __DIR__ . "/__html_foot.php"; ?>
