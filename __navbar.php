@@ -13,7 +13,7 @@
                 <svg class="bi me-2" width="25" height="25">
                     <use xlink:href="#speedometer2"></use>
                 </svg>
-                行程介紹
+                行程
             </a>
         </li>
         <li>
