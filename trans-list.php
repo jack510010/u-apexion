@@ -2,7 +2,7 @@
 <?php
 $title = 'Transportation';
 
-$perPage = 5;
+$perPage = 6;
 
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 if ($page < 1) {
@@ -22,18 +22,16 @@ if ($page > $totalPages) {
 }
 
 
-$sql = sprintf("SELECT t.*, s.name FROM `trans_mainlists` t LEFT JOIN `user` s ON t.user_sid = s.sid ORDER BY t.sid DESC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+$sql = sprintf("SELECT t.*, s.name FROM `trans_mainlists` t LEFT JOIN `user` s ON t.user_sid = s.sid ORDER BY t.sid ASC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
 
 $rows = $pdo->query($sql)->fetchAll();
 
 
-// $main_list_sql = "SELECT t.*, s.name FROM `trans_mainlists` t LEFT JOIN `user` s ON t.user_sid = s.sid";
-// $main_list = $pdo->query($main_list_sql)->fetchAll();
+
 
 ?>
 <?php require __DIR__ . "/__html_head.php"; ?>
-<!-- <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-<link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" /> -->
+
 <style>
     .transports {
         width: 70%;
@@ -65,6 +63,13 @@ $rows = $pdo->query($sql)->fetchAll();
         border: 2px solid rgb(67, 195, 255);
         border-radius: 50px;
         box-shadow: 7px 5px 15px rgb(67, 195, 255, .4), -7px -3px 15px rgba(67, 255, 214, 0.3);
+        color: lightcyan;
+    }
+
+    .trstyle {
+        text-align: center ;
+        color:rgb(164, 255, 243);
+        font-size: 20px;
     }
 
     .btn {
@@ -78,10 +83,60 @@ $rows = $pdo->query($sql)->fetchAll();
 <?php require __DIR__ . "/__navbar.php"; ?>
 <section class="transports">
     <div class="container">
+
+
+
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                        <tr class="trstyle">
+                            <th scope="col" style="color:rgb(164, 255, 243); font-size:20px; text-align:center"><i class="fas fa-trash-alt"></i></th>
+                            <th scope="col">#</th>
+                            <th scope="col" style="color:rgb(164, 255, 243); font-size:20px; text-align:center">Name</th>
+                            <th scope="col">Destination Address</th>
+                            <th scope="col">Transportation</th>
+                            <th scope="col">Schedule</th>
+                            <th scope="col">Boarding Location</th>
+                            <th scope="col">Seat / Room</th>
+                            <th scope="col"><i class="fas fa-edit"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($rows as $r) : ?>
+                            <tr>
+
+                                <td>
+
+                                    <a href="javascript: delete_it(<?= $r['sid'] ?>)">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                                <td><?= $r['sid'] ?></td>
+                                <td style="color:rgb(164, 255, 243) ; font-size:20px; text-align:center"><?= htmlentities($r['name']) ?></td>
+                                <td><?= htmlentities($r['destination_address_main']) ?></td>
+                                <td style=" font-size:15px; text-align:center "><?= $r['transportation_way'] ?></td>
+                                <td><?= $r['schedule'] ?></td>
+                                <td><?= $r['boarding_location_main'] ?></td>
+                                <td><?= $r['seat_main'] ?></td>
+
+                                <td>
+                                    <a href="transportation.php?sid=<?= $r['sid'] ?>">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach;  ?>
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
         <div class="row">
             <div class="col">
                 <nav aria-label="Page navigation example">
-                    <ul class="pagination">
+                    <ul class="pagination pagination-sm justify-content-center">
                         <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>"><a class="page-link" href="?page=<?= $page - 1 ?>">
                                 <i class="fas fa-arrow-circle-left"></i>
                             </a></li>
@@ -98,56 +153,6 @@ $rows = $pdo->query($sql)->fetchAll();
                             </a></li>
                     </ul>
                 </nav>
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col">
-                <table class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            
-                            <th scope="col"><i class="fas fa-trash-alt"></i></th>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Destination Address</th>
-                            <th scope="col">Transportation</th>
-                            <th scope="col">Schedule</th>
-                            <th scope="col">Boarding Location</th>
-                            <th scope="col">Seat / Room</th>
-                            <th scope="col"><i class="fas fa-edit"></i></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($rows as $r) : ?>
-                            <tr>
-                               
-                                <td>
-                                    
-                                    <a href="javascript: delete_it(<?= $r['sid'] ?>)">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
-                                </td>
-                                <td><?= $r['sid'] ?></td>
-                                <td><?= htmlentities($r['name']) ?></td>
-                                <td><?= htmlentities($r['destination_address_main']) ?></td>
-                                <td><?= $r['transportation_way'] ?></td>
-                                <td><?= $r['schedule'] ?></td>
-                                <td><?= $r['boarding_location_main'] ?></td>
-                                <td><?= $r['seat_main'] ?></td>
-
-                                <td>
-                                    <a href="transportation.php?sid=<?= $r['sid'] ?>">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        <?php endforeach;  ?>
-
-                    </tbody>
-
-                </table>
             </div>
         </div>
     </div>

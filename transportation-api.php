@@ -1,5 +1,5 @@
 <?php
-require __DIR__. "/ua__connect.php";
+require __DIR__. "/__connect_db.php";
 
 header('Content-Type: application/json', 'Accept: application/json');
 
@@ -14,7 +14,7 @@ $transportation_kind = isset($_POST['transport']) ? $_POST['transport'] : '';
 
 $boarding_locat = isset($_POST['board']) ? $_POST['board'] : '';
 
-$date = isset($_POST['date']) ? $_POST['date'] : '';
+$date = isset($_POST['myDate']) ? $_POST['myDate'] : '';
 
 $seats = isset($_POST['seat']) ? $_POST['seat'] : '';
 
@@ -24,7 +24,7 @@ $seats = isset($_POST['seat']) ? $_POST['seat'] : '';
 
 if(empty($date)){
     $output['success']=false;
-    $output['error']='Please Select The Date';
+    $output['error']=$date;
     echo json_encode($output);
     exit;
 }
@@ -59,6 +59,14 @@ $stmt->execute([
     $date
 ]);
 $output['success'] = $stmt->rowCount() == 1;
+
+$output['sql'] = $transql;
+
+$output['var'] = [$boarding_locat,
+$seats,
+$transportation_kind,
+$destination_address,
+$date];
 //$output['success'] = true;
 // echo $output;
 echo json_encode($output);
