@@ -138,7 +138,7 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
     </div>
     <div class="row">
         <div class="col">
-            <table class="table  text-white">
+            <table class="table animate__animated animate__fadeIn text-white">
                 <thead>
                     <tr class="text-info">
 

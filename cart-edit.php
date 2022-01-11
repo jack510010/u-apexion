@@ -27,9 +27,23 @@ if (empty($row)) {                        // 如果$row是空的，就讓你回�
 }
 ?>
 <?php include __DIR__ . "/__html_head.php" ?>
+<style>
+    .container-wrap {
+        z-index: -2;
+    }
 
+    #navbar {
+        z-index: 1;
+    }
+    .modal-backdrop{
+        z-index: -3;
+    }
+</style>
 <?php include __DIR__ . "/__navbar.php" ?>
-
+<video class="vdo" playsinline="" loop="loop" autoplay="autoplay" style=" width: 120%; height: 120%; position: fixed;left:-8%;filter:brightness(.9);z-index:-1;">
+    <source src="https://assets.mixkit.co/videos/preview/mixkit-stars-in-the-sky-rotating-10011-large.mp4" type="video/mp4">
+</video>
+<div class="second" style="object-fit:cover; z-index:1;">
     <div class="container">
         <div class="rol">
             <div class="col-md-12">
@@ -40,7 +54,7 @@ if (empty($row)) {                        // 如果$row是空的，就讓你回�
                     </div>
                 </div>
                 <div class="card-body col-md-6">
-                    <form name="form1" onsubmit="sendData();return false;">
+                    <form name="form1" class="animate__animated animate__heartBeat" onsubmit="sendData();return false;">
                         <!--onsubmit 事件會在表單中的確認按鈕被點選時發生。-->
                         <!--不要讓表單用傳統的方式送出，就是指『method="post"』-->
                         <input type="hidden" name="sid" value="<?= $row["sid"] ?>">
@@ -71,6 +85,7 @@ if (empty($row)) {                        // 如果$row是空的，就讓你回�
             </div>
         </div>
     </div>
+</div>
     <!--這條線以下只是在設定bootstrap modal而已，跟要學的php東西無關，就是讓網頁好看這樣子。-->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
