@@ -18,7 +18,7 @@ if($page>$totalPages){
     exit;
 } 
 
-// 抓會員
+//抓會員
 $sql3 = sprintf("SELECT * FROM user WHERE `sid` = %s" , $_SESSION['admin']['sid']);
 
 $row3= $pdo->query($sql3)->fetch();

@@ -2,13 +2,13 @@
 $title = '周邊商品';
 $pageName = 'product';
 
-if(!isset($_SESSION['admin'])){
-    $path=explode("?","$_SERVER[REQUEST_URI]");
-    $filename=basename($path[0]);
-    $_SESSION['page_from'] = $filename;
-    
-    header('Location: user_list.php');
-    exit;
+if (!isset($_SESSION['admin'])) {
+  $path = explode("?", "$_SERVER[REQUEST_URI]");
+  $filename = basename($path[0]);
+  $_SESSION['page_from'] = $filename;
+
+  header('Location: user_list.php');
+  exit;
 }
 
 //幾筆資料一頁
@@ -56,7 +56,7 @@ if ($page > $totalPages) {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-light" href="product.php?category=1" id="womanProduct" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle text-light" href="#" id="womanProduct" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               女生
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -117,7 +117,7 @@ if ($page > $totalPages) {
             <td><?= $p['sid'] ?></td>
             <td><?= $p['category'] ?></td>
             <td><?= $p['product_name'] ?></td>
-            <td  width="120px" height="120px"><img class="img-fluid " src="./img/product_img/<?= $p['img'] ?>"></td>
+            <td width="120px" height="120px"><img class="img-fluid " src="./img/product_img/<?= $p['img'] ?>"></td>
             <td><?= $p['size'] ?></td>
             <td><?= $p['style'] ?></td>
             <td><?= $p['quantity'] ?></td>
@@ -169,12 +169,10 @@ if ($page > $totalPages) {
 
 <?php require __DIR__ . "/__scripts.php"; ?>
 <script>
-    function delete_it(sid){
-        if(confirm(`確定要刪除編 ${sid} 的資料嗎?`)){
-            location.href = `product_delete.php?sid=${sid}`;
-        }
+  function delete_it(sid) {
+    if (confirm(`確定要刪除編 ${sid} 的資料嗎?`)) {
+      location.href = `product_delete.php?sid=${sid}`;
     }
- 
-    
+  }
 </script>
 <?php require __DIR__ . "/__html_foot.php"; ?>
