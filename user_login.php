@@ -16,20 +16,20 @@ if( isset($_GET['pagefrom']) ){
 <?php require __DIR__ . "/__navbar.php"; ?>
 
 <style>
-    .container{
-        /* border:1px solid red; */
-        /* height:500px; */
-        /* align-items:center; */
-    }
-    /* .center-container{
+/* .container{ */
+/* border:1px solid red; */
+/* height:500px; */
+/* align-items:center; */
+/* } */
+/* .center-container{
         display:flex;
         justify-content:center; */
-        /* margin-top:; */
-    /* } */
+/* margin-top:; */
+/* } */
 
-    .row{
-        margin-top:50px;
-    }
+.row {
+    margin-top: 50px;
+}
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light pt-3 shadow ">

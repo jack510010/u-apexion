@@ -26,7 +26,7 @@ $pageName = 'ticket_insert';
 <div class="all-wrap">
 <form class="ticket-form mt-3" name="ticketForm">
   <h2 class="mb-3">新增訂票資訊</h2>
-  <div class="mb-3">
+  <div class="mb-3 wow fadeInDown">
     <div class="d-flex align-items-center ticket-wrap">
     <label for="exampleInputEmail1" class=" align-self-stretch d-flex align-items-center justify-content-center">啟航日程</label>
     <select required id="flightTime" class="ticket-form-select form-select form-control flex-fill" aria-label="Default select example" name="flightTime">
@@ -39,7 +39,7 @@ $pageName = 'ticket_insert';
     </div>
     <div class="ticket-incorrect"></div>
   </div>
-  <div class="mb-3">
+  <div class="mb-3 wow fadeInDown" data-wow-delay=".5s">
     <div class="d-flex align-items-center ticket-wrap">
     <label for="exampleInputEmail1" class="form-label  d-flex align-items-center justify-content-center align-self-stretch">旅遊行程</label>
     <select id="trip" class="ticket-form-select form-select form-control flex-fill" aria-label="Default select example" name="trip" required>
@@ -51,7 +51,7 @@ $pageName = 'ticket_insert';
     </div>
     <div class="ticket-incorrect"></div>
   </div>
-  <div class="mb-3">
+  <div class="mb-3 wow fadeInDown" data-wow-delay="1s">
     <div class="d-flex align-items-center ticket-wrap">
     <label for="exampleInputEmail1" class="form-label  d-flex align-items-center justify-content-center align-self-stretch">艙等</label>
     <select required id="seatlvl" class="ticket-form-select form-select form-control flex-fill" aria-label="Default select example" name="seatLevel">
@@ -63,7 +63,7 @@ $pageName = 'ticket_insert';
     </div>
     <div class="ticket-incorrect"></div>
   </div>
-  <div class="mb-3">
+  <div class="mb-3 wow fadeInDown" data-wow-delay="1.5s">
     <div class="d-flex align-items-center ticket-wrap">
     <label for="exampleInputEmail1" class="form-label  d-flex align-items-center justify-content-center align-self-stretch flex-grow-1">人數</label>
     <input type="number" maxlength="2" class="form-control" id="members" placeholder="請輸入人數(上限10人)" name="memberNumber" required>
@@ -183,7 +183,7 @@ $pageName = 'ticket_insert';
     const memberInput = `<div class="mb-3">
     <div class="d-flex align-items-center ticket-wrap">
     <label for="membername" class="memberName form-label  d-flex align-items-center justify-content-center align-self-stretch">成員姓名</label>
-    <input type="text" class="memberNowName form-control flex-fill" id="membername" aria-describedby="emailHelp" name="member[]" placeholder="請輸入護照英文名字">
+    <input type="text" class="memberNowName form-control flex-fill text-white" id="membername" aria-describedby="emailHelp" name="member[]" placeholder="請輸入護照英文名字">
     </div>
     <div class="ticket-incorrect"></div>
   </div><div class="mb-3">

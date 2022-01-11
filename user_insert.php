@@ -16,10 +16,10 @@ $user_country = $pdo->query($user_sql)->fetchAll();
 <?php require __DIR__ . "/__navbar.php"; ?>
 
 <style>
-    .row{
-        margin-top:50px;
-        margin-bottom:50px;
-    }
+.row {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light pt-3 shadow ">
@@ -55,7 +55,7 @@ $user_country = $pdo->query($user_sql)->fetchAll();
                         </div>
                         <div class="mb-3">
                             <label for="mobile" class="form-label">mobile</label>
-                            <input type="mobile" class="form-control" id="mobile" name="mobile"
+                            <input type="text" class="form-control" id="mobile" name="mobile"
                                 data-pattern="09\d{2}-?\d{3}-?\d{3}">
                             <div class="form-text"></div>
                         </div>
@@ -75,10 +75,10 @@ $user_country = $pdo->query($user_sql)->fetchAll();
                             <label for="country" class="form-label">country</label>
                             <select class="form-select" aria-label="Default select example" name="country">
 
-                            <?php foreach($country as $count){ ?>
-                                    <option selected value="<?= $count['sid'] ?>"><?= $count['country_name'] ?></option>
-                                    <?php } ?>
-                            <!-- <input type="country" class="form-control" id="country" name="country"> -->
+                                <?php foreach ($country as $count) { ?>
+                                <option selected value="<?= $count['sid'] ?>"><?= $count['country_name'] ?></option>
+                                <?php } ?>
+                                <!-- <input type="country" class="form-control" id="country" name="country"> -->
                             </select>
                             <div class="form-text"></div>
                         </div>
@@ -134,15 +134,15 @@ function sendData() {
     // 檢查表單的資料
     if (name.value.length < 2) {
         isPass = false;
-        name.nextElementSibling.innerHTML = '請輸入正確的姓名';
+        name.nextElementSibling.innerHTML = '請輸入正確的姓名(至少2位元以上)';
     }
     if (!email_re.test(email.value)) {
         isPass = false;
-        email.nextElementSibling.innerHTML = '請輸入正確的email';
+        email.nextElementSibling.innerHTML = '請輸入正確的email(例:abc@xxx.com)';
     }
     if (password.value.length < 6) {
         isPass = false;
-        password.nextElementSibling.innerHTML = '請輸入正確的password';
+        password.nextElementSibling.innerHTML = '請輸入正確的password(至少6位元以上)';
     }
     if (mobile.value && !mobile_re.test(mobile.value)) {
         isPass = false;

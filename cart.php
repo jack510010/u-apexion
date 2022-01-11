@@ -138,7 +138,7 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
     </div>
     <div class="row">
         <div class="col">
-            <table class="table  text-white">
+            <table class="table text-white wow fadeIn">
                 <thead>
                     <tr class="text-info">
 
@@ -188,6 +188,6 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
 
 </div>
 
-</div>
+
 <?php include __DIR__ . "/__scripts.php" ?>
 <?php include __DIR__ . "/__html_foot.php" ?>
