@@ -34,17 +34,17 @@ $pageName = "insert"; // 新增購物車項目
                 <!--不要讓表單用傳統的方式送出，就是指『method="post"』-->
                 <div class="mb-3">
                     <label for="user_id" class="form-label text-white">會員編號</label>
-                    <input type="text" class="form-control" id="user_id" name="user_id" >
+                    <input type="text" class="form-control text-dark" id="user_id" name="user_id" >
                     <div class="form-text text-danger"></div>
                 </div>
                 <div class="mb-3">
                     <label for="product_id" class="form-label text-white">商品編號</label>
-                    <input type="text" class="form-control" id="product_id" name="product_id" placeholder="請輸入國際條碼13碼">
+                    <input type="text" class="form-control text-dark" id="product_id" name="product_id" placeholder="請輸入國際條碼13碼">
                     <div class="form-text text-danger"></div>
                 </div>
                 <div class="mb-3">
                     <label for="count_number" class="form-label text-white">數量</label>
-                    <input type="text" class="form-control" id="count_number" name="count_number">
+                    <input type="text" class="form-control text-dark" id="count_number" name="count_number">
                     <div class="form-text text-danger"></div>
                 </div>
                 <button type="submit" class="btn btn-outline-warning">加入清單</button>
@@ -82,7 +82,10 @@ $pageName = "insert"; // 新增購物車項目
     let user_id = document.querySelector("#user_id");
     let product_id = document.querySelector("#product_id");
     let count_number = document.querySelector("#count_number");
+    let user_id_re = /^(0|[1-9][0-9]*)$/;
     let product_re = /^471[\d]{10}$/;
+    let count_number_re = /^(0|[1-9][0-9]*)$/;
+
     function sendData() {
         user_id.nextElementSibling.innerHTML = "";
         product_id.nextElementSibling.innerHTML = "";
@@ -92,7 +95,7 @@ $pageName = "insert"; // 新增購物車項目
         // 邏輯上的意思是說，我先預設你是通過的。但是！你只要有一個欄位沒通過就算沒通過。
         //todo 檢查表單的資料。 這行以下開始檢查資料。
 
-        if (user_id.value.length < 1 || user_id.value < 1) {
+        if (user_id.value.length < 1 || !user_id_re.test(user_id.value)) {
             isPass = false;
             user_id.nextElementSibling.innerHTML = "請輸入正確的會員編號"
         }
@@ -101,7 +104,7 @@ $pageName = "insert"; // 新增購物車項目
             isPass = false;
             product_id.nextElementSibling.innerHTML = "請輸入正確的商品編號"
         }
-        if (count_number.value.length < 1 || count_number.value < 1) {
+        if (count_number.value.length < 1 || !count_number_re.test(count_number.value)) {
             isPass = false;
             count_number.nextElementSibling.innerHTML = "請輸入想下單的數量"
         }

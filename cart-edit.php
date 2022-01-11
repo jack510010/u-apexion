@@ -93,9 +93,12 @@ if (empty($row)){                        // 如果$row是空的，就讓你回�
     //這串只是在設定bootstrap裡面的modal而已，跟要學的php東西無關
 
     let user_id = document.querySelector("#user_id");  
-    let product_id = document.querySelector("#product_id");  // 
+    let product_id = document.querySelector("#product_id");  
     let count_number = document.querySelector("#count_number");
+    let user_id_re = /^(0|[1-9][0-9]*)$/;
     let product_re = /^471[\d]{10}$/;
+    let count_number_re = /^(0|[1-9][0-9]*)$/;
+
     function sendData(){
         user_id.nextElementSibling.innerHTML = "";
         product_id.nextElementSibling.innerHTML = "";
@@ -105,7 +108,7 @@ if (empty($row)){                        // 如果$row是空的，就讓你回�
                             // 邏輯上的意思是說，我先預設你是通過的。但是！你只要有一個欄位沒通過就算沒通過。
                             //todo 檢查表單的資料。 這行以下開始檢查資料。
 
-        if(user_id.value.length < 1 || user_id.value < 1){
+        if(user_id.value.length < 1 || !user_id_re.test(user_id.value)){
             isPass = false;
             user_id.nextElementSibling.innerHTML = "請輸入正確的會員編號"
         }
@@ -115,7 +118,7 @@ if (empty($row)){                        // 如果$row是空的，就讓你回�
             product_id.nextElementSibling.innerHTML = "請輸入想修改商品編號"
         }
 
-        if(count_number.value.length < 1 || count_number.value < 1){
+        if(count_number.value.length < 1 || !count_number_re.test(count_number.value)){
             isPass = false;
             count_number.nextElementSibling.innerHTML = "請輸入想下單的數量"
         }
