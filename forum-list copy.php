@@ -13,8 +13,17 @@ $pageName = 'forum-list';
 $perPage = 5;
 $page= isset($_GET['page'])? intval($_GET['page']) : 1;
 
+$nowCat = '';
+if(isset($_GET["cat"])){
+    $nowCat = " WHERE art_category_sid=" . $_GET["cat"];
+}
 
-$t_sql = "SELECT COUNT(1) FROM forum_article";
+
+$sql = sprintf("SELECT SQL_CALC_FOUND_ROWS * FROM forum_article LEFT JOIN forum_category ON forum_category.cat_sid=forum_article.art_category_sid %s ORDER BY forum_article.sid DESC LIMIT %s, %s", $nowCat, ($page-1)*$perPage, $perPage);
+
+$rows = $pdo->query($sql)->fetchAll();
+
+$t_sql = "SELECT FOUND_ROWS()";
 
 // 總筆數
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
@@ -24,15 +33,6 @@ if($page>$totalPages){
     exit;
 } 
 
-$nowCat = '';
-if(isset($_GET["cat"])){
-    $nowCat = " WHERE art_category_sid=" . $_GET["cat"];
-}
-
-
-$sql = sprintf("SELECT * FROM forum_article LEFT JOIN forum_category ON forum_category.cat_sid=forum_article.art_category_sid %s ORDER BY forum_article.sid DESC LIMIT %s, %s", $nowCat, ($page-1)*$perPage, $perPage);
-
-$rows = $pdo->query($sql)->fetchAll();
 
 ?>
 
@@ -199,7 +199,7 @@ $rows = $pdo->query($sql)->fetchAll();
 
     .forum-list-content{
         /* width:100%; */
-        height:20px;
+        /* height:20px; */
     }
     .ellipsis{
         width:300px;
@@ -207,12 +207,12 @@ $rows = $pdo->query($sql)->fetchAll();
         white-space: nowrap;
         text-overflow: ellipsis;
     }
-    .photo_ellipsis{
-        width:200px;
+    .photo-ellipsis{
+        width:150px;
+        height:100px;
         overflow:hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
     }
+
     
 
 
@@ -286,7 +286,9 @@ $rows = $pdo->query($sql)->fetchAll();
                             <p class="ellipsis"><?= $r['art_content'] ?></p>
                         </td>
                         <td class="forum-list-content">
-                            <p class="photo-ellipsis"><?= $r['art_photo'] ?></p>
+                            <div class="photo-ellipsis">
+                                <img src="./img/<?= $r['art_photo'] ?>" alt="">
+                            </div>
                         </td>
                         <td><?= $r['art_create_time'] ?></td>
                         <td>

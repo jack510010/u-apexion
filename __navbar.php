@@ -75,8 +75,7 @@
             <div id="userPic" style="width: 50px"><img src="./img/userpic.png" alt=""  height=""
                     class=" me-2"></i></div>
                 <?php }else {?>
-                    <div id="userPic" style="width: 50px"><img src="" alt=""  height=""
-                    class=" me-2"><i class="fas fa-user"></i></div>
+                    <div id="userPic" style="width: 50px"><i class="fas fa-user"></i></div>
                     <?php } ?>
             <svg class="bi me-2" width="5" height="5">
                 <use xlink:href="#speedometer2"></use>
