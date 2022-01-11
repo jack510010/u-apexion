@@ -96,6 +96,8 @@ if (empty($row)){                        // 如果$row是空的，就讓你回�
     let product_id = document.querySelector("#product_id");  // 
     let count_number = document.querySelector("#count_number");
     let product_re = /^471[\d]{10}$/;
+    let count_number_re = /^(0|[1-9][0-9]*)$/;
+
     function sendData(){
         user_id.nextElementSibling.innerHTML = "";
         product_id.nextElementSibling.innerHTML = "";
@@ -115,7 +117,7 @@ if (empty($row)){                        // 如果$row是空的，就讓你回�
             product_id.nextElementSibling.innerHTML = "請輸入想修改商品編號"
         }
 
-        if(count_number.value.length < 1 || count_number.value < 1){
+        if(count_number.value.length < 1 || !count_number_re.test(count_number.value)){
             isPass = false;
             count_number.nextElementSibling.innerHTML = "請輸入想下單的數量"
         }
