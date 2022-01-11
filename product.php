@@ -2,14 +2,14 @@
 $title = '周邊商品';
 $pageName = 'product';
 
-// if(!isset($_SESSION['admin'])){
-//     $path=explode("?","$_SERVER[REQUEST_URI]");
-//     $filename=basename($path[0]);
-//     $_SESSION['page_from'] = $filename;
+if(!isset($_SESSION['admin'])){
+    $path=explode("?","$_SERVER[REQUEST_URI]");
+    $filename=basename($path[0]);
+    $_SESSION['page_from'] = $filename;
     
-//     header('Location: user_list.php');
-//     exit;
-// }
+    header('Location: user_list.php');
+    exit;
+}
 
 //幾筆資料一頁
 $perPage = 5;
@@ -120,7 +120,7 @@ if ($page > $totalPages) {
             <td><?= $p['sid'] ?></td>
             <td><?= $p['category'] ?></td>
             <td><?= $p['product_name'] ?></td>
-            <td  width="100px" height="100px"><img class="img-fluid " src="./img/product_img/<?= $p['img'] ?>"></td>
+            <td  width="120px" height="120px"><img class="img-fluid " src="./img/product_img/<?= $p['img'] ?>"></td>
             <td><?= $p['size'] ?></td>
             <td><?= $p['style'] ?></td>
             <td><?= $p['quantity'] ?></td>
