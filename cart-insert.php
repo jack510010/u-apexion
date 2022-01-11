@@ -15,47 +15,63 @@ $pageName = "insert"; // 新增購物車項目
 .row_1{
     margin-left: 1%;
 }
+.container-wrap {
+        z-index: -2;
+    }
+
+    #navbar {
+        z-index: 1;
+    }
 </style>
 <?php include __DIR__ . "/__navbar.php" ?>
-<div class="container">
-    <div class="row ">
-        <div class="col-md-12 mt-3 ">
-            
-                <div class="d-flex justify-content-between">
-                    <h5 class="card-title text-warning">新增購物車資料</h5>
-                    <a class="btn btn-info " href="cart.php" role="button">返回</a>
-                </div>
-        </div>
-    </div>
-    <div class="row_1">
-        <div class="col-md-6 ">
-            <form name="form1"  onsubmit="sendData(); return false;">
-                <!--onsubmit 事件會在表單中的確認按鈕被點選時發生。-->
-                <!--不要讓表單用傳統的方式送出，就是指『method="post"』-->
-                <div class="mb-3">
-                    <label for="user_id" class="form-label text-white">會員編號</label>
-                    <input type="text" class="form-control text-dark" id="user_id" name="user_id" >
-                    <div class="form-text text-danger"></div>
-                </div>
-                <div class="mb-3">
-                    <label for="product_id" class="form-label text-white">商品編號</label>
-                    <input type="text" class="form-control text-dark" id="product_id" name="product_id" placeholder="請輸入國際條碼13碼">
-                    <div class="form-text text-danger"></div>
-                </div>
-                <div class="mb-3">
-                    <label for="count_number" class="form-label text-white">數量</label>
-                    <input type="text" class="form-control text-dark" id="count_number" name="count_number">
-                    <div class="form-text text-danger"></div>
-                </div>
-                <button type="submit" class="btn btn-outline-warning">加入清單</button>
-                    <!--如果『標籤button』沒有要送出資料的話，裡面的type要下button。就像這樣type="button"-->
-            </form>
-        </div>
-    </div>
 
+<video class="vdo" playsinline="" loop="loop" autoplay="autoplay" style=" width: 120%; height: 120%; position: fixed;left:-8%;filter:brightness(.9);z-index:-1;">
+    <source src="https://assets.mixkit.co/videos/preview/mixkit-stars-in-the-sky-rotating-10011-large.mp4" type="video/mp4">
+</video>
+
+<div class="second" style="object-fit:cover; z-index:1;">
+
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-12 mt-3 ">
+                
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title text-warning">新增購物車資料</h5>
+                        <a class="btn btn-info " href="cart.php" role="button">返回</a>
+                    </div>
+            </div>
+        </div>
+        <div class="row_1">
+            <div class="col-md-6 ">
+                <form name="form1"  onsubmit="sendData(); return false;">
+                    <!--onsubmit 事件會在表單中的確認按鈕被點選時發生。-->
+                    <!--不要讓表單用傳統的方式送出，就是指『method="post"』-->
+                    <div class="mb-3">
+                        <label for="user_id" class="form-label text-white">會員編號</label>
+                        <input type="text" class="form-control text-dark" id="user_id" name="user_id" >
+                        <div class="form-text text-danger"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="product_id" class="form-label text-white">商品編號</label>
+                        <input type="text" class="form-control text-dark" id="product_id" name="product_id" placeholder="請輸入國際條碼13碼">
+                        <div class="form-text text-danger"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="count_number" class="form-label text-white">數量</label>
+                        <input type="text" class="form-control text-dark" id="count_number" name="count_number">
+                        <div class="form-text text-danger"></div>
+                    </div>
+                    <button type="submit" class="btn btn-outline-warning">加入清單</button>
+                        <!--如果『標籤button』沒有要送出資料的話，裡面的type要下button。就像這樣type="button"-->
+                </form>
+            </div>
+        </div>
+
+                
             
         
-    
+    </div>
+
 </div>
 <!--這條線以下只是在設定bootstrap modal而已，跟要學的php東西無關，就是讓網頁好看這樣子。-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
