@@ -82,6 +82,7 @@ $pageName = "insert"; // 新增購物車項目
     let user_id = document.querySelector("#user_id");
     let product_id = document.querySelector("#product_id");
     let count_number = document.querySelector("#count_number");
+    let user_id_re = /^(0|[1-9][0-9]*)$/;
     let product_re = /^471[\d]{10}$/;
     let count_number_re = /^(0|[1-9][0-9]*)$/;
 
@@ -94,7 +95,7 @@ $pageName = "insert"; // 新增購物車項目
         // 邏輯上的意思是說，我先預設你是通過的。但是！你只要有一個欄位沒通過就算沒通過。
         //todo 檢查表單的資料。 這行以下開始檢查資料。
 
-        if (user_id.value.length < 1 || user_id.value < 1) {
+        if (user_id.value.length < 1 || !user_id_re.test(user_id.value)) {
             isPass = false;
             user_id.nextElementSibling.innerHTML = "請輸入正確的會員編號"
         }
