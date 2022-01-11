@@ -155,15 +155,15 @@ function sendData() {
     // 檢查表單的資料
     if (name.value.length < 2) {
         isPass = false;
-        name.nextElementSibling.innerHTML = '請輸入正確的姓名';
+        name.nextElementSibling.innerHTML = '請輸入正確的姓名(至少2位元以上)';
     }
     if (!email_re.test(email.value)) {
         isPass = false;
-        email.nextElementSibling.innerHTML = '請輸入正確的email';
+        email.nextElementSibling.innerHTML = '請輸入正確的email(例:abc@xxx.com)';
     }
     if (password.value.length < 6) {
         isPass = false;
-        password.nextElementSibling.innerHTML = '請輸入正確的密碼';
+        password.nextElementSibling.innerHTML = '請輸入正確的密碼(至少6位元以上)';
     }
     if (mobile.value && !mobile_re.test(mobile.value)) {
         isPass = false;
