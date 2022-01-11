@@ -2,17 +2,17 @@
 $title = '周邊商品';
 $pageName = 'product';
 
-if(!isset($_SESSION['admin'])){
-    $path=explode("?","$_SERVER[REQUEST_URI]");
-    $filename=basename($path[0]);
-    $_SESSION['page_from'] = $filename;
+// if(!isset($_SESSION['admin'])){
+//     $path=explode("?","$_SERVER[REQUEST_URI]");
+//     $filename=basename($path[0]);
+//     $_SESSION['page_from'] = $filename;
     
-    header('Location: user_list.php');
-    exit;
-}
+//     header('Location: user_list.php');
+//     exit;
+// }
 
 //幾筆資料一頁
-$perPage = 7;
+$perPage = 5;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 if ($page < 1) {
   header('Location: product.php');
@@ -37,6 +37,12 @@ if ($page > $totalPages) {
   exit;
 }
 
+// $product_img=$pdo->query("SELECT `img` FROM `product`")->fetch();
+// $product_img="SELECT `img` FROM `product`";
+// $img=$pdo->query($product_img);
+// while($imgs=img->fetch()){
+//   echo "{$imgs['img']}";
+// }
 ?>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
@@ -114,7 +120,7 @@ if ($page > $totalPages) {
             <td><?= $p['sid'] ?></td>
             <td><?= $p['category'] ?></td>
             <td><?= $p['product_name'] ?></td>
-            <td><?= $p['img'] ?></td>
+            <td  width="100px" height="100px"><img class="img-fluid " src="./img/product_img/<?= $p['img'] ?>"></td>
             <td><?= $p['size'] ?></td>
             <td><?= $p['style'] ?></td>
             <td><?= $p['quantity'] ?></td>
@@ -171,5 +177,11 @@ if ($page > $totalPages) {
             location.href = `product_delete.php?sid=${sid}`;
         }
     }
+ 
+    //拿取img路徑 
+    const data = "<?= $product_img['img'] ?>";
+    console.log('data', data);
+    document.querySelector('#product_blah').setAttribute("src", `./img/product_img/${data}`);
+    
 </script>
 <?php require __DIR__ . "/__html_foot.php"; ?>
