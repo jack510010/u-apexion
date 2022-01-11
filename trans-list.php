@@ -1,4 +1,4 @@
-<?php require __DIR__ . "/__connect_db.php"; ?>
+<?php require __DIR__ . "/ua__connect.php"; ?>
 <?php
 $title = 'Transportation';
 
@@ -91,7 +91,7 @@ $rows = $pdo->query($sql)->fetchAll();
                 <table class="table">
                     <thead>
                         <tr class="trstyle">
-                            <th scope="col" style="color:rgb(164, 255, 243); font-size:20px; text-align:center"><i class="fas fa-trash-alt"></i></th>
+                           
                             <th scope="col">#</th>
                             <th scope="col" style="color:rgb(164, 255, 243); font-size:20px; text-align:center">Name</th>
                             <th scope="col">Destination Address</th>
@@ -105,13 +105,6 @@ $rows = $pdo->query($sql)->fetchAll();
                     <tbody>
                         <?php foreach ($rows as $r) : ?>
                             <tr>
-
-                                <td>
-
-                                    <a href="javascript: delete_it(<?= $r['sid'] ?>)">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
-                                </td>
                                 <td><?= $r['sid'] ?></td>
                                 <td style="color:rgb(164, 255, 243) ; font-size:20px; text-align:center"><?= htmlentities($r['name']) ?></td>
                                 <td><?= htmlentities($r['destination_address_main']) ?></td>
@@ -121,7 +114,7 @@ $rows = $pdo->query($sql)->fetchAll();
                                 <td><?= $r['seat_main'] ?></td>
 
                                 <td>
-                                    <a href="transportation.php?sid=<?= $r['sid'] ?>">
+                                    <a href="trans_input_delet.php?sid=<?= $r['sid'] ?>">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                 </td>

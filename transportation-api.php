@@ -1,11 +1,16 @@
 <?php
-require __DIR__. "/__connect_db.php";
+require __DIR__. "/ua__connect.php";
 
 header('Content-Type: application/json', 'Accept: application/json');
 
 $output = [
     'success' => false,
     'error' => '',
+    'des' =>$destination_address,
+    '$trans' =>$transportation_kind,
+    '$board' =>$boarding_locat,
+    '$date' =>$date ,
+    'seat' =>$seats,
 ];
 // $usersid = isset($_POST['sid']) ? intval($_POST['sid']) : 1;
 $destination_address = isset($_POST['destination_add']) ? $_POST['destination_add'] : '';
