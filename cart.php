@@ -188,6 +188,6 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
 
 </div>
 
-</div>
+
 <?php include __DIR__ . "/__scripts.php" ?>
 <?php include __DIR__ . "/__html_foot.php" ?>
