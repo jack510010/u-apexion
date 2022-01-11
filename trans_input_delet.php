@@ -7,7 +7,7 @@ if (!isset($_GET['sid'])) {
     exit;
 }
 $order_sid = $_GET['sid'];
-echo  $order_sid;
+
 $trans_sid_sql = "SELECT * FROM trans_mainlists  WHERE sid=$order_sid";
 $trans_sid = $pdo->query($trans_sid_sql)->fetch();
 
@@ -15,7 +15,7 @@ $user_sql  = "SELECT * FROM `user` WHERE `sid`=" . $trans_sid['user_sid'];
 $user_data = $pdo->query($user_sql)->fetch();
 $user_country_sid = $user_data["country_sid"];
 
-
+echo  $trans_sid['user_sid'];
 
 $transportation_sql = "SELECT * FROM `transportation`";
 $transportation = $pdo->query($transportation_sql)->fetchAll();
@@ -129,7 +129,7 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
                 Change The Order!
             </button>
 
-            <button class="btn btn-outline-danger " type="button" onclick="delete_it(<?= $order_sid; ?>); return false">
+            <button class="btn btn-outline-danger " type="button" onclick="delete_it(<?= $trans_sid['user_sid']; ?>); return false">
                 Delet The Order!
             </button>
 
