@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . "/ua__connect.php";
+require __DIR__ . "/__connect_db.php";
 
 header('Content-Type: application/json', 'Accept: application/json');
 
@@ -22,7 +22,12 @@ $output = [
     'date' => $date,
      'seats' => $seats
 ];
-
+if (empty($transportation_kind)) {
+    $output['success'] = false;
+    $output['error'] = 'Are You Blind?';
+    echo json_encode($output, JSON_UNESCAPED_UNICODE);
+    exit;
+}
 if (empty($date)) {
     $output['success'] = false;
     $output['error'] = 'Please Select The Date';
@@ -37,12 +42,7 @@ if (empty($destination_address)) {
     exit;
 }
 
-if (empty($transportation_kind)) {
-    $output['success'] = false;
-    $output['error'] = 'Are You Blind?';
-    echo json_encode($output, JSON_UNESCAPED_UNICODE);
-    exit;
-}
+
 
 
 $transql = "UPDATE `trans_mainlists` SET  `boarding_location_main`=?, `seat_main`=?, `transportation_way`=?, `destination_address_main`=?, `schedule`=? WHERE user_sid=?";

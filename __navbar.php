@@ -25,7 +25,7 @@
             </a>
         </li>
         <li>
-            <a href="trans_button.php?sid=2" class="nav-link ">
+            <a href="trans-button.php?sid=2" class="nav-link ">
                 <svg class="bi me-2" width="10" height="25">
                     <use xlink:href="#grid"></use>
                 </svg>

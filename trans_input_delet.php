@@ -1,9 +1,9 @@
-<?php require __DIR__ . "/ua__connect.php"; ?>
+<?php require __DIR__ . "/__connect_db.php"; ?>
 <?php
 $title = 'Transportation';
 
 if (!isset($_GET['sid'])) {
-    header('Location: list.php');
+    header('Location: trans-list.php');
     exit;
 }
 $order_sid = $_GET['sid'];
@@ -15,7 +15,7 @@ $user_sql  = "SELECT * FROM `user` WHERE `sid`=" . $trans_sid['user_sid'];
 $user_data = $pdo->query($user_sql)->fetch();
 $user_country_sid = $user_data["country_sid"];
 
-
+echo  $trans_sid['user_sid'];
 
 $transportation_sql = "SELECT * FROM `transportation`";
 $transportation = $pdo->query($transportation_sql)->fetchAll();
@@ -129,7 +129,7 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
                 Change The Order!
             </button>
 
-            <button class="btn btn-outline-danger " type="button" onclick="delete_it(<?php echo $order_sid; ?>); return false">
+            <button class="btn btn-outline-danger " type="button" onclick="delete_it(<?= $trans_sid['user_sid']; ?>); return false">
                 Delet The Order!
             </button>
 

@@ -1,4 +1,4 @@
-<?php require __DIR__ . '/ua__connect.php';
+<?php require __DIR__ . '/__connect_db.php';
 $title = 'Transportation';
 if(! isset($_GET['sid'])) {
     header('Location: trans-list.php');

@@ -1,13 +1,11 @@
-
-
 <?php
 // 這個是read
 include __DIR__ . "/__connect_db.php";
 if (!isset($_SESSION['admin'])) {
-    $path=explode("?","$_SERVER[REQUEST_URI]");
-    $filename=basename($path[0]);
+    $path = explode("?", "$_SERVER[REQUEST_URI]");
+    $filename = basename($path[0]);
     $_SESSION['page_from'] = $filename;
-    
+
     header('Location: user_login.php');
     exit;
 }
@@ -60,73 +58,90 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
 //print_r($row);
 // ---------在這條線以上做操作---------------
 ?>
+
 <?php include __DIR__ . "/__html_head.php" ?>
+<style>
+    .container-wrap {
+        z-index: -2;
+    }
+
+    #navbar {
+        z-index: 1;
+    }
+</style>
 <?php include __DIR__ . "/__navbar.php"; ?>
 
-<div class="container">
-    <div class="row">
-        <div class="col-6 ">
-            <div class="d-flex align-items-center">
-                <nav aria-label="Page navigation example">  <!--會顯示頁數的bootstrap-->
-                    <ul class="pagination">
+<video class="vdo" playsinline="" loop="loop" autoplay="autoplay" style=" width: 120%; height: 120%; position: fixed;left:-8%;filter:brightness(.9);z-index:-1;">
+    <source src="https://assets.mixkit.co/videos/preview/mixkit-stars-in-the-sky-rotating-10011-large.mp4" type="video/mp4">
+</video>
 
-                        <li class="page-item <?= 1 == $page ? "disabled" : "" ?> "><a class="page-link" href="?page=1 "><i class="fas fa-step-backward"></i></a></li>
-                        <!--去到最前頁icon-->
-                        <!--如果page已經在第1頁了，就不讓使用者繼續按，所以呈現disabled 『1 == $page ? "disabled" : ""』-->
 
-                        <li class="page-item <?= 1 == $page ? "disabled" : "" ?> "><a class="page-link" href="?page=<?= $page - 1 ?> "><i class="fas fa-chevron-circle-left"></i></a></li>
-                        <!--『href="?"』連結是『？』代表檔案是同一個檔案-->
-                        <!--上一頁的icon-->
-                        <!--當前所在的頁數減1就是上一頁    href="?page= $page - 1-->
-                        <!--如果page已經在第1頁了，就不讓使用者繼續按，所以呈現disabled 『1 == $page ? "disabled" : ""』-->
-                        <!-- && $i <= $totalPages-->
+<div class="second" style="object-fit:cover; z-index:1;">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 ">
+                <div class="d-flex align-items-center">
+                    <nav aria-label="Page navigation example">
+                        <!--會顯示頁數的bootstrap-->
+                        <ul class="pagination">
 
-                        <?php for($i = $page - 2; $i <= $page + 2; $i++):
-                            if ( $i >= 1 && $i <= $totalPages ): ?> 
-                            <!--把頁數呈現出來，用for迴圈把$i的值帶入-->
+                            <li class="page-item <?= 1 == $page ? "disabled" : "" ?> "><a class="page-link" href="?page=1 "><i class="fas fa-step-backward"></i></a></li>
+                            <!--去到最前頁icon-->
+                            <!--如果page已經在第1頁了，就不讓使用者繼續按，所以呈現disabled 『1 == $page ? "disabled" : ""』-->
 
-                            <li class="page-item <?= $i == $page ? "active" : "" ?> "> 
-                            <!--這串是要讓使用者的所在頁數反白。如果$i的值等於所在頁數$page，『就反白"active"』，『沒有的話就啥也不做""』-->
+                            <li class="page-item <?= 1 == $page ? "disabled" : "" ?> "><a class="page-link" href="?page=<?= $page - 1 ?> "><i class="fas fa-chevron-circle-left"></i></a></li>
+                            <!--『href="?"』連結是『？』代表檔案是同一個檔案-->
+                            <!--上一頁的icon-->
+                            <!--當前所在的頁數減1就是上一頁    href="?page= $page - 1-->
+                            <!--如果page已經在第1頁了，就不讓使用者繼續按，所以呈現disabled 『1 == $page ? "disabled" : ""』-->
+                            <!-- && $i <= $totalPages-->
 
-                                <a class="page-link" href="?page=<?= $i ?>">  <!--#字號(改成用?page)後面會顯示所在頁數-->
-                                    <?= $i ?>  <!--本來是寫死的頁數，改成用變數$i把值帶入-->
-                                </a>
-                            </li>
-                    
-                        <?php endif;
-                        endfor; ?>
-                        <li class="page-item <?= $totalPages == $page ? "disabled" : "" ?> "><a class="page-link" href="?page=<?= $page + 1 ?> "><i class="fas fa-chevron-circle-right"></i></a></li>
-                        <!--下一頁的icon-->
-                        <!--當前所在的頁數加1就是上一頁   href="?page= $page + 1  -->
-                        <!--如果page已經在最後一頁了，就不讓使用者繼續按，所以呈現disabled 『$totalPages == $page ? "disabled" : ""』-->
+                            <?php for ($i = $page - 2; $i <= $page + 2; $i++) :
+                                if ($i >= 1 && $i <= $totalPages) : ?>
+                                    <!--把頁數呈現出來，用for迴圈把$i的值帶入-->
 
-                        <li class="page-item <?= $totalPages == $page ? "disabled" : "" ?> "><a class="page-link" href="?page=<?= $totalPages ?> "><i class="fas fa-step-forward"></i></a></li>
-                        <!--最後一頁的icon-->
-                        <!--如果page已經在最後一頁了，就不讓使用者繼續按，所以呈現disabled 『$totalPages == $page ? "disabled" : ""』-->
-                        
-                    </ul>
-                    
-                </nav>
-                <p class="px-2 text-warning ml-5" style="width: 500px;">共有<?= $totalRows ?>筆資料</p>
+                                    <li class="page-item <?= $i == $page ? "active" : "" ?> ">
+                                        <!--這串是要讓使用者的所在頁數反白。如果$i的值等於所在頁數$page，『就反白"active"』，『沒有的話就啥也不做""』-->
+
+                                        <a class="page-link" href="?page=<?= $i ?>">
+                                            <!--#字號(改成用?page)後面會顯示所在頁數-->
+                                            <?= $i ?>
+                                            <!--本來是寫死的頁數，改成用變數$i把值帶入-->
+                                        </a>
+                                    </li>
+
+                            <?php endif;
+                            endfor; ?>
+                            <li class="page-item <?= $totalPages == $page ? "disabled" : "" ?> "><a class="page-link" href="?page=<?= $page + 1 ?> "><i class="fas fa-chevron-circle-right"></i></a></li>
+                            <!--下一頁的icon-->
+                            <!--當前所在的頁數加1就是上一頁   href="?page= $page + 1  -->
+                            <!--如果page已經在最後一頁了，就不讓使用者繼續按，所以呈現disabled 『$totalPages == $page ? "disabled" : ""』-->
+
+                            <li class="page-item <?= $totalPages == $page ? "disabled" : "" ?> "><a class="page-link" href="?page=<?= $totalPages ?> "><i class="fas fa-step-forward"></i></a></li>
+                            <!--最後一頁的icon-->
+                            <!--如果page已經在最後一頁了，就不讓使用者繼續按，所以呈現disabled 『$totalPages == $page ? "disabled" : ""』-->
+
+                        </ul>
+
+                    </nav>
+                    <p class="px-2 text-warning ml-5" style="width: 500px;">共有<?= $totalRows ?>筆資料</p>
+                </div>
+            </div>
+
+            <div class="col-4"></div>
+
+            <div class="col-2 justify-content-end">
+                <!-- <a class="btn btn-primary col <?= $pageName == "cart" ? "active disabled" : "" ?> " href="#" role="button">清單</a> -->
+                <a class="btn btn-info col text-dark" href="cart-insert.php" role="button">新增購入項目</a>
             </div>
         </div>
-        
-        <div class="col-4"></div>
-
-        <div class="col-2 justify-content-end">
-            <!-- <a class="btn btn-primary col <?= $pageName == "cart" ? "active disabled" : "" ?> " href="#" role="button">清單</a> -->
-            <a class="btn btn-info col text-dark" href="cart-insert.php" role="button">新增購入項目</a>
-        </div>
     </div>
-</div>
-
-<div class="container">
     <div class="row">
         <div class="col">
             <table class="table  text-white">
                 <thead>
                     <tr class="text-info">
-                        
+
                         <th scope="col">
                             <i class="fas fa-trash-alt"></i>
                         </th>
@@ -145,7 +160,7 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
                         <!--不知道foreach哪來的去看這個檔案『4foreach-0有問題要問老師.php』-->
                         <tr>
                             <!--這一坨就是後端生畫面-->
-                            <td >
+                            <td>
                                 <!-- 裡面這是第一種刪除方法。比較直觀簡單。因為我們要告訴他要刪除哪一筆，所以加上?sid=<?= $r["sid"] ?>，看a標籤 -->
                                 <a href="cart-delete.php?sid=<?= $r["sid"] ?>" onclick="return confirm('確定要刪除這筆資料嗎？')">
                                     <i class="fas fa-trash-alt text-white"></i>
@@ -170,6 +185,9 @@ $row = $pdo->query($sql)->fetchAll(); // 拿到所有資料的陣列
             </table>
         </div>
     </div>
+
+</div>
+
 </div>
 <?php include __DIR__ . "/__scripts.php" ?>
 <?php include __DIR__ . "/__html_foot.php" ?>

@@ -1,4 +1,4 @@
-<?php require __DIR__ . "/ua__connect.php"; ?>
+<?php require __DIR__ . "/__connect_db.php"; ?>
 <?php
 $title = 'Transportation';
 
@@ -101,7 +101,7 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
 
 
 
-<iframe src="https://www.youtube.com/embed/4_sLTe6-7SE?controls=0?controls=0&autoplay=1&mute=1&loop=1&rel=0&modestbranding=1&" style=" width: 120%; height: 120%;object-fit:cover; position: fixed;left:-8%;filter:brightness(.7) ">
+<iframe src="https://www.youtube.com/embed/4_sLTe6-7SE?controls=0?controls=0&autoplay=1&mute=1&loop=1&rel=0&modestbranding=1&" style=" width: 120%; height: 120%;object-fit:cover; position: fixed;top:-5%;left:-8%;filter:brightness(.7) ">
 </iframe>
 <section class="transports" style=" object-fit:cover; z-index:1; ">
 
@@ -109,7 +109,8 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
     flex-direction:row;
     justify-content:space-evenly;
     padding:20px 0;">
-
+        <a href="./trans-list.php?" style="margin:10px;" class="btn btn-outline-light collapsed " >
+            Back List</a>
         <?php foreach ($mainlist_user as $mainlists) { ?>
             <a href="./trans-button.php?sid=<?= $mainlists['user_sid']; ?>" style="margin:10px;" class="btn btn-outline-info collapsed " data-bs-toggle="" data-bs-target="#collapseExample<?php echo intval($mainlists['user_sid']); ?>" aria-expanded="false" aria-controls="collapseExample">
                 No.<?php echo $mainlists['sid'] ?> : <?= $mainlists['name']; ?> </a>
@@ -215,7 +216,7 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
 
     let boradData = <?php echo $boarding_view_dto ?>;
     let seatsData = <?php echo $seats_view_dto ?>;
-   
+
 
     const transport = document.querySelector('#transport');
     transport.addEventListener('change', test);

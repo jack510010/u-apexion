@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/ua__connect.php';
+require __DIR__ . '/__connect_db.php';
 
 
 if(isset($_GET['sid'])){
