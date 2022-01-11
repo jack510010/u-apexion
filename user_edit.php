@@ -32,10 +32,10 @@ if (empty($user)) {
 <?php require __DIR__ . "/__navbar.php"; ?>
 
 <style>
-    .row{
-        margin-top:50px;
-        margin-bottom:50px;
-    }
+.row {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light pt-3 shadow ">
@@ -75,7 +75,7 @@ if (empty($user)) {
                         </div>
                         <div class="mb-3">
                             <label for="mobile" class="form-label">mobile</label>
-                            <input type="mobile" class="form-control" id="mobile" name="mobile"
+                            <input type="text" class="form-control" id="mobile" name="mobile"
                                 data-pattern="09\d{2}-?\d{3}-?\d{3}" value="<?= $user['mobile'] ?>">
                             <div class="form-text"></div>
                         </div>
@@ -94,13 +94,13 @@ if (empty($user)) {
                         </div>
 
                         <div class="mb-3">
-                        <label for="country" class="form-label">country</label>
+                            <label for="country" class="form-label">country</label>
                             <select class="form-select" aria-label="Default select example" name="country">
 
-                            <?php foreach($country as $count){ ?>
-                                    <option selected value="<?= $count['sid'] ?>"><?= $count['country_name'] ?></option>
-                                    <?php } ?>
-                            <!-- <input type="country" class="form-control" id="country" name="country"> -->
+                                <?php foreach ($country as $count) { ?>
+                                <option selected value="<?= $count['sid'] ?>"><?= $count['country_name'] ?></option>
+                                <?php } ?>
+                                <!-- <input type="country" class="form-control" id="country" name="country"> -->
                             </select>
                         </div>
 

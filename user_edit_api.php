@@ -76,7 +76,7 @@ $stmt->execute([
 ]);
 
 if ($stmt->rowCount() == 0) {
-    $output['error'] = '資料沒有修改';
+    $output['error'] = '資料沒有異動';
 } else {
     $output['success'] = true;
 }
