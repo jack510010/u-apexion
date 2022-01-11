@@ -71,6 +71,7 @@ if (empty($row)) {                        // 如果$row是空的，就讓你回�
             </div>
         </div>
     </div>
+
     <!--這條線以下只是在設定bootstrap modal而已，跟要學的php東西無關，就是讓網頁好看這樣子。-->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
