@@ -22,6 +22,9 @@ $pageName = "insert"; // 新增購物車項目
     #navbar {
         z-index: 1;
     }
+    .modal-backdrop{
+        z-index: -3;
+    }
 </style>
 <?php include __DIR__ . "/__navbar.php" ?>
 
