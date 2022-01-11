@@ -94,9 +94,10 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
         border: none;
     }
 
-    #navbar {
+    #navbar{
         z-index: 1;
     }
+    
     .showhere{
         
     }
