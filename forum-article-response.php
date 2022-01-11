@@ -24,11 +24,7 @@ $sql3 = sprintf("SELECT * FROM user WHERE `sid` = %s" , $_SESSION['admin']['sid'
 $row3= $pdo->query($sql3)->fetch();
 
 
-<<<<<<< HEAD
-$sql = sprintf("SELECT * FROM forum_response LEFT JOIN user ON forum_response.user_sid=user.sid  ORDER BY forum_response.sid DESC LIMIT %s, %s", ($page-1)*$perPage, $perPage);
-=======
 $sql = sprintf("SELECT * FROM forum_response LEFT JOIN user ON forum_response.user_sid=user.sid ORDER BY forum_response.sid DESC LIMIT %s, %s", ($page-1)*$perPage, $perPage);
->>>>>>> refs/remotes/origin/main
 
 $rows = $pdo->query($sql)->fetchAll();
 
@@ -348,7 +344,7 @@ date_default_timezone_set('Asia/Taipei');
                         <form name="form2" class="post-form" onsubmit="sendData(); return false;">
                            <li class="list-group-item respose-fix">
                                 <i class="fas fa-user"></i>
-                                <input id="response" name="response" type="text" placeholder="留言...">
+                                <input id="response" name="response" type="text" placeholder="留言..." style="color:#fff">
                                 <button>送出</button>
                             </li> 
                         </form>

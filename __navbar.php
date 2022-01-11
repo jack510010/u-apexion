@@ -41,7 +41,7 @@
             </a>
         </li>
         <li>
-            <a href="forum-list copy.php" class="nav-link <?= $pageName == 'forum' ? 'active disabled' : '' ?>">
+            <a href="forum-list copy.php" class="nav-link <?= $pageName == 'forum-list' ? 'active disabled' : '' ?>">
                 <svg class="bi me-2" width="10" height="25">
                     <use xlink:href="#people-circle"></use>
                 </svg>

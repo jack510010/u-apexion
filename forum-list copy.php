@@ -246,7 +246,9 @@ $rows = $pdo->query($sql)->fetchAll();
                 </div>
                 
                 <div class="search d-flex">
-                    <a href="forum-insert.php"><i class="far fa-file-alt"></i></a>
+                    <a href="forum-insert.php">
+                      <button class="btn btn-outline-success forum-search-btn" style="margin-right:10px; border:0; text-decoration:underline" type="submit">新增貼文</button>  
+                    </a>
                     <input class="form-control me-2 forum-search" type="search" placeholder="Type Here" aria-label="Search" name="search_text" id="search_text">
                     <button class="btn btn-outline-success forum-search-btn" type="submit">Search</button>
                 </div>

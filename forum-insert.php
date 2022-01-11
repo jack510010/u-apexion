@@ -24,7 +24,7 @@ date_default_timezone_set('Asia/Taipei');
             font-family: 'Noto Sans TC', sans-serif;
         }
     form .form-text {
-        color: #fff;
+        color: #FFD700;
     }
     .forum-card{
         background: linear-gradient(to right, #021943 0%, #023f74 100%);
@@ -127,7 +127,7 @@ date_default_timezone_set('Asia/Taipei');
                     <!-- btn -->
                     <div class="cat-choice d-flex justify-content-center">
                         <button type="button">1.事前準備</button>
-                        <button type="button">2.事前準備</button>
+                        <button type="button">2.旅遊心得</button>
                         <button type="button">3.太空冷知識</button>
                         <button type="button">4.星球介紹</button>
                         <button type="button">5.音樂推薦</button>
@@ -204,9 +204,6 @@ date_default_timezone_set('Asia/Taipei');
 
     const modal = new bootstrap.Modal(document.querySelector('#exampleModal'));
 
-    // const email_re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    // const mobile_re = /^09\d{2}-?\d{3}-?\d{3}$/;
-
     function sendData(){
 
         title.nextElementSibling.innerHTML = '';
@@ -215,8 +212,25 @@ date_default_timezone_set('Asia/Taipei');
 
         let isPass = true;
         // 檢查表單的資料
-         
 
+        if (title.value.length == 0) {
+        isPass = false;
+        title.nextElementSibling.innerHTML = '請輸入標題';
+
+        }
+        if (category.value.length == 0) {
+            isPass = false;
+            category.nextElementSibling.innerHTML = '請輸入分類';
+
+        }
+        // category change
+
+
+        if (content.value.length < 10) {
+            isPass = false;
+            content.nextElementSibling.innerHTML = '請輸入至少10個文字';
+
+        }
 
 
 
