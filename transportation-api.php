@@ -1,5 +1,5 @@
 <?php
-require __DIR__. "/ua__connect.php";
+require __DIR__. "/__connect_db.php";
 
 header('Content-Type: application/json', 'Accept: application/json');
 
