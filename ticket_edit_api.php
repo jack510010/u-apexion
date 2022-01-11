@@ -75,7 +75,7 @@ $upload_folder = __DIR__."/img/uploaded";
 if(! empty($_FILES['memberPass'])) {
     foreach($_FILES['memberPass']['name'] as $i=>$name){
         $ext = $exts[$_FILES['memberPass']['type'][$i]];
-        $filename = sha1($name).$ext;
+        $filename = sha1($name.rand()).$ext;
 
         $target = $upload_folder. '/'. $filename;
         if( move_uploaded_file($_FILES['memberPass']['tmp_name'][$i], $target)){
