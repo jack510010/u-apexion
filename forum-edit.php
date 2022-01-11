@@ -29,9 +29,6 @@ $row = $pdo->query("SELECT * FROM `forum_article` WHERE sid=$sid")->fetch();
 
 
 <style>
-form .form-text {
-    color: red;
-}
 
 body {
     /* background: linear-gradient(to right, #021943 0%, #023f74 100%); */
@@ -40,7 +37,7 @@ body {
 }
 
 form .form-text {
-    color: red;
+    color: #FFD700;
 }
 
 .card-title {
@@ -164,7 +161,7 @@ form .form-text {
                 <!-- btn -->
                 <div class="cat-choice d-flex justify-content-center">
                     <button type="button">1.事前準備</button>
-                    <button type="button">2.事前準備</button>
+                    <button type="button">2.旅遊心得</button>
                     <button type="button">3.太空冷知識</button>
                     <button type="button">4.星球介紹</button>
                     <button type="button">5.音樂推薦</button>
@@ -257,7 +254,7 @@ function sendData(event) {
     }
     if (category.value.length == 0) {
         isPass = false;
-        category.nextElementSibling.innerHTML = '請輸入類型';
+        category.nextElementSibling.innerHTML = '請輸入分類';
 
     }
     // category change

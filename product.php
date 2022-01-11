@@ -2,13 +2,17 @@
 $title = '周邊商品';
 $pageName = 'product';
 
-if(!isset($_SESSION['admin'])){
-     header('Location: user_list.php');
-    exit;
+if (!isset($_SESSION['admin'])) {
+  $path = explode("?", "$_SERVER[REQUEST_URI]");
+  $filename = basename($path[0]);
+  $_SESSION['page_from'] = $filename;
+
+  header('Location: user_list.php');
+  exit;
 }
 
 //幾筆資料一頁
-$perPage = 7;
+$perPage = 5;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 if ($page < 1) {
   header('Location: product.php');
@@ -33,6 +37,12 @@ if ($page > $totalPages) {
   exit;
 }
 
+// $product_img=$pdo->query("SELECT `img` FROM `product`")->fetch();
+// $product_img="SELECT `img` FROM `product`";
+// $img=$pdo->query($product_img);
+// while($imgs=img->fetch()){
+//   echo "{$imgs['img']}";
+// }
 ?>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
@@ -46,7 +56,7 @@ if ($page > $totalPages) {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-light" href="product.php?category=1" id="womanProduct" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle text-light" href="#" id="womanProduct" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               女生
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -79,10 +89,7 @@ if ($page > $totalPages) {
           </li>
         </ul>
         <button type="button" class="btn btn-info"><a class="text-dark" href="product_new.php" style="text-decoration:none;">新增商品</a></button>
-        <form class="d-flex align-items-center ms-2">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-warning" type="submit">Search</button>
-        </form>
+
       </div>
     </div>
   </nav>
@@ -110,7 +117,7 @@ if ($page > $totalPages) {
             <td><?= $p['sid'] ?></td>
             <td><?= $p['category'] ?></td>
             <td><?= $p['product_name'] ?></td>
-            <td><?= $p['img'] ?></td>
+            <td width="120px" height="120px"><img class="img-fluid " src="./img/product_img/<?= $p['img'] ?>"></td>
             <td><?= $p['size'] ?></td>
             <td><?= $p['style'] ?></td>
             <td><?= $p['quantity'] ?></td>
@@ -122,7 +129,7 @@ if ($page > $totalPages) {
               </a>
             </td>
             <td>
-              <a href="product_delete.php?sid=<?= $p['sid'] ?>" onclick="return conform('確定要刪除這筆資料嗎')">
+              <a href="javascript: delete_it(<?= $p['sid'] ?>)">
                 <i class="fas fa-trash-alt"></i>
               </a>
             </td>
@@ -161,4 +168,11 @@ if ($page > $totalPages) {
 </div>
 
 <?php require __DIR__ . "/__scripts.php"; ?>
+<script>
+  function delete_it(sid) {
+    if (confirm(`確定要刪除編 ${sid} 的資料嗎?`)) {
+      location.href = `product_delete.php?sid=${sid}`;
+    }
+  }
+</script>
 <?php require __DIR__ . "/__html_foot.php"; ?>

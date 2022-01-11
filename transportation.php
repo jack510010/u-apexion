@@ -1,6 +1,14 @@
 <?php require __DIR__ . '/__connect_db.php';
 $title = 'Transportation';
-$user_sql  = "SELECT * FROM `user` WHERE `sid`=3 ";
+if(! isset($_GET['sid'])) {
+    header('Location: trans-list.php');
+    exit;
+}
+
+$sid = intval($_GET['sid']);
+
+
+$user_sql  = "SELECT * FROM `user` WHERE `sid`=$sid ";
 $user_country_sid = json_encode($pdo->query($user_sql)->fetch()["country_sid"]);
 
 $transportation_sql = "SELECT * FROM `transportation`";
@@ -34,7 +42,6 @@ $boarding_sql = "SELECT * FROM `boarding_location` WHERE `country_sid`= $user_co
 $boarding = $pdo->query($boarding_sql)->fetchAll();
 
 foreach ($boarding as $key => $value) {
-
     $boarding_view[$transportationList[$value['trans_sid']]][] = $value['name'];
 }
 
@@ -118,7 +125,7 @@ $boarding = $pdo->query($board_sql)->fetchAll();
 <?php include __DIR__ . '/__navbar.php'; ?>
 
 <section class="transports">
-    <form name="transForm">
+    <form id="transForm">
         <h1>Apexion - Transportation</h1>
         <div class="outdiv">
             <h4>Your Address</h4>
@@ -150,7 +157,7 @@ $boarding = $pdo->query($board_sql)->fetchAll();
                 </div>
                 <h4>Select Your Departure Datetime...</h4>
                 <div class="input-group" id='departure-date datetime'>
-                    <input type="date" class="form-control date" name="date" value="">
+                    <input id="date" type="date" class="form-control date" name="myDate" value="">
                     
                       
                         <!-- <i class="far fa-calendar-alt"></i>
@@ -283,7 +290,7 @@ $boarding = $pdo->query($board_sql)->fetchAll();
     // };
 
     function sendTransportation() {
-        const fd = new FormData(document.transForm);
+        const fd = new FormData(document.querySelector('#transForm'));
         fetch('transportation-api.php', {
                 method: 'POST',
                 body: fd,
@@ -294,7 +301,9 @@ $boarding = $pdo->query($board_sql)->fetchAll();
                     alert('SUCCESS');
                     location.href = 'trans_input_delet.php';
                 } else {
+                    console.log(obj);
                     alert('xxx');
+                    
                 }
             });
     }

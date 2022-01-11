@@ -11,7 +11,7 @@
        /* chrome的input樣式 */
         input:-webkit-autofill {
             -webkit-animation: autofill-fix 1s infinite;
-            -webkit-text-fill-color: #fff;
+            /* -webkit-text-fill-color: #fff; */
         }
         @-webkit-keyframes autofill-fix {
             from {
@@ -28,6 +28,10 @@
             width: 85%;
             position: absolute;
             right: 0;
+        }
+
+        ul li {
+            list-style-type: none;
         }
 
         img {
@@ -156,7 +160,7 @@
 
         .myticket-wrap {
             max-width: 700px;
-            margin: 0 0;
+            margin: 0 auto;
         }
 
         .myticket-content {
@@ -279,7 +283,7 @@
          /* jhih-ting開始 */
          .form-control {
             border-radius: 20px;
-            border: 1px solid #05f2f2;
+            
         }
 
        /* jhih-ting結束 */

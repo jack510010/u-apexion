@@ -51,7 +51,7 @@ if (empty($row)){                        // 如果$row是空的，就讓你回�
                     <div class="mb-3">
                         <label for="product_id" class="form-label text-light">商品編號</label>
                         <input type="text" class="form-control" id="product_id" name="product_id"
-                        value="<?= htmlentities($row["product_id"]) ?>">  <!--value是為了讓你進去修改頁面的時候，已把值show在該欄位上-->
+                        value="<?= htmlentities($row["product_id"]) ?>" placeholder="請輸入國際條碼13碼">  <!--value是為了讓你進去修改頁面的時候，已把值show在該欄位上-->
                         <div  class="form-text text-danger"></div>
                     </div>
                     <div class="mb-3">
@@ -92,9 +92,12 @@ if (empty($row)){                        // 如果$row是空的，就讓你回�
     let modal = new bootstrap.Modal(document.querySelector("#exampleModal"));
     //這串只是在設定bootstrap裡面的modal而已，跟要學的php東西無關
 
-    let user_id = document.querySelector("#user_id");
-    let product_id = document.querySelector("#product_id");
+    let user_id = document.querySelector("#user_id");  
+    let product_id = document.querySelector("#product_id");  
     let count_number = document.querySelector("#count_number");
+    let user_id_re = /^(0|[1-9][0-9]*)$/;
+    let product_re = /^471[\d]{10}$/;
+    let count_number_re = /^(0|[1-9][0-9]*)$/;
 
     function sendData(){
         user_id.nextElementSibling.innerHTML = "";
@@ -105,17 +108,17 @@ if (empty($row)){                        // 如果$row是空的，就讓你回�
                             // 邏輯上的意思是說，我先預設你是通過的。但是！你只要有一個欄位沒通過就算沒通過。
                             //todo 檢查表單的資料。 這行以下開始檢查資料。
 
-        if(user_id.value.length < 1 || user_id.value < 1){
+        if(user_id.value.length < 1 || !user_id_re.test(user_id.value)){
             isPass = false;
             user_id.nextElementSibling.innerHTML = "請輸入正確的會員編號"
         }
 
-        if(product_id.value.length < 1 || product_id.value < 1){
+        if(product_id.value.length !== 13 || !product_re.test(product_id.value)){
             isPass = false;
             product_id.nextElementSibling.innerHTML = "請輸入想修改商品編號"
         }
 
-        if(count_number.value.length < 1 || count_number.value < 1){
+        if(count_number.value.length < 1 || !count_number_re.test(count_number.value)){
             isPass = false;
             count_number.nextElementSibling.innerHTML = "請輸入想下單的數量"
         }
