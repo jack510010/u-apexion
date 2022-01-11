@@ -1,4 +1,4 @@
-<?php require __DIR__ . "/ua__connect.php"; ?>
+<?php require __DIR__ . "/__connect_db.php"; ?>
 <?php
 $title = 'Transportation';
 
@@ -9,8 +9,10 @@ $mainlist_user = $pdo->query($mainlist_user_sql)->fetchAll();
 // $tans_country_sql = "SELECT c.sid,c.country_trans,c.parent_sid,t.transport_kind FROM `country_transportation` c LEFT JOIN `transportation` t ON c.parent_sid=t.sid";
 // $tans_country = $pdo->query($tans_country_sql)->fetchAll();
 
-$user_sql  = "SELECT * FROM `user` WHERE `sid`=3 ";
-$user_country_sid = json_encode($pdo->query($user_sql)->fetch()["country_sid"]);
+$sid = $_GET['sid'];
+$user_sql  = "SELECT * FROM `user` WHERE `sid`=".$sid;
+$user_data = $pdo->query($user_sql)->fetch();
+$user_country_sid = $user_data["country_sid"];
 
 $transportation_sql = "SELECT * FROM `transportation`";
 $transportation = $pdo->query($transportation_sql)->fetchAll();
@@ -43,14 +45,9 @@ $boarding_sql = "SELECT * FROM `boarding_location` WHERE `country_sid`= $user_co
 $boarding = $pdo->query($boarding_sql)->fetchAll();
 
 foreach ($boarding as $key => $value) {
-
     $boarding_view[$transportationList[$value['trans_sid']]][] = $value['name'];
-
-
+    
 }
-
-
-
 
 
 // $sql = "SELECT `address` FROM `user`";
@@ -114,6 +111,7 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
     }
 </style>
 <?php require __DIR__ . "/__navbar.php"; ?>
+
 <section class="transports">
     <div class="container" style="display:flex;
     flex-direction:row;
@@ -121,15 +119,16 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
     padding:20px 0;">
 
         <?php foreach ($mainlist_user as $mainlists) { ?>
-            <button style="margin:10px;" class="btn btn-outline-info collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample<?php echo intval($mainlists['user_sid']); ?>" aria-expanded="false" aria-controls="collapseExample">
-                <?php echo $mainlists['name']?> No.<?=$mainlists['sid']; ?> </button>
+            <a href="./trans-button.php?sid=<?=$mainlists['sid']; ?>" style="margin:10px;" class="btn btn-outline-info collapsed "  data-bs-toggle="" data-bs-target="#collapseExample<?php echo intval($mainlists['user_sid']); ?>" aria-expanded="false" aria-controls="collapseExample">
+                <?php echo $mainlists['name']?> No.<?=$mainlists['sid']; ?> </a>
         <?php } ?>
     </div>
     <!-- ===================== -->
     <div class="showhere">
         <?php foreach ($mainlist_user as $mainlists) { ?>
             <!-- ========= -->
-            <div class="collapse " id="collapseExample<?php echo intval($mainlists['user_sid']); ?>">
+            <?php if($mainlists['user_sid'] === $sid) { ?>
+            <div class="" id="collapseExample<?php echo intval($mainlists['user_sid']); ?>">
                 <div class="card card-body" style="background-color: rgb(00,00,00,.0); color:skyblue; border:none;">
                     <h1>Apexion - Transportation</h1>
                     <div class="outdiv1">
@@ -148,13 +147,15 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
                         <h5> Your Seat/Room</h5>
                         <input class="form-control" type="text" value=" <?= $mainlists['seat_main'] ?>" aria-label="readonly input example" readonly>
                     </div>
-                    <form name="transForm">
+                    <form id="transForm">
                         <h1>Change List</h1>
                         
                         <div class="outdiv">
                             <h4>User Address</h4>
+                            <input hidden name="sid" value="<?= $user_data['sid'] ?>">
                             <?php foreach ($user_add as $u) { ?>
-                                <input class="form-control" type="text" value=" <?= $u['address'] ?>" <?php } ?> aria-label="readonly input example" readonly>
+                                
+                                <input  class="form-control" type="text" value=" <?= $u['address'] ?>" <?php } ?> aria-label="readonly input example" readonly>
                                 <h4>Destination Address</h4>
                                 <select class="form-select destination-addr" aria-label="Default select example" name="destination_add">
                                     <option selected>Choose Destination Address</option>
@@ -162,7 +163,7 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
                                             <?= $u['training_address'] ?> <?php } ?></option>
                                 </select>
                                 <h4>User Transportation Kind</h4>
-                                <select class="form-select destination-addr" aria-label="Default select example" id="transport" name="transport" onchange="test()">
+                                <select class="form-select destination-addr" aria-label="Default select example" id="transport" name="transport">
                                     <option selected disabled>What Kind Transportation Do You Want?</option>
                                     <?php foreach ($userTrans_view as $b) {   ?>
                                         <option value="<?= $b ?>">
@@ -205,6 +206,8 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
                     </form>
                 </div>
             </div>
+
+            <?php }?>
         <?php } ?>
         <!-- ============ -->
     </div>
@@ -234,9 +237,12 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
 
     let boradData = <?php echo $boarding_view_dto ?>;
     let seatsData = <?php echo $seats_view_dto ?>;
+        console.log('boradData',boradData);
+        console.log('sssssssssssss');
+        console.log(seatsData);
 
-    
-
+    const transport = document.querySelector('#transport');
+    transport.addEventListener('change',test);
     function test() {
 
 
@@ -257,7 +263,7 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
     }
 
     function sendTransportation() {
-        const fd = new FormData(document.transForm);
+        const fd = new FormData(document.querySelector('#transForm'));
 
         fetch('trans_button_api.php', {
                 method: 'POST',

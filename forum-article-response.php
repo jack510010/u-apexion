@@ -344,7 +344,7 @@ date_default_timezone_set('Asia/Taipei');
                         <form name="form2" class="post-form" onsubmit="sendData(); return false;">
                            <li class="list-group-item respose-fix">
                                 <i class="fas fa-user"></i>
-                                <input id="response" name="response" type="text" placeholder="留言...">
+                                <input id="response" name="response" type="text" placeholder="留言..." style="color:#fff">
                                 <button>送出</button>
                             </li> 
                         </form>

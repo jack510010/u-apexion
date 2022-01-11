@@ -1,21 +1,27 @@
 <?php
-require __DIR__ . "/ua__connect.php";
+require __DIR__ . "/__connect_db.php";
 
 header('Content-Type: application/json', 'Accept: application/json');
 
-$output = [
-    'success' => false,
-    'error' => '',
-];
 
-$user_sid = isset($_POST['user_sid']) ? $_POST['user_sid'] : '';
+
+$user_sid = isset($_POST['sid']) ? $_POST['sid'] : '';
 $destination_address = isset($_POST['destination_add']) ? $_POST['destination_add'] : '';
 $transportation_kind = isset($_POST['transport']) ? $_POST['transport'] : '';
 $boarding_locat = isset($_POST['board']) ? $_POST['board'] : '';
 $date = isset($_POST['date']) ? $_POST['date'] : '';
 $seats = isset($_POST['seat']) ? $_POST['seat'] : '';
 
-
+$output = [
+    'success' => false,
+    'error' => '',
+    'userid' => $user_sid,
+    'add' => $destination_address,
+    'kind' => $transportation_kind,
+    'boarding_locat' => $boarding_locat,
+    'date' => $date,
+     'seats' => $seats
+];
 
 if (empty($date)) {
     $output['success'] = false;
@@ -39,7 +45,7 @@ if (empty($transportation_kind)) {
 }
 
 
-$transql = "UPDATE `trans_mainlists` SET  `boarding_location_main`=?, `seat_main`=?, `transportation_way`=?, `destination_address_main`=?, `schedule`=? WHERE sid=?";
+$transql = "UPDATE `trans_mainlists` SET  `boarding_location_main`=?, `seat_main`=?, `transportation_way`=?, `destination_address_main`=?, `schedule`=? WHERE user_sid=?";
 
 
 $stmt = $pdo->prepare($transql); //prepare() 準備執行
