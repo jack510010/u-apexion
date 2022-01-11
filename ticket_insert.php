@@ -183,7 +183,7 @@ $pageName = 'ticket_insert';
     const memberInput = `<div class="mb-3">
     <div class="d-flex align-items-center ticket-wrap">
     <label for="membername" class="memberName form-label  d-flex align-items-center justify-content-center align-self-stretch">成員姓名</label>
-    <input type="text" class="memberNowName form-control flex-fill" id="membername" aria-describedby="emailHelp" name="member[]" placeholder="請輸入護照英文名字">
+    <input type="text" class="memberNowName form-control flex-fill text-white" id="membername" aria-describedby="emailHelp" name="member[]" placeholder="請輸入護照英文名字">
     </div>
     <div class="ticket-incorrect"></div>
   </div><div class="mb-3">
