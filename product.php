@@ -12,7 +12,7 @@ if(!isset($_SESSION['admin'])){
 }
 
 //幾筆資料一頁
-$perPage = 7;
+$perPage = 5;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 if ($page < 1) {
   header('Location: product.php');
@@ -37,6 +37,12 @@ if ($page > $totalPages) {
   exit;
 }
 
+// $product_img=$pdo->query("SELECT `img` FROM `product`")->fetch();
+// $product_img="SELECT `img` FROM `product`";
+// $img=$pdo->query($product_img);
+// while($imgs=img->fetch()){
+//   echo "{$imgs['img']}";
+// }
 ?>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
@@ -83,10 +89,7 @@ if ($page > $totalPages) {
           </li>
         </ul>
         <button type="button" class="btn btn-info"><a class="text-dark" href="product_new.php" style="text-decoration:none;">新增商品</a></button>
-        <form class="d-flex align-items-center ms-2">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-warning" type="submit">Search</button>
-        </form>
+
       </div>
     </div>
   </nav>
@@ -114,7 +117,7 @@ if ($page > $totalPages) {
             <td><?= $p['sid'] ?></td>
             <td><?= $p['category'] ?></td>
             <td><?= $p['product_name'] ?></td>
-            <td><?= $p['img'] ?></td>
+            <td  width="120px" height="120px"><img class="img-fluid " src="./img/product_img/<?= $p['img'] ?>"></td>
             <td><?= $p['size'] ?></td>
             <td><?= $p['style'] ?></td>
             <td><?= $p['quantity'] ?></td>
@@ -171,5 +174,7 @@ if ($page > $totalPages) {
             location.href = `product_delete.php?sid=${sid}`;
         }
     }
+ 
+    
 </script>
 <?php require __DIR__ . "/__html_foot.php"; ?>
