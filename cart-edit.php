@@ -54,7 +54,7 @@ if (empty($row)) {                        // 如果$row是空的，就讓你回�
                     </div>
                 </div>
                 <div class="card-body col-md-6">
-                    <form name="form1" class="animate__animated animate__heartBeat" onsubmit="sendData();return false;">
+                    <form name="form1" class="wow fadeIn" onsubmit="sendData();return false;">
                         <!--onsubmit 事件會在表單中的確認按鈕被點選時發生。-->
                         <!--不要讓表單用傳統的方式送出，就是指『method="post"』-->
                         <input type="hidden" name="sid" value="<?= $row["sid"] ?>">
