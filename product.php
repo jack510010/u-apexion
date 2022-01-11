@@ -178,10 +178,6 @@ if ($page > $totalPages) {
         }
     }
  
-    //拿取img路徑 
-    const data = "<?= $product_img['img'] ?>";
-    console.log('data', data);
-    document.querySelector('#product_blah').setAttribute("src", `./img/product_img/${data}`);
     
 </script>
 <?php require __DIR__ . "/__html_foot.php"; ?>
