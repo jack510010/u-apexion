@@ -199,7 +199,7 @@ $rows = $pdo->query($sql)->fetchAll();
 
     .forum-list-content{
         /* width:100%; */
-        height:20px;
+        /* height:20px; */
     }
     .ellipsis{
         width:300px;
@@ -207,12 +207,12 @@ $rows = $pdo->query($sql)->fetchAll();
         white-space: nowrap;
         text-overflow: ellipsis;
     }
-    .photo_ellipsis{
-        width:200px;
+    .photo-ellipsis{
+        width:150px;
+        height:100px;
         overflow:hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
     }
+
     
 
 
@@ -286,7 +286,9 @@ $rows = $pdo->query($sql)->fetchAll();
                             <p class="ellipsis"><?= $r['art_content'] ?></p>
                         </td>
                         <td class="forum-list-content">
-                            <p class="photo-ellipsis"><?= $r['art_photo'] ?></p>
+                            <div class="photo-ellipsis">
+                                <img src="./img/<?= $r['art_photo'] ?>" alt="">
+                            </div>
                         </td>
                         <td><?= $r['art_create_time'] ?></td>
                         <td>
