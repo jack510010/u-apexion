@@ -56,7 +56,7 @@ $rows = $pdo->query($sql)->fetchAll();
     }
 
     h5 {
-        color: rgb(109, 160, 184);
+        color:rgba(215, 253, 253, 0.9);
     }
 
     .update-div {
@@ -73,7 +73,7 @@ $rows = $pdo->query($sql)->fetchAll();
 
     .trstyle {
         text-align: center;
-        color: rgb(164, 255, 243);
+        color: rgb(139, 205, 236);
         font-size: 20px;
     }
 
@@ -87,6 +87,18 @@ $rows = $pdo->query($sql)->fetchAll();
 
     #navbar {
         z-index: 1;
+    }
+    .table th {
+       text-align: center;
+       border-bottom:2px solid rgba(255, 247, 200, 0.2);
+       opacity: .6;
+      padding: 10px;
+     
+    }
+    .table td {
+        padding: 10px;
+       border-top:1px solid rgba(255, 247, 200, 0.2);
+       opacity: .7;
     }
 </style>
 <?php require __DIR__ . "/__navbar.php"; ?>
@@ -104,29 +116,29 @@ $rows = $pdo->query($sql)->fetchAll();
         <div class="row">
             <div class="col">
                 <div class="not" style="margin-bottom:50px;"></div>
-                <h1>Apexion - Transportation</h1>
-                <a href="./trans-button.php?sid=2" style="margin:10px;" class="btn btn-outline-light collapsed " >
-            Back To Babo</a>
-                <table class="table">
+                <h1 style="margin:20px 0 30px 0">U-Apexion - Transportation</h1>
+                <a href="./trans-button.php?sid=2" style="margin:10px;box-shadow: inset 5px 8px 10px #aaa;" class="btn btn-outline-light collapsed ">Back To The Space</a>
+            
+                <table class="table table-borderless">
 
                     <thead>
                         <tr class="trstyle">
 
                             <th scope="col">#</th>
-                            <th scope="col" style="color:rgb(164, 255, 243); font-size:20px; text-align:center">Name</th>
-                            <th scope="col">Destination Address</th>
-                            <th scope="col">Transportation</th>
-                            <th scope="col">Schedule</th>
-                            <th scope="col">Boarding Location</th>
-                            <th scope="col">Seat / Room</th>
-                            <th scope="col"><i class="fas fa-edit"></i></th>
+                            <th scope="col" style="color: rgb(139, 205, 236); font-size:20px; text-align:center;">姓名  Name</th>
+                            <th scope="col">訓練集合地 Destination Address</th>
+                            <th scope="col">交通方式 Transportation</th>
+                            <th scope="col">搭乘時間 Departure Time</th>
+                            <th scope="col">車站/機場/港口 Boarding Location</th>
+                            <th scope="col">座位/房號 Seat/Room</th>
+                            <th scope="col"><i class="fas fa-edit" style="font-size:15px;"></i></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($rows as $r) : ?>
-                            <tr>
-                                <td><?= $r['sid'] ?></td>
-                                <td style="color:rgb(164, 255, 243) ; font-size:20px; text-align:center"><?= htmlentities($r['name']) ?></td>
+                            <tr >
+                                <td style="color: rgb(139, 205, 236);margin:100px 50px;" ><?= $r['sid'] ?></td>
+                                <td style="color: rgb(139, 205, 236);margin:100px 50px; font-size:20px; "><?= htmlentities($r['name']) ?></td>
                                 <td><?= htmlentities($r['destination_address_main']) ?></td>
                                 <td style=" font-size:15px; text-align:center "><?= $r['transportation_way'] ?></td>
                                 <td><?= $r['schedule'] ?></td>
@@ -134,7 +146,7 @@ $rows = $pdo->query($sql)->fetchAll();
                                 <td><?= $r['seat_main'] ?></td>
 
                                 <td>
-                                    <a href="trans_input_delet.php?sid=<?= $r['sid'] ?>">
+                                    <a href="trans_input_delet.php?sid=<?= $r['sid'] ?>" style="color:#fae7b0;font-size:15px;">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                 </td>
@@ -146,7 +158,7 @@ $rows = $pdo->query($sql)->fetchAll();
                 </table>
             </div>
         </div>
-        <div class="row" style="opacity: .6;">
+        <div class="row" style="opacity: .4;">
             <div class="col">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination pagination-sm justify-content-center">

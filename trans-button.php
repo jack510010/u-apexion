@@ -71,30 +71,37 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
     }
 
     h5 {
-        color: rgb(109, 160, 184);
+        color: rgb(139, 205, 236);
     }
 
     .update-div {
         background-color: rgb(22, 33, 11, .5);
     }
 
-    .form-control,
+    .form-control, input,
+    .form-control input,
     .form-select {
         border: 2px solid rgb(67, 195, 255);
         border-radius: 50px;
         box-shadow: 7px 5px 15px rgb(67, 195, 255, .4), -7px -3px 15px rgba(67, 255, 214, 0.3);
+        opacity: .5;
     }
 
     .btn {
         filter: saturate(.7);
         border-radius: 20px;
-        box-shadow: inset 5px 8px 10px rgb(67, 195, 255, .5);
+        box-shadow: inset 5px 8px 10px rgba(156, 200, 238, 0.5);
         border: none;
-
     }
 
     #navbar {
         z-index: 1;
+    }
+    .showhere{
+        
+    }
+    input,select {
+        margin: 10px 0 ;
     }
 </style>
 <?php require __DIR__ . "/__navbar.php"; ?>
@@ -109,52 +116,54 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
     flex-direction:row;
     justify-content:space-evenly;
     padding:20px 0;">
-        <a href="./trans-list.php?" style="margin:10px;" class="btn btn-outline-light collapsed " >
-            Back List</a>
+
+       
         <?php foreach ($mainlist_user as $mainlists) { ?>
-            <a href="./trans-button.php?sid=<?= $mainlists['user_sid']; ?>" style="margin:10px;" class="btn btn-outline-info collapsed " data-bs-toggle="" data-bs-target="#collapseExample<?php echo intval($mainlists['user_sid']); ?>" aria-expanded="false" aria-controls="collapseExample">
+            <a href="./trans-button.php?sid=<?= $mainlists['user_sid']; ?>" style="margin:10px;color:rgba(91, 176, 255);" class="btn btn-outline-info collapsed " data-bs-toggle="" data-bs-target="#collapseExample<?php echo intval($mainlists['user_sid']); ?>" aria-expanded="false" aria-controls="collapseExample">
                 No.<?php echo $mainlists['sid'] ?> : <?= $mainlists['name']; ?> </a>
         <?php } ?>
     </div>
     <!-- ===================== -->
     <div class="showhere">
+    <a href="./trans-list.php?" style="margin:10px;box-shadow: inset 5px 8px 10px #aaa;" class="btn btn-outline-light collapsed ">
+            Back To List</a>
         <?php foreach ($mainlist_user as $mainlists) { ?>
             <!-- ========= -->
             <?php if ($mainlists['user_sid'] === $sid) { ?>
-                <div class="" id="collapseExample<?php echo intval($mainlists['user_sid']); ?>">
-                    <div class="card card-body" style="background-color: rgb(00,00,00,.0); color:skyblue; border:none;">
-                        <h1>Apexion - Transportation</h1>
+                <div id="collapseExample<?php echo intval($mainlists['user_sid']); ?>">
+                    <div class="card card-body" style="background-color: rgb(00,00,00,.0);              color:rgba(215, 253, 253, 0.9); border:none;">
+                        <h1 style="margin:0px 0 30px 0">U-Apexion - Transportation</h1>
                         <div class="outdiv1">
-                            <h5>Name</h5>
-                            <input class="form-control" type="text" value=" <?= $mainlists['name'] ?>" aria-label="readonly input example" readonly>
-                            <h5>Order Number</h5>
-                            <input class="form-control" name="user_sid" type="text" value=" <?= $mainlists['sid'] ?>" aria-label="readonly input example" readonly>
-                            <h5>Destination Address</h5>
-                            <input class="form-control" type="text" value=" <?= $mainlists['destination_address_main'] ?>" aria-label="readonly input example" readonly>
-                            <h5>Transportation </h5>
-                            <input class="form-control" type="text" value=" <?= $mainlists['transportation_way'] ?>" aria-label="readonly input example" readonly>
-                            <h5>Boarding Location</h5>
-                            <input class="form-control" type="text" value=" <?= $mainlists['boarding_location_main'] ?>" aria-label="readonly input example" readonly>
-                            <h5>Departure Date</h5>
-                            <input class="form-control" type="text" value=" <?= $mainlists['schedule'] ?>" aria-label="readonly input example" readonly>
-                            <h5> Your Seat/Room</h5>
-                            <input class="form-control" type="text" value=" <?= $mainlists['seat_main'] ?>" aria-label="readonly input example" readonly>
+                            <h5>姓名 Name</h5>
+                            <input class="form-control" type="text" value=" <?= $mainlists['name'] ?>" aria-label="readonly input example" readonly style="opacity: .7;">
+                            <h5>訂單編號 Order Number</h5>
+                            <input class="form-control" name="user_sid" type="text" value=" <?= $mainlists['sid'] ?>" aria-label="readonly input example" readonly style="opacity: .7;">
+                            <h5>訓練集合地 Destination Address</h5>
+                            <input class="form-control" type="text" value=" <?= $mainlists['destination_address_main'] ?>" aria-label="readonly input example" readonly style="opacity: .7;">
+                            <h5>交通方式 Transportation</h5>
+                            <input class="form-control" type="text" value=" <?= $mainlists['transportation_way'] ?>" aria-label="readonly input example" readonly style="opacity: .7;">
+                            <h5>車站/機場/港口 Boarding Location</h5>
+                            <input class="form-control" type="text" value=" <?= $mainlists['boarding_location_main'] ?>" aria-label="readonly input example" readonly style="opacity: .7;">
+                            <h5>搭乘時間 Departure Time</h5>
+                            <input class="form-control" type="text" value=" <?= $mainlists['schedule'] ?>" aria-label="readonly input example" readonly style="opacity: .7;">
+                            <h5>座位/房號 Seat/Room</h5>
+                            <input class="form-control" type="text" value=" <?= $mainlists['seat_main'] ?>" aria-label="readonly input example" readonly style="opacity: .7;">
                         </div>
-                        <form id="transForm">
-                            <h1>Change List</h1>
+                        <form id="transForm" >
+                            <h1 style="margin:20px 0 30px 0">Change List</h1>
 
                             <div class="outdiv">
-                                <h4>User Address</h4>
-                                <input hidden name="sid" value="<?= $user_data['sid'] ?>">
+                                <h5>通訊地址 Address</h5>
+                                <input hidden name="sid" value="<?= $user_data['sid'] ?>" >
                                 <?php foreach ($user_add as $u) { ?>
-                                    <input class="form-control" type="text" value=" <?= $u['address'] ?>" <?php } ?> aria-label="readonly input example" readonly>
-                                    <h4>Destination Address</h4>
+                                    <input class="form-control" type="text" value=" <?= $u['address'] ?>" <?php } ?> aria-label="readonly input example" readonly style="opacity: .7;">
+                                    <h5>訓練集合地 Destination Address</h5>
                                     <select class="form-select destination-addr" aria-label="Default select example" name="destination_add">
                                         <option selected>Choose Destination Address</option>
                                         <?php foreach ($dest_add as $u) { ?><option value="<?= $u['training_address'] ?>">
                                                 <?= $u['training_address'] ?> <?php } ?></option>
                                     </select>
-                                    <h4>User Transportation Kind</h4>
+                                    <h5>交通方式 Transportation</h5>
                                     <select class="form-select destination-addr" aria-label="Default select example" id="transport" name="transport">
                                         <option selected disabled>What Kind Transportation Do You Want?</option>
                                         <?php foreach ($userTrans_view as $b) {   ?>
@@ -167,18 +176,18 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
                                         <!-- HHHEEELLLPP!!!! -->
                                     </select>
                                     <div class="board">
-                                        <h4>Boarding Location</h4>
+                                        <h5>車站/機場/港口 Boarding Location</h5>
                                         <select class="form-select destination-addr" aria-label="Default select example" name="board" id="board">
 
                                         </select>
                                     </div>
-                                    <h4>Departure Datetime</h4>
+                                    <h5>搭乘時間 Departure Time</h5>
                                     <div class="input-group date" id='departure-date datetime'>
                                         <input type="date" class="form-control" name="date" value="">
 
                                     </div>
                                     <div class="seat">
-                                        <h4>Room / Seat</h4>
+                                        <h5>座位/房號  Seat/Room</h5>
                                         <select class="form-select destination-addr" aria-label="Default select example" name="seat" id="seat">
 
                                         </select>
@@ -186,7 +195,7 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
                                     </div>
 
 
-                                    <div class="buttonc" style="display:flex;flex-direction:row;justify-content:space-evenly;margin-top:30px;">
+                                    <div class="buttonc" style="display:flex;flex-direction:row;justify-content:space-evenly;margin:50px 0;">
                                         <button type="submit" class="btn btn-outline-info" onclick="sendTransportation(); return false">Done! Send It</button>
                                         <button type="reset" class="btn btn-outline-warning">Oops... Reset</button>
                                         <button type="submit" class="btn btn-outline-danger" onclick="delete_it(<?= $sid ?>); return false">Delete It!</button>
@@ -204,7 +213,7 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
 
     <!-- ======= showhere = -->
 </section>
-</div>
+
 
 
 <?php require __DIR__ . "/__scripts.php"; ?>
@@ -266,3 +275,4 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
     }
 </script>
 <?php require __DIR__ . "/__html_foot.php"; ?>
+</div>
