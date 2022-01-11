@@ -57,7 +57,7 @@ $sql =
                     `mobile`=?,
                     `birthday`=?,
                     `address`=?,
-                    `country`=?
+                    `country_sid`=?
                    
     WHERE `sid`=?";
 

@@ -24,20 +24,27 @@ $rows = $pdo->query($sql)->fetchAll();
 ?>
 
 <style>
-i {
-    font-size: 30px;
-    text-align: center;
-    padding: 35px 10px 10px 10px;
-}
+    i {
+        font-size: 30px;
+        text-align: center;
+        padding: 35px 10px 10px 10px;
+    }
 
-.fa-times-circle {
-    color: red;
-}
+    .fa-times-circle {
+        color: red;
+    }
 
-.text_e {
-    text-align: center;
-    line-height: 100px;
-}
+    .text_e {
+        text-align: center;
+        line-height: 100px;
+    }
+
+    .bg_img2 {
+        min-height: 100vh;
+        background-image: url(./img/0257.jpg);
+        background-position: center;
+        background-size: cover;
+    }
 </style>
 <?php require __DIR__ . "/__html_head.php"; ?>
 <?php require __DIR__ . "/__navbar.php"; ?>
@@ -49,13 +56,13 @@ i {
         <a class="nav-link text-warning" href="travel_insert.php">新增行程</a>
     </li>
 </ul>
-<div class="container">
-    <div class="row">
+<div class="bg_img2">
+    <div class="d-flex">
         <div class="col">
             <table class="table table-bordered text-light">
                 <thead>
                     <tr class="text-info">
-                        <th  scope="col" style="text-align: center;">刪除</th>
+                        <th scope="col" style="text-align: center;">刪除</th>
                         <th scope="col">行程編號</th>
                         <th scope="col">行程標題</th>
                         <th scope="col">行程介紹</th>
@@ -68,23 +75,22 @@ i {
 
                 <tbody>
                     <?php foreach ($rows as $r) : ?>
-                    <tr>
-                        <td>
-                            <a href="travel_delete.php?sid=<?= $r["sid"] ?>" onclick="return confirm('確定要刪除嗎?')"><i
-                                    class="fas fa-times-circle"></i></a>
-                        </td>
-                        <td class="text_e"><?= $r["sid"] ?></td>
-                        <td class="text_e"><?= $r["name"] ?></td>
-                        <td><?= $r["introduction"] ?></td>
-                        <td><?= $r["attention"] ?></td>
-                        <td class="text_e" style="font-size:30px;"><?= $r["price"] ?></td>
-                        <td>
-                            <a href="travel_select.php?sid=<?= $r["sid"] ?>"><i class="far fa-hand-pointer"></i></a>
-                        </td>
-                        <td>
-                            <a href="travel_edit.php?sid=<?= $r["sid"] ?>"><i class="fas fa-pen-nib"></i></a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <a href="travel_delete.php?sid=<?= $r["sid"] ?>" onclick="return confirm('確定要刪除嗎?')"><i class="fas fa-times-circle"></i></a>
+                            </td>
+                            <td class="text_e"><?= $r["sid"] ?></td>
+                            <td class="text_e"><?= $r["name"] ?></td>
+                            <td><?= $r["introduction"] ?></td>
+                            <td><?= $r["attention"] ?></td>
+                            <td class="text_e" style="font-size:30px;"><?= $r["price"] ?></td>
+                            <td>
+                                <a href="travel_select.php?sid=<?= $r["sid"] ?>"><i class="far fa-hand-pointer"></i></a>
+                            </td>
+                            <td>
+                                <a href="travel_edit.php?sid=<?= $r["sid"] ?>"><i class="fas fa-pen-nib"></i></a>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -98,9 +104,9 @@ i {
                     </li>
 
                     <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-                    <li class="page-item">
-                        <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                    </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                        </li>
                     <?php endfor; ?>
 
                     <li class="page-item">
@@ -110,10 +116,6 @@ i {
                     </li>
                 </ul>
             </nav>
-
-            <div class="div">
-                <img src="./img/640.png" alt="">
-            </div>
         </div>
     </div>
 </div>
