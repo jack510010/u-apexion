@@ -89,10 +89,7 @@ if ($page > $totalPages) {
           </li>
         </ul>
         <button type="button" class="btn btn-info"><a class="text-dark" href="product_new.php" style="text-decoration:none;">新增商品</a></button>
-        <form class="d-flex align-items-center ms-2">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-warning" type="submit">Search</button>
-        </form>
+
       </div>
     </div>
   </nav>
