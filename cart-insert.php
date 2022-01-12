@@ -46,7 +46,7 @@ $pageName = "insert"; // 新增購物車項目
         </div>
         <div class="row_1">
             <div class="col-md-6 ">
-                <form name="form1" class="animate__animated animate__jackInTheBox" onsubmit="sendData(); return false;">
+                <form name="form1" class="wow fadeIn" onsubmit="sendData(); return false;">
                     <!--onsubmit 事件會在表單中的確認按鈕被點選時發生。-->
                     <!--不要讓表單用傳統的方式送出，就是指『method="post"』-->
                     <div class="mb-3">
