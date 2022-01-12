@@ -201,6 +201,10 @@ date_default_timezone_set('Asia/Taipei');
     .forum-title-dropdown{
         margin-left:auto;
     }
+
+    .article_emoji button:active{
+        transform:scale(1.2);
+    }
     
 
 
@@ -260,9 +264,10 @@ date_default_timezone_set('Asia/Taipei');
                             <a href="">
                             <i class="far fa-laugh" style="margin-right:8px;"></i>
                             </a>
-                            <a href="#">
-                                <i class="fab fa-gratipay" style="margin-right:10px;"></i>
-                            </a>
+                            <button id="like-btn" style="border:0; background-color:transparent; margin-top:-12px;">
+                                <i class="fab fa-gratipay"></i>
+                            </button>
+                            <input type="number" id="input1" value="5" name="" style="border:0; background-color:transparent; margin-top:-15px; color:#fff; width:30px;margin-left:5px; pointer-events:none;">
                             <a href="#list-group-item">
                                <p>回應<?= $totalRows ?>則</p> 
                             </a>
@@ -378,7 +383,7 @@ date_default_timezone_set('Asia/Taipei');
 </div>
 <?php include __DIR__. '/__scripts.php' ?>
 
-<script>
+<script type="text/javascript">
 
     const response = document.querySelector('#response');
 
@@ -410,6 +415,13 @@ date_default_timezone_set('Asia/Taipei');
         }
 
     }
+
+    let likebtn = document.querySelector('#like-btn');
+
+    let input1= document.querySelector('#input1');
+    likebtn.addEventListener('click',()=>{
+        input1.value =parseInt(input1.value)+1;
+    })
 
 </script>
 
