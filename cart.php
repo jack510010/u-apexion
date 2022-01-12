@@ -15,7 +15,7 @@ $pageName = "cart"; // 意思是給這個『cart.php』檔叫做cart。
 
 //todo 以下開始做分頁
 
-$perPage = 4; //每一頁有幾筆資料
+$perPage = 6; //每一頁有幾筆資料
 
 // intval意思是轉換成整數』如果有的話轉換成整數
 $page = isset($_GET["page"]) ? intval($_GET["page"]) : 1;  // 去拿到所在頁面，
