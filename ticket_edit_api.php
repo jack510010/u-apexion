@@ -16,7 +16,7 @@ $seatLevel = isset($_POST['seatLevel'])? $_POST['seatLevel'] : '';
 $memberNumber = isset($_POST['memberNumber'])? intval($_POST['memberNumber']) : '';
 $member = isset($_POST['member'])? implode(",",$_POST['member']) : '';
 $memberPass = isset($_FILES['memberPass'])? $_FILES['memberPass'] : '';
-$memberPassName = implode(",",$memberPass['name']);
+
 
 
 if(empty($flightTime)){
@@ -63,18 +63,27 @@ if(empty($memberPass)){
     exit;
 }
 
+$exts = [
+    'image/jpeg' => '.jpg',
+    'image/png' => '.png',
+    'image/gif' => '.gif',
+];
+
 
 //移動檔案位置
 $upload_folder = __DIR__."/img/uploaded";
 if(! empty($_FILES['memberPass'])) {
     foreach($_FILES['memberPass']['name'] as $i=>$name){
-        $filename = $name;
+        $ext = $exts[$_FILES['memberPass']['type'][$i]];
+        $filename = sha1($name.rand()).$ext;
 
         $target = $upload_folder. '/'. $filename;
         if( move_uploaded_file($_FILES['memberPass']['tmp_name'][$i], $target)){
             $output['success'] = true;
             $output['filename'] = $filename;
             $output['i'] = $i;
+            $output["memberpass"] = $memberPass;
+            $output['files'][] = $filename; 
         } else {
             $output['error'] = '無法移動檔案';
             $output['target'] = $target;
@@ -84,6 +93,8 @@ if(! empty($_FILES['memberPass'])) {
 else {
     $output['error'] = '沒有上傳檔案';
 }
+
+$memberPassName = implode(",",$output['files']);
 
 // $ticketUpdateSql = "UPDATE `ticket` SET 
 //                           `flight_time`=?,
