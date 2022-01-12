@@ -208,68 +208,7 @@ $dest_add = $pdo->query($destination_sql)->fetchAll();
                         </form>
                     </div>
                 </div>
-                <form id="transForm">
-                    <h1>Change List</h1>
-
-                    <div class="outdiv">
-                        <h4>User Address</h4>
-                        <input hidden name="sid" value="<?= $user_data['sid'] ?>">
-                        <?php foreach ($user_add as $u) { ?>
-                        <input class="form-control" type="text" value=" <?= $u['address'] ?>" <?php } ?>
-                            aria-label="readonly input example" readonly>
-                        <h4>Destination Address</h4>
-                        <select class="form-select destination-addr" aria-label="Default select example"
-                            name="destination_add">
-                            <option selected>Choose Destination Address</option>
-                            <?php foreach ($dest_add as $u) { ?><option value="<?= $u['training_address'] ?>">
-                                <?= $u['training_address'] ?> <?php } ?></option>
-                        </select>
-                        <h4>User Transportation Kind</h4>
-                        <select class="form-select destination-addr" aria-label="Default select example" id="transport"
-                            name="transport">
-                            <option selected disabled>What Kind Transportation Do You Want?</option>
-                            <?php foreach ($userTrans_view as $b) {   ?>
-                            <option value="<?= $b ?>">
-                                <?= $b ?>
-
-                            </option>
-                            <?php  }; ?>
-
-                            <!-- HHHEEELLLPP!!!! -->
-                        </select>
-                        <div class="board">
-                            <h4>Boarding Location</h4>
-                            <select class="form-select destination-addr" aria-label="Default select example"
-                                name="board" id="board">
-
-                            </select>
-                        </div>
-                        <h4>Departure Datetime</h4>
-                        <div class="input-group date" id='departure-date datetime'>
-                            <input type="date" class="form-control" name="date" value="">
-
-                        </div>
-                        <div class="seat">
-                            <h4>Room / Seat</h4>
-                            <select class="form-select destination-addr" aria-label="Default select example" name="seat"
-                                id="seat">
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="buttonc"
-                            style="display:flex;flex-direction:row;justify-content:space-evenly;margin-top:30px;">
-                            <button type="submit" class="btn btn-outline-info"
-                                onclick="sendTransportation(); return false">Done! Send It</button>
-                            <button type="reset" class="btn btn-outline-warning">Oops... Reset</button>
-                            <button type="submit" class="btn btn-outline-danger"
-                                onclick="delete_it(<?= $sid ?>); return false">Delete It!</button>
-                        </div>
-
-                    </div>
-                </form>
+                
             </div>
         </div>
 
