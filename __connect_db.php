@@ -1,7 +1,7 @@
 <?php
-$db_host = '192.168.40.17';
+$db_host = 'localhost';
 $db_name = 'bteam';
-$db_user = 'bteam';
+$db_user = 'root';
 $db_pass = '12345678';
 
 $dsn = "mysql:host={$db_host};dbname={$db_name};charset=utf8";

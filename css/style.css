@@ -7,6 +7,10 @@
             font-family: 'Noto Sans HK', sans-serif;
             font-family: 'Noto Sans TC', sans-serif;
         }
+
+        h2 {
+            color: white;
+        }
        
        /* chrome的input樣式 */
         input:-webkit-autofill {
@@ -264,6 +268,11 @@
         .ticket-sumprice {
             color:#FFC107;
         }
+
+        .table.ticket-list-table {
+            color: white;
+        }
+
         
         /* 訂票 Tina結束 */
 

@@ -82,7 +82,7 @@
             <svg class="bi me-2" width="5" height="5">
                 <use xlink:href="#speedometer2"></use>
             </svg>
-            <strong><?= $_SESSION['admin']['name'] ?? '會員你好' ?></strong>
+          
         </a>
         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser1">
             <li>

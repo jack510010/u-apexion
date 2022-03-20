@@ -1,14 +1,14 @@
 <?php
 require __DIR__. "/__connect_db.php";
 
-if (!isset($_SESSION['admin'])) {
-  $path=explode("?","$_SERVER[REQUEST_URI]");
-  $filename=basename($path[0]);
-  $_SESSION['page_from'] = $filename;
+// if (!isset($_SESSION['admin'])) {
+//   $path=explode("?","$_SERVER[REQUEST_URI]");
+//   $filename=basename($path[0]);
+//   $_SESSION['page_from'] = $filename;
   
-  header('Location: user_login.php');
-  exit;
-}
+//   header('Location: user_login.php');
+//   exit;
+// }
 
 $flightsql = 'SELECT `flight_time` FROM `flight`';
 $flightrows = $pdo->query($flightsql)->fetchAll();
@@ -267,7 +267,7 @@ function sendTicketForm(){
   if(txt.success){
     console.log(txt.files);
     alert("資料新增成功");
-    location.href = "ticket_myticket.php";
+    location.href = "ticket_list.php";
   }else {
     alert(txt.error);
   }

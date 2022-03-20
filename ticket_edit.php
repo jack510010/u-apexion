@@ -292,7 +292,7 @@ function sendTicketForm(){
   }).then(r=>r.json())
   .then(txt => {
     alert("資料修改成功");
-    location.href = "ticket_myticket.php";
+    location.href = "ticket_list.php";
 });
 }
 }
